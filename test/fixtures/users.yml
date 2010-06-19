@@ -1,12 +1,12 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-kaz:
+one:
   login: kaz
   hashed_password: secret
   name: The Man Himself
   location: Japan
 
-someloser:
+two:
   login: someloser
   hashed_password: secret
   name: Meow
