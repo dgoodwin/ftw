@@ -1,13 +1,15 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
+# NOTE: Hashed passwords are "admin":
+
 one:
   login: kaz
-  hashed_password: secret
+  hashed_password: d033e22ae348aeb5660fc2140aec35850c4da997
   name: The Man Himself
   location: Japan
 
 two:
   login: someloser
-  hashed_password: secret
+  hashed_password: d033e22ae348aeb5660fc2140aec35850c4da997
   name: Meow
   location: Somewhere

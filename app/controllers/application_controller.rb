@@ -1,3 +1,5 @@
+require 'digest/sha1'
+
 class ApplicationController < ActionController::Base
   protect_from_forgery
   layout 'application'
@@ -8,10 +10,13 @@ class ApplicationController < ActionController::Base
     authenticate_or_request_with_http_basic do |user_name, password| 
       user = User.where({'login' => user_name})[0]
 
-      print "Found user:"
-      print user
+      if user.nil?
+        return false
+      end
 
-      user_name == 'admin' && password == 'password'  
+      hashed_password = Digest::SHA1.hexdigest(password)
+      hashed_password == user.hashed_password
+
     end  
   end
 
