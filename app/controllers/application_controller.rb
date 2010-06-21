@@ -15,8 +15,14 @@ class ApplicationController < ActionController::Base
       end
 
       hashed_password = Digest::SHA1.hexdigest(password)
-      hashed_password == user.hashed_password
+      if hashed_password == user.hashed_password && \
+          session[:logged_out] != true
 
+        session[:user_id] = user.id
+        flash[:notice] = "Welcome %s!" % user_name
+        return true
+      end
+      session[:logged_out] = nil
     end  
   end
 

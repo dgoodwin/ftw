@@ -4,6 +4,9 @@ Ftw::Application.routes.draw do |map|
 
   root :to => "home#index"
 
+  match 'login' => "home#login"
+  match 'logout' => "home#logout"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

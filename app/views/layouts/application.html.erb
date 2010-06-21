@@ -12,7 +12,15 @@
         <%= link_to "Home", "/" %>
         <%= link_to "Users", users_path %>
         <%= link_to "Register", new_user_path %>
+        <%= link_to "Login", "/login" %>
+        <%= link_to "Logout", "/logout" %>
     </center>
+
+    <% if flash[:notice] %>
+      <div class="notice"><%= flash[:notice] %></div>
+    <% end %>
+
+    Logged in as: <%= session[:user_id] %>
 
 <%= yield %>
 

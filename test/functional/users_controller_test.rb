@@ -29,15 +29,17 @@ class UsersControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-#  test "should get edit" do
-#    get :edit, :id => @user.to_param
-#    assert_response :success
-#  end
+  test "should get edit" do
+    authenticate(users(:two).login, 'admin')
+    get :edit, :id => @user.to_param
+    assert_response :success
+  end
 
-#  test "should update user" do
-#    put :update, :id => @user.to_param, :user => @user.attributes
-#    assert_redirected_to user_path(assigns(:user))
-#  end
+  test "should update user" do
+    authenticate(users(:two).login, 'admin')
+    put :update, :id => @user.to_param, :user => @user.attributes
+    assert_redirected_to user_path(assigns(:user))
+  end
 
   test "should destroy user" do
     authenticate(users(:two).login, 'admin')
