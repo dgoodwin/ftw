@@ -8,6 +8,9 @@ class User < ActiveRecord::Base
     #validates_format_of :email, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i, :message => "Invalid email"  
     attr_accessor :password
 
+    has_many :members
+    has_many :leagues, :through => :members
+
     def password=(pass)
         self.hashed_password = Digest::SHA1.hexdigest(pass)
     end
