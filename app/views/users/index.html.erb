@@ -18,6 +18,7 @@
     <td><%= link_to 'Show', user %></td>
     <td><%= link_to 'Edit', edit_user_path(user) %></td>
     <td><%= if !session[:user_id].nil?
+              # TODO: Only site admins should be able to do this.
               link_to 'Destroy', user, :confirm => 'Are you sure?', :method => :delete 
             end 
         %></td>

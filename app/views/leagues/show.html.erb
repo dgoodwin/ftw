@@ -10,6 +10,18 @@
   <%= @league.description %>
 </p>
 
+<p>
+  <b>Members:</b>
+  <%= @league.members %>
+</p>
+
+<p>
+  <b>Users:</b>
+  <%= @league.users %>
+</p>
+
+<%= link_to_if @can_join, "Join This League", leagues_path %><p/>
+
 
 <%= link_to 'Edit', edit_league_path(@league) %> |
 <%= link_to 'Back', leagues_path %>

@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
     #validates_format_of :email, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i, :message => "Invalid email"  
     attr_accessor :password
 
-    has_many :members
+    has_many :members, :dependent => :destroy
     has_many :leagues, :through => :members
 
     def password=(pass)

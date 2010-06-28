@@ -50,10 +50,5 @@ class UsersControllerTest < ActionController::TestCase
     assert_redirected_to users_path
   end
 
-  def authenticate(username, password) 
-    @request.env["HTTP_AUTHORIZATION"] = "Basic " + Base64::encode64("%s:%s" \
-        % [username, password])
-  end
-
 
 end
