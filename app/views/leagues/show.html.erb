@@ -20,7 +20,16 @@
   <%= @league.users %>
 </p>
 
+<!-- TODO -->
 <%= link_to_if @can_join, "Join This League", leagues_path %><p/>
+
+<p>
+  <b>Seasons:</b>
+  <%= @league.seasons %>
+</p>
+
+<%= link_to "Create Season", new_league_season_path(@league) %><p/>
+
 
 
 <%= link_to 'Edit', edit_league_path(@league) %> |

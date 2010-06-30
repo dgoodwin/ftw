@@ -1,0 +1,22 @@
+<%= form_for([@league, @league.seasons.build]) do |f| %>
+  <% if @season.errors.any? %>
+  <div id="errorExplanation">
+    <h2><%= pluralize(@season.errors.count, "error") %> prohibited this season from being saved:</h2>
+    <ul>
+    <% @season.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+  <% end %>
+
+  League: <%= @league.name %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,5 +1,8 @@
 Ftw::Application.routes.draw do |map|
-  resources :leagues
+  resources :seasons
+  resources :leagues do
+    resources :seasons
+  end
 
   resources :users
 
