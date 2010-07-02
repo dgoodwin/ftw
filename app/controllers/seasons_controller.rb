@@ -45,8 +45,6 @@ class SeasonsController < ApplicationController
   # POST /seasons
   # POST /seasons.xml
   def create
-    print "PARAMS\n"
-    print params
     @league = League.find(params[:league_id])
     @season = @league.seasons.create(params[:season])
 

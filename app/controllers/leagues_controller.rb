@@ -97,4 +97,5 @@ class LeaguesController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
 end

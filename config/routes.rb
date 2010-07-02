@@ -2,6 +2,7 @@ Ftw::Application.routes.draw do |map|
   resources :seasons
   resources :leagues do
     resources :seasons
+    resources :members
   end
 
   resources :users

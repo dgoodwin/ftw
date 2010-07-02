@@ -20,8 +20,16 @@
   <%= @league.users %>
 </p>
 
-<!-- TODO -->
-<%= link_to_if @can_join, "Join This League", leagues_path %><p/>
+<% if @can_join then %>
+  Join this league?
+  <%= form_for([@league, @league.members.build]) do |f| %>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+  <% end %>
+<% else %>
+  You are a member of this league.<p/>
+<% end %>
 
 <p>
   <b>Seasons:</b>
