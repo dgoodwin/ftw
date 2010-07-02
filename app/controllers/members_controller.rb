@@ -13,7 +13,21 @@ class MembersController < ApplicationController
     print("Processing join request for: %s\n" % user)
     member = Member.new(:league => @league, :user => user)
     @league.members << member
-    redirect_to(@league, :notice => 'You have successfully joined the league.')
+    redirect_to(@league, :notice => 'You have joined the league.')
   end
+ 
+  # DELETE /leagues/1/members/1
+  def destroy
+    # TODO: Sort out issue with preserving stats
+    @member = Member.find(params[:id])
+    @league = @member.league
+    @member.destroy
+
+    respond_to do |format|
+      format.html { redirect_to(league_path(@league), :notice => 'You have left the league.') }
+      format.xml  { head :ok }
+    end
+  end
+
 end
 

@@ -20,17 +20,6 @@
   <%= @league.users %>
 </p>
 
-<% if @can_join then %>
-  Join this league?
-  <%= form_for([@league, @league.members.build]) do |f| %>
-    <div class="actions">
-      <%= f.submit %>
-    </div>
-  <% end %>
-<% else %>
-  You are a member of this league.<p/>
-<% end %>
-
 <p>
   <b>Seasons:</b>
   <%= @league.seasons %>
@@ -38,6 +27,18 @@
 
 <%= link_to "Create Season", new_league_season_path(@league) %><p/>
 
+<% if @can_join then %>
+  <%= form_for([@league, @league.members.build]) do |f| %>
+    <div class="actions">
+      <%= f.submit 'Join' %>
+    </div>
+  <% end %>
+<% else %>
+  You are a member of this league.<p/>
+  <%= link_to 'Leave this league', [@member.league, @member], 
+    :confirm => 'Are you sure you wish to leave this league?', 
+    :method => :delete %><p/>
+<% end %>
 
 
 <%= link_to 'Edit', edit_league_path(@league) %> |

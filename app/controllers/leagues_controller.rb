@@ -21,12 +21,12 @@ class LeaguesController < ApplicationController
     # Check if we'll be displaying a "join this league" link.
     if session[:user_id] 
       user = User.find(session[:user_id])
-      member = Member.where(["user_id = ? AND league_id = ?", user.id, @league.id]).first
+      @member = Member.where(["user_id = ? AND league_id = ?", user.id, @league.id]).first
     else
       user = nil
     end
 
-    @can_join = user && !member
+    @can_join = user && !@member
 
     respond_to do |format|
       format.html # show.html.erb
