@@ -1,4 +1,6 @@
 class SeasonsController < ApplicationController
+  # TODO: authentication is missing
+
   # GET /seasons
   # GET /seasons.xml
   def index

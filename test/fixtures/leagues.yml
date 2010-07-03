@@ -1,9 +1,9 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  name: MyString
-  description: MyText
+  name: Test League 1
+  description: Welcome to Test League 1, the home of champions.
 
 two:
-  name: MyString
-  description: MyText
+  name: Less Awesome League
+  description: Another league for people less awesume.
