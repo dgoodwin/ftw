@@ -12,11 +12,13 @@ class SeasonsControllerTest < ActionController::TestCase
   end
 
   test "should get new" do
+    authenticate(users(:one).login, 'admin')
     get :new, :league_id => leagues(:one).id
     assert_response :success
   end
 
   test "should create season" do
+    authenticate(users(:one).login, 'admin')
     assert_difference('Season.count') do
       post :create, :season => @season.attributes, \
         :league_id => leagues(:one).id
@@ -36,11 +38,13 @@ class SeasonsControllerTest < ActionController::TestCase
 #  end
 
   test "should update season" do
+    authenticate(users(:one).login, 'admin')
     put :update, :id => @season.to_param, :season => @season.attributes
     assert_redirected_to season_path(assigns(:season))
   end
 
   test "should destroy season" do
+    authenticate(users(:one).login, 'admin')
     assert_difference('Season.count', -1) do
       delete :destroy, :id => @season.to_param
     end

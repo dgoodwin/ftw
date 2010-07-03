@@ -1,5 +1,6 @@
 class SeasonsController < ApplicationController
-  # TODO: authentication is missing
+
+  before_filter :authenticate, :except => [:index, :show]
 
   # GET /seasons
   # GET /seasons.xml
