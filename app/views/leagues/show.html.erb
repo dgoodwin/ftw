@@ -33,7 +33,7 @@
       <%= f.submit 'Join' %>
     </div>
   <% end %>
-<% else %>
+<% elif @member %>
   You are a member of this league.<p/>
   <%= link_to 'Leave this league', [@member.league, @member], 
     :confirm => 'Are you sure you wish to leave this league?', 
