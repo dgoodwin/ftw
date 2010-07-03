@@ -17,10 +17,6 @@
         <%= link_to "Logout", "/logout" %>
     </center>
 
-    <% if flash[:notice] %>
-      <div class="notice"><%= flash[:notice] %></div>
-    <% end %>
-
     Logged in as: <%= session[:user_id] %>
 
 <%= yield %>
