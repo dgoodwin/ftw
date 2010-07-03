@@ -1,0 +1,24 @@
+<%= form_for(@round) do |f| %>
+  <% if @round.errors.any? %>
+  <div id="errorExplanation">
+    <h2><%= pluralize(@round.errors.count, "error") %> prohibited this round from being saved:</h2>
+    <ul>
+    <% @round.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :time %><br />
+    <%= f.datetime_select :time %>
+  </div>
+  <div class="field">
+    <!-- TODO: Really not sure this is the most railsy way to do this... -->
+    <%= hidden_field_tag 'season_id', @season.id %><br />
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
