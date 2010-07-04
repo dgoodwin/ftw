@@ -2,7 +2,7 @@ require 'test_helper'
 
 class LeaguesControllerTest < ActionController::TestCase
   setup do
-    @league = leagues(:one)
+    @league = leagues(:alien)
   end
 
   test "should get index" do
@@ -12,7 +12,7 @@ class LeaguesControllerTest < ActionController::TestCase
   end
 
   test "should get new" do
-    authenticate(users(:two).login, 'admin')
+    authenticate(users(:kaz).login, 'admin')
     get :new
     assert_response :success
   end
@@ -23,7 +23,7 @@ class LeaguesControllerTest < ActionController::TestCase
   end
 
   test "should create league" do
-    authenticate(users(:two).login, 'admin')
+    authenticate(users(:kaz).login, 'admin')
     assert_difference('League.count') do
       post :create, :league => @league.attributes
     end
@@ -35,7 +35,7 @@ class LeaguesControllerTest < ActionController::TestCase
 
     # TODO: No idea why, but this works deployed but not in tests:
 #    assert !@league.members(true).empty?
-#    assert @league.members.include?(users(:two))
+#    assert @league.members.include?(users(:kaz))
   end
 
   test "should show league" do
@@ -44,19 +44,19 @@ class LeaguesControllerTest < ActionController::TestCase
   end
 
   test "should get edit" do
-    authenticate(users(:two).login, 'admin')
+    authenticate(users(:kaz).login, 'admin')
     get :edit, :id => @league.to_param
     assert_response :success
   end
 
   test "should update league" do
-    authenticate(users(:two).login, 'admin')
+    authenticate(users(:kaz).login, 'admin')
     put :update, :id => @league.to_param, :league => @league.attributes
     assert_redirected_to league_path(assigns(:league))
   end
 
   test "should destroy league" do
-    authenticate(users(:two).login, 'admin')
+    authenticate(users(:kaz).login, 'admin')
     assert_difference('League.count', -1) do
       delete :destroy, :id => @league.to_param
     end

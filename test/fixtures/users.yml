@@ -2,14 +2,51 @@
 
 # NOTE: Hashed passwords are "admin":
 
-one:
+admin:
+  login: admin
+  hashed_password: d033e22ae348aeb5660fc2140aec35850c4da997
+  name: Initial site administrator.
+  location: Canada
+
+kaz:
   login: kaz
   hashed_password: d033e22ae348aeb5660fc2140aec35850c4da997
-  name: The Man Himself
+  name: kaz
   location: Japan
 
-two:
-  login: someloser
+bill:
+  login: bill
   hashed_password: d033e22ae348aeb5660fc2140aec35850c4da997
-  name: Meow
+  name: bill
   location: Somewhere
+
+sally:
+  login: sally
+  hashed_password: d033e22ae348aeb5660fc2140aec35850c4da997
+  name: sally
+  location: Somewhere
+
+sam:
+  login: sam
+  hashed_password: d033e22ae348aeb5660fc2140aec35850c4da997
+  name: sam
+  location: Somewhere
+
+mary:
+  login: mary
+  hashed_password: d033e22ae348aeb5660fc2140aec35850c4da997
+  name: mary
+  location: Somewhere
+
+joe:
+  login: joe
+  hashed_password: d033e22ae348aeb5660fc2140aec35850c4da997
+  name: joe
+  location: Somewhere
+
+homer:
+  login: homer
+  hashed_password: d033e22ae348aeb5660fc2140aec35850c4da997
+  name: homer
+  location: Somewhere
+

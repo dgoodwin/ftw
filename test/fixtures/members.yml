@@ -1,0 +1,39 @@
+# Fixture to have test users join the test leagues:
+
+admin_alien:
+  user: admin
+  league: alien
+
+admin_newb:
+  user: admin
+  league: newb
+
+kaz_alien:
+  user: kaz
+  league: alien
+
+bill_newb:
+  user: bill
+  league: newb
+
+sally_alien:
+  user: sally
+  league: alien
+
+sam_alien:
+  user: sam
+  league: alien
+
+mary_alien:
+  user: mary
+  league: alien
+
+joe_alien:
+  user: joe
+  league: alien
+
+homer_alien:
+  user: homer
+  league: alien
+
+

@@ -1,7 +1,13 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-one:
-  name: MyString
+alien_s1:
+  name: 2010 Season 1
+  league: alien
 
-two:
-  name: MyString
+alien_s2:
+  name: 2010 Season 2
+  league: alien
+
+newb_s1:
+  name: 2010 Newb Season 1
+  league: newb

@@ -1,9 +1,9 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-one:
-  name: Test League 1
-  description: Welcome to Test League 1, the home of champions.
+alien:
+  name: Super Awesome Aliens League
+  description: The home of champions.
 
-two:
-  name: Less Awesome League
-  description: Another league for people less awesume.
+newb:
+  name: The Newb League
+  description: We are not so good...
