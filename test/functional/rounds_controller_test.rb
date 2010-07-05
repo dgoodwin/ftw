@@ -53,14 +53,15 @@ class RoundsControllerTest < ActionController::TestCase
     assert_redirected_to rounds_path
   end
 
-#  test "schedule single race round" do
-#    # Create a league with members:
-#    league = create_league(16, 1)
-#    get :schedule, {'xid' => league.id}
-#    print @response
-#  end
+  test "should schedule races" do
+    authenticate(users(:admin).login, 'admin')
+    league = create_league(16)
+    round = league.seasons[0].rounds[0]
+    get :schedule, {'id' => round.id}
+    assert_redirected_to round_path(round)
+  end
 
-  def create_league(member_count, season_count, round_count)
+  def create_league(member_count)
     league = League.new
     (1..member_count).each do |i|
       user = User.new
@@ -70,6 +71,14 @@ class RoundsControllerTest < ActionController::TestCase
       league.members << member
       member.save
     end
+
+    season = Season.new(:league => league, :name => "Season 1")
+    season.save
+
+    round = Round.new(:season => season)
+    season.rounds << round
+    league.seasons << season
+
     league.save
     
     assert_equal(member_count, league.members.length)

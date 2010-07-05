@@ -4,5 +4,4 @@ class Season < ActiveRecord::Base
 
   # TODO: unique name
   # TODO: must have league
-  # TODO: test round cleanup on delete
 end
