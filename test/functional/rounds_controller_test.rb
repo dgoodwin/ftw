@@ -52,4 +52,36 @@ class RoundsControllerTest < ActionController::TestCase
 
     assert_redirected_to rounds_path
   end
+
+#  test "schedule single race round" do
+#    # Create a league with members:
+#    league = create_league(16, 1)
+#    get :schedule, {'xid' => league.id}
+#    print @response
+#  end
+
+  def create_league(member_count, season_count, round_count)
+    league = League.new
+    (1..member_count).each do |i|
+      user = User.new
+      user.login = "user%s" % i
+      user.save
+      member = Member.new(:league => league, :user => user)
+      league.members << member
+      member.save
+    end
+    league.save
+    
+    assert_equal(member_count, league.members.length)
+
+    return league
+  end
+
+  test "race sizes" do
+    assert_equal([16], @controller.calc_race_sizes(16, 16))
+    assert_equal([15], @controller.calc_race_sizes(15, 16))
+    assert_equal([9, 8], @controller.calc_race_sizes(17, 16))
+    assert_equal([48, 48, 47, 47, 47], @controller.calc_race_sizes(237, 50))
+  end
+
 end

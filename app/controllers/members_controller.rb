@@ -10,7 +10,7 @@ class MembersController < ApplicationController
    
     @league = League.find(params[:league_id])
     user = User.find(session[:user_id])
-    print("Processing join request for: %s\n" % user)
+    logger.info("Processing join request for: %s\n" % user)
     member = Member.new(:league => @league, :user => user)
     @league.members << member
     redirect_to(@league, :notice => 'You have joined the league.')
@@ -19,6 +19,7 @@ class MembersController < ApplicationController
   # DELETE /leagues/1/members/1
   def destroy
     # TODO: Sort out issue with preserving stats
+    # TODO: prevent destroy if user is last league admin
     @member = Member.find(params[:id])
     @league = @member.league
     @member.destroy

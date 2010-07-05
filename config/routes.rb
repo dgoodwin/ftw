@@ -9,6 +9,8 @@ Ftw::Application.routes.draw do |map|
 
   resources :users
 
+  # A non-RESTful route for scheduling rounds:
+  match 'rounds/:id/schedule' => 'rounds#schedule'
 
   root :to => "home#index"
 
