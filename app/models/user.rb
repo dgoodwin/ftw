@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
 
     has_many :members, :dependent => :destroy
     has_many :leagues, :through => :members
+    has_and_belongs_to_many :races
 
     def password=(pass)
         self.hashed_password = Digest::SHA1.hexdigest(pass)

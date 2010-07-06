@@ -59,6 +59,11 @@ class RoundsControllerTest < ActionController::TestCase
     round = league.seasons[0].rounds[0]
     get :schedule, {'id' => round.id}
     assert_redirected_to round_path(round)
+
+    assert_equal 1, round.races.length
+    round.races.each do |race|
+      assert_equal 16, race.users.length
+    end
   end
 
   def create_league(member_count)
@@ -90,6 +95,7 @@ class RoundsControllerTest < ActionController::TestCase
     assert_equal([16], @controller.calc_race_sizes(16, 16))
     assert_equal([15], @controller.calc_race_sizes(15, 16))
     assert_equal([9, 8], @controller.calc_race_sizes(17, 16))
+    assert_equal([2, 1], @controller.calc_race_sizes(3, 2))
     assert_equal([48, 48, 47, 47, 47], @controller.calc_race_sizes(237, 50))
   end
 

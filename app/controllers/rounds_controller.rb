@@ -92,8 +92,38 @@ class RoundsController < ApplicationController
     @round = Round.find(params[:id])
     logger.info "Scheduling round %s for league: %s" % \
       [@round.id, @round.season.league.id] 
-    print @round.season.league.name
-    print "\n"
+    # TODO: assuming race size of 16 for now, should be configurable
+    race_sizes = calc_race_sizes(@round.season.league.members.length, 16)
+    logger.debug("Creating %s races" % race_sizes.length)
+    logger.debug(race_sizes)
+
+    # Create all the required races, we'll add participants after:
+    races = []
+    race_sizes.each do |size|
+      race = Race.new
+      race.round = @round
+      race.time = @round.time
+      race.instructions = ""
+      race.password = ""
+      races << race
+    end
+
+    # Assign users to each race:
+    # TODO: assign randomly, or perhaps based on standings?
+    race_index = 0
+    @round.season.league.members.each do |member|
+      races[race_index].users << member.user
+      if races[race_index].users.length == race_sizes[race_index]
+        race_index += 1
+      end
+    end
+
+    # Save each race:
+    races.each do |race|
+      race.save
+      @round.races << race
+    end
+
     redirect_to(@round, :notice => 'Races have been scheduled.')
   end
 
@@ -109,8 +139,10 @@ class RoundsController < ApplicationController
     
     f = member_count.to_f
     base_size = (f / rounds).floor
+    logger.debug("base_size = %s" % base_size)
     race_sizes = Array.new(rounds, base_size)
-    remainder = member_count % base_size
+    remainder = member_count - base_size * race_sizes.length
+    logger.debug("remainder = %s" % remainder)
     i = 0
     while remainder > 0
       race_sizes[i] += 1

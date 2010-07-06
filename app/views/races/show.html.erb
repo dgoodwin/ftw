@@ -1,0 +1,30 @@
+<p class="notice"><%= notice %></p>
+
+<p>
+  <b>Time:</b>
+  <%= @race.time %>
+</p>
+
+<p>
+  <b>Round:</b>
+  <%= @race.round %>
+</p>
+
+<p>
+  <b>Instructions:</b>
+  <%= @race.instructions %>
+</p>
+
+<p>
+  <b>Password:</b>
+  <%= @race.password %>
+</p>
+
+<p>
+  <b>Users:</b>
+  <%= @race.users %>
+</p>
+
+
+<%= link_to 'Edit', edit_race_path(@race) %> |
+<%= link_to 'Back', races_path %>
