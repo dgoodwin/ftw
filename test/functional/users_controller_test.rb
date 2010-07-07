@@ -17,8 +17,13 @@ class UsersControllerTest < ActionController::TestCase
   end
 
   test "should create user" do
+    create_me = User.new(:login => "testguy", :password => "passwordakajshdkajhd")
+
     assert_difference('User.count') do
-      post :create, :user => @user.attributes
+      attrs = create_me.attributes
+      # Hack in password, the model already changed it to a hashed version:
+      attrs['password'] = 'password'
+      post :create, :user => attrs
     end
 
     assert_redirected_to user_path(assigns(:user))
@@ -37,7 +42,12 @@ class UsersControllerTest < ActionController::TestCase
 
   test "should update user" do
     authenticate(users(:kaz).login, 'admin')
-    put :update, :id => @user.to_param, :user => @user.attributes
+
+    # Hack in the password again:
+    attributes = @user.attributes
+    attributes['password'] = 'password'
+
+    put :update, :id => @user.to_param, :user => attributes
     assert_redirected_to user_path(assigns(:user))
   end
 
