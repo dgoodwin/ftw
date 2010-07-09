@@ -24,13 +24,11 @@ class LeaguesControllerTest < ActionController::TestCase
 
   test "should create league" do
     authenticate(users(:kaz).login, 'admin')
+    create_me = League.new(:name => "Elite league!")
     assert_difference('League.count') do
-      post :create, :league => @league.attributes
+      post :create, :league => create_me.attributes
     end
 
-    @league = League.find(@league.id)
-    @league.members(true)
-    @league.users(true)
     assert_redirected_to league_path(assigns(:league))
 
     # TODO: No idea why, but this works deployed but not in tests:

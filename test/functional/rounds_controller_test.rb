@@ -67,7 +67,8 @@ class RoundsControllerTest < ActionController::TestCase
   end
 
   def create_league(member_count)
-    league = League.new
+    name = "Test League %s" % rand(10000000)
+    league = League.new(:name => name)
     (1..member_count).each do |i|
       user = User.new
       user.login = "user%s" % i

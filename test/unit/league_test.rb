@@ -1,11 +1,18 @@
 require 'test_helper'
 
 class LeagueTest < ActiveSupport::TestCase
+
   # Replace this with your real tests.
-  test "the truth" do
-    assert true
+  test "name is unique" do
+    l = League.new(:name => leagues(:alien).name, :description => "something")
+    assert !l.save
+    assert l.errors[:name].any?
   end
 
-  # TODO: Test user can only join once.
-  # TODO: Test user leaves league.
+  test "name required" do
+    l = League.new
+    assert !l.save
+    assert l.errors[:name].any?
+  end
+
 end
