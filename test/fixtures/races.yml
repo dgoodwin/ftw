@@ -2,7 +2,7 @@
 
 alien_s1_r1_r1:
   time: 2010-07-05 21:36:31
-  round: alien_s1_r1 
+  event: alien_s1_r1 
   instructions: Just be there.
   password: password
   users: admin, kaz, bill, sally

@@ -1,7 +1,7 @@
 Ftw::Application.routes.draw do |map|
   resources :races
 
-  resources :rounds
+  resources :events
 
   resources :seasons
   resources :leagues do
@@ -11,8 +11,8 @@ Ftw::Application.routes.draw do |map|
 
   resources :users
 
-  # A non-RESTful route for scheduling rounds:
-  match 'rounds/:id/schedule' => 'rounds#schedule'
+  # A non-RESTful route for scheduling events:
+  match 'events/:id/schedule' => 'events#schedule'
 
   root :to => "home#index"
 

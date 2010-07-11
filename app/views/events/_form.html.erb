@@ -1,9 +1,9 @@
-<%= form_for(@round) do |f| %>
-  <% if @round.errors.any? %>
+<%= form_for(@event) do |f| %>
+  <% if @event.errors.any? %>
   <div id="errorExplanation">
-    <h2><%= pluralize(@round.errors.count, "error") %> prohibited this round from being saved:</h2>
+    <h2><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</h2>
     <ul>
-    <% @round.errors.full_messages.each do |msg| %>
+    <% @event.errors.full_messages.each do |msg| %>
       <li><%= msg %></li>
     <% end %>
     </ul>

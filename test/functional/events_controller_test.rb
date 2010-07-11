@@ -1,14 +1,14 @@
 require 'test_helper'
 
-class RoundsControllerTest < ActionController::TestCase
+class EventsControllerTest < ActionController::TestCase
   setup do
-    @round = rounds(:alien_s1_r1)
+    @event = events(:alien_s1_r1)
   end
 
   test "should get index" do
     get :index
     assert_response :success
-    assert_not_nil assigns(:rounds)
+    assert_not_nil assigns(:events)
   end
 
   test "should get new" do
@@ -17,51 +17,51 @@ class RoundsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should create round" do
+  test "should create event" do
     authenticate(users(:admin).login, 'admin')
-    assert_difference('Round.count') do
-      post :create, :round => @round.attributes, \
+    assert_difference('Event.count') do
+      post :create, :event => @event.attributes, \
         :season_id => seasons(:alien_s1).id
     end
 
-    assert_redirected_to round_path(assigns(:round))
+    assert_redirected_to event_path(assigns(:event))
   end
 
-  test "should show round" do
-    get :show, :id => @round.to_param
+  test "should show event" do
+    get :show, :id => @event.to_param
     assert_response :success
   end
 
 #  test "should get edit" do
 #    authenticate(users(:admin).login, 'admin')
-#    get :edit, :id => @round.to_param
+#    get :edit, :id => @event.to_param
 #    assert_response :success
 #  end
 
-  test "should update round" do
+  test "should update event" do
     authenticate(users(:admin).login, 'admin')
-    put :update, :id => @round.to_param, :round => @round.attributes
-    assert_redirected_to round_path(assigns(:round))
+    put :update, :id => @event.to_param, :event => @event.attributes
+    assert_redirected_to event_path(assigns(:event))
   end
 
-  test "should destroy round" do
+  test "should destroy event" do
     authenticate(users(:admin).login, 'admin')
-    assert_difference('Round.count', -1) do
-      delete :destroy, :id => @round.to_param
+    assert_difference('Event.count', -1) do
+      delete :destroy, :id => @event.to_param
     end
 
-    assert_redirected_to rounds_path
+    assert_redirected_to events_path
   end
 
   test "should schedule races" do
     authenticate(users(:admin).login, 'admin')
     league = create_league(16)
-    round = league.seasons[0].rounds[0]
-    get :schedule, {'id' => round.id}
-    assert_redirected_to round_path(round)
+    event = league.seasons[0].events[0]
+    get :schedule, {'id' => event.id}
+    assert_redirected_to event_path(event)
 
-    assert_equal 1, round.races.length
-    round.races.each do |race|
+    assert_equal 1, event.races.length
+    event.races.each do |race|
       assert_equal 16, race.users.length
     end
   end
@@ -81,8 +81,8 @@ class RoundsControllerTest < ActionController::TestCase
     season = Season.new(:league => league, :name => "Season 1")
     season.save
 
-    round = Round.new(:season => season)
-    season.rounds << round
+    event = Event.new(:season => season)
+    season.events << event
     league.seasons << season
 
     league.save

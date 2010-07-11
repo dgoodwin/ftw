@@ -1,0 +1,17 @@
+<p class="notice"><%= notice %></p>
+
+<p>
+  <b>Time:</b>
+  <%= @event.time %>
+</p>
+
+<p>
+  <b>Season:</b>
+  <%= @event.season %>
+</p>
+
+<%= link_to 'Schedule Event', :controller => "events", :action => "schedule", :id => @event %><p/>
+
+
+<%= link_to 'Edit', edit_event_path(@event) %> |
+<%= link_to 'Back', events_path %>

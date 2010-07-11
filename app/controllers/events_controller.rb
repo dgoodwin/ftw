@@ -1,99 +1,99 @@
-class RoundsController < ApplicationController
+class EventsController < ApplicationController
 
   before_filter :authenticate, :except => [:index, :show]
 
-  # GET /rounds
-  # GET /rounds.xml
+  # GET /events
+  # GET /events.xml
   def index
-    @rounds = Round.all
+    @events = Event.all
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @rounds }
+      format.xml  { render :xml => @events }
     end
   end
 
-  # GET /rounds/1
-  # GET /rounds/1.xml
+  # GET /events/1
+  # GET /events/1.xml
   def show
-    @round = Round.find(params[:id])
+    @event = Event.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @round }
+      format.xml  { render :xml => @event }
     end
   end
 
-  # GET /rounds/new
-  # GET /rounds/new.xml
+  # GET /events/new
+  # GET /events/new.xml
   def new
-    @round = Round.new
+    @event = Event.new
     @season = Season.find(params[:season_id])
-    @round.season = @season
+    @event.season = @season
 
     respond_to do |format|
       format.html # new.html.erb
-      format.xml  { render :xml => @round }
+      format.xml  { render :xml => @event }
     end
   end
 
-  # GET /rounds/1/edit
+  # GET /events/1/edit
   def edit
-    @round = Round.find(params[:id])
+    @event = Event.find(params[:id])
   end
 
-  # POST /rounds
-  # POST /rounds.xml
+  # POST /events
+  # POST /events.xml
   def create
     @season = Season.find(params[:season_id])
-    @round = @season.rounds.create(params[:round])
+    @event = @season.events.create(params[:event])
 
     respond_to do |format|
-      if @round.save
-        format.html { redirect_to(@round, :notice => 'Round was successfully created.') }
-        format.xml  { render :xml => @round, :status => :created, :location => @round }
+      if @event.save
+        format.html { redirect_to(@event, :notice => 'Event was successfully created.') }
+        format.xml  { render :xml => @event, :status => :created, :location => @event }
       else
         format.html { render :action => "new" }
-        format.xml  { render :xml => @round.errors, :status => :unprocessable_entity }
+        format.xml  { render :xml => @event.errors, :status => :unprocessable_entity }
       end
     end
   end
 
-  # PUT /rounds/1
-  # PUT /rounds/1.xml
+  # PUT /events/1
+  # PUT /events/1.xml
   def update
-    # TODO: block updates if the round is scheduled
-    @round = Round.find(params[:id])
+    # TODO: block updates if the event is scheduled
+    @event = Event.find(params[:id])
 
     respond_to do |format|
-      if @round.update_attributes(params[:round])
-        format.html { redirect_to(@round, :notice => 'Round was successfully updated.') }
+      if @event.update_attributes(params[:event])
+        format.html { redirect_to(@event, :notice => 'Event was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
-        format.xml  { render :xml => @round.errors, :status => :unprocessable_entity }
+        format.xml  { render :xml => @event.errors, :status => :unprocessable_entity }
       end
     end
   end
 
-  # DELETE /rounds/1
-  # DELETE /rounds/1.xml
+  # DELETE /events/1
+  # DELETE /events/1.xml
   def destroy
-    @round = Round.find(params[:id])
-    @round.destroy
+    @event = Event.find(params[:id])
+    @event.destroy
 
     respond_to do |format|
-      format.html { redirect_to(rounds_url) }
+      format.html { redirect_to(events_url) }
       format.xml  { head :ok }
     end
   end
 
   def schedule
-    @round = Round.find(params[:id])
-    logger.info "Scheduling round %s for league: %s" % \
-      [@round.id, @round.season.league.id] 
+    @event = Event.find(params[:id])
+    logger.info "Scheduling event %s for league: %s" % \
+      [@event.id, @event.season.league.id] 
     # TODO: assuming race size of 16 for now, should be configurable
-    race_sizes = calc_race_sizes(@round.season.league.members.length, 16)
+    race_sizes = calc_race_sizes(@event.season.league.members.length, 16)
     logger.debug("Creating %s races" % race_sizes.length)
     logger.debug(race_sizes)
 
@@ -101,8 +101,8 @@ class RoundsController < ApplicationController
     races = []
     race_sizes.each do |size|
       race = Race.new
-      race.round = @round
-      race.time = @round.time
+      race.event = @event
+      race.time = @event.time
       race.instructions = ""
       race.password = ""
       races << race
@@ -111,7 +111,7 @@ class RoundsController < ApplicationController
     # Assign users to each race:
     # TODO: assign randomly, or perhaps based on standings?
     race_index = 0
-    @round.season.league.members.each do |member|
+    @event.season.league.members.each do |member|
       races[race_index].users << member.user
       if races[race_index].users.length == race_sizes[race_index]
         race_index += 1
@@ -121,10 +121,10 @@ class RoundsController < ApplicationController
     # Save each race:
     races.each do |race|
       race.save
-      @round.races << race
+      @event.races << race
     end
 
-    redirect_to(@round, :notice => 'Races have been scheduled.')
+    redirect_to(@event, :notice => 'Races have been scheduled.')
   end
 
   # Calculate how many races to create and of what size.
@@ -132,15 +132,15 @@ class RoundsController < ApplicationController
   # keep the number of participants in each race as close as possible.
   def calc_race_sizes(member_count, max_size)
     race_sizes = []
-    rounds = member_count / max_size
+    events = member_count / max_size
     if member_count % max_size > 0
-      rounds += 1
+      events += 1
     end
     
     f = member_count.to_f
-    base_size = (f / rounds).floor
+    base_size = (f / events).floor
     logger.debug("base_size = %s" % base_size)
-    race_sizes = Array.new(rounds, base_size)
+    race_sizes = Array.new(events, base_size)
     remainder = member_count - base_size * race_sizes.length
     logger.debug("remainder = %s" % remainder)
     i = 0

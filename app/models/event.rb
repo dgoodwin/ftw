@@ -1,4 +1,4 @@
-class Round < ActiveRecord::Base
+class Event < ActiveRecord::Base
   belongs_to :season
   has_many :races, :dependent => :destroy
   # TODO: Give it a name
