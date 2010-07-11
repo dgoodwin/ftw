@@ -9,17 +9,19 @@
 <body>
 
     <center>
-        <%= link_to "Home", "/" %>
-        <%= link_to "Leagues", leagues_path %>
-        <%= link_to "Seasons", seasons_path %>
-        <%= link_to "Events", events_path %>
-        <%= link_to "Users", users_path %>
+      <h1>GT FTW</h1>
+      <%= link_to "Home", "/" %>
+      <%= link_to "Leagues", leagues_path %>
+      <%= link_to "Seasons", seasons_path %>
+      <%= link_to "Events", events_path %>
+      <%= link_to "Users", users_path %>
+      <% if session[:user_id] %>
+        <%= link_to "Logout", "/logout" %>
+      <% else %>
         <%= link_to "Register", new_user_path %>
         <%= link_to "Login", "/login" %>
-        <%= link_to "Logout", "/logout" %>
+      <% end %>
     </center>
-
-    Logged in as: <%= session[:user_id] %>
 
 <%= yield %>
 

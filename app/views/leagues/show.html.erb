@@ -1,28 +1,29 @@
 <p class="notice"><%= notice %></p>
 
 <p>
-  <b>Name:</b>
-  <%= @league.name %>
+<h2><%= @league.name %></h2>
 </p>
 
 <p>
-  <b>Description:</b>
   <%= @league.description %>
 </p>
 
 <p>
-  <b>Members:</b>
-  <%= @league.members %>
+<b>Members:</b>
+<ul>
+  <% @league.members.each do |member| %>
+    <li><%= link_to member.user.name, user_path(member.user) %></li>
+  <% end %>
+</ul>
 </p>
 
 <p>
-  <b>Users:</b>
-  <%= @league.users %>
-</p>
-
-<p>
-  <b>Seasons:</b>
-  <%= @league.seasons %>
+<b>Seasons:</b>
+<ul>
+  <% @league.seasons.each do |season| %>
+    <li><%= link_to season.name, season_path(season) %></li>
+  <% end %>
+</ul>
 </p>
 
 <%= link_to "Create Season", new_league_season_path(@league) %><p/>
