@@ -81,7 +81,7 @@ class EventsControllerTest < ActionController::TestCase
     season = Season.new(:league => league, :name => "Season 1")
     season.save
 
-    event = Event.new(:season => season)
+    event = Event.new(:season => season, :time => Time.now)
     season.events << event
     league.seasons << season
 
