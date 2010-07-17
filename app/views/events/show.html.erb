@@ -25,7 +25,8 @@
 </p>
 
 
-<%= link_to 'Schedule Event', :controller => "events", :action => "schedule", :id => @event %><p/>
+<%= link_to_if @event.races.length == 0, 'Schedule Event', 
+  :controller => "events", :action => "schedule", :id => @event %><p/>
 
 
 <%= link_to 'Edit', edit_event_path(@event) %> |

@@ -94,6 +94,12 @@ class EventsController < ApplicationController
 
   def schedule
     @event = Event.find(params[:id])
+    if @event.races.length > 0
+      logger.warn "Attempt to re-schedule an event: %s" % @event.id
+      flash[:error] = "Event has already been scheduled."
+      redirect_to(@event, :notice => 'Event has already been scheduled.')
+      return
+    end
     logger.info "Scheduling event %s for league: %s" % \
       [@event.id, @event.season.league.id] 
     # TODO: assuming race size of 16 for now, should be configurable
