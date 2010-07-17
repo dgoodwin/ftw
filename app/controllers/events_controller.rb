@@ -109,13 +109,16 @@ class EventsController < ApplicationController
 
     # Create all the required races, we'll add participants after:
     races = []
+    index = 1 # We manually order each race with an index.
     race_sizes.each do |size|
       race = Race.new
       race.event = @event
       race.time = @event.time
+      race.index = index
       race.instructions = ""
       race.password = ""
       races << race
+      index += 1
     end
 
     # Assign users to each race:

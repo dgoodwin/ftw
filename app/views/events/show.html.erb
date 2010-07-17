@@ -19,7 +19,7 @@
 <b>Races:</b>
 <ul>
   <% @event.races.each do |race| %>
-    <li><%= link_to race, race_path(race) %></li>
+    <li><%= link_to "Heat %s" % race.index.to_s, race_path(race) %></li>
   <% end %>
 </ul>
 </p>
