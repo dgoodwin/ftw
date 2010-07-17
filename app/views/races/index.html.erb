@@ -18,7 +18,7 @@
     <td><%= race.event %></td>
     <td><%= race.instructions %></td>
     <td><%= race.password %></td>
-    <td><%= race.users %></td>
+    <td><%= race.users.length %></td>
     <td><%= link_to 'Show', race %></td>
     <td><%= link_to 'Edit', edit_race_path(race) %></td>
     <td><%= link_to 'Destroy', race, :confirm => 'Are you sure?', :method => :delete %></td>

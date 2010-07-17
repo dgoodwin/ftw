@@ -1,5 +1,7 @@
 <p class="notice"><%= notice %></p>
 
+<h1><%= @race.event.season.league.name %> - TODO</h1>
+
 <p>
   <b>Time:</b>
   <%= @race.time %>
@@ -21,8 +23,12 @@
 </p>
 
 <p>
-  <b>Users:</b>
-  <%= @race.users %>
+<b>Users:</b>
+<ul>
+  <% @race.users.each do |user| %>
+    <li><%= link_to user.name, user_path(user) %></li>
+  <% end %>
+</ul>
 </p>
 
 

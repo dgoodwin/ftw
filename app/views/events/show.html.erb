@@ -7,8 +7,18 @@
 
 <p>
   <b>Season:</b>
-  <%= @event.season %>
+  <%= link_to @event.season.name, season_path(@event.season) %>
 </p>
+
+<p>
+<b>Races:</b>
+<ul>
+  <% @event.races.each do |race| %>
+    <li><%= link_to race, race_path(race) %></li>
+  <% end %>
+</ul>
+</p>
+
 
 <%= link_to 'Schedule Event', :controller => "events", :action => "schedule", :id => @event %><p/>
 
