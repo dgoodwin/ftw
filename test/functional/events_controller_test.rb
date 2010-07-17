@@ -81,7 +81,8 @@ class EventsControllerTest < ActionController::TestCase
     season = Season.new(:league => league, :name => "Season 1")
     season.save
 
-    event = Event.new(:season => season, :time => Time.now)
+    event = Event.new(:season => season, :time => Time.now, 
+        :name => "Round %s" % rand(10000))
     season.events << event
     league.seasons << season
 

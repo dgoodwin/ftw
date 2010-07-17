@@ -2,6 +2,7 @@
 
 <table>
   <tr>
+    <th>Name</th>
     <th>Time</th>
     <th>Season</th>
     <th></th>
@@ -11,8 +12,9 @@
 
 <% @events.each do |event| %>
   <tr>
+    <td><%= event.name %></td>
     <td><%= event.time %></td>
-    <td><%= event.season %></td>
+    <td><%= link_to event.season.name, season_path(event.season) %></td>
     <td><%= link_to 'Show', event %></td>
     <td><%= link_to 'Edit', edit_event_path(event) %></td>
     <td><%= link_to 'Destroy', event, :confirm => 'Are you sure?', :method => :delete %></td>

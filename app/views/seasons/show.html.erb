@@ -8,8 +8,8 @@
 <p>
 <b>Events:</b>
 <ul>
-  <% @season.events.each do |event| %>
-    <li><%= link_to event.time, event_path(event) %></li>
+  <% @season.events.sort { |a,b| a.time <=> b.time }.each do |event| %>
+    <li><%= link_to event.name, event_path(event) %> - <%= event.time %></li>
   <% end %>
 </ul>
 </p>
