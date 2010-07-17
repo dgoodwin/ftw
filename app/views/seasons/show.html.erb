@@ -5,6 +5,15 @@
   <%= @season.name %>
 </p>
 
+<p>
+<b>Events:</b>
+<ul>
+  <% @season.events.each do |event| %>
+    <li><%= link_to event.time, event_path(event) %></li>
+  <% end %>
+</ul>
+</p>
+
 <%= link_to 'Add Event', new_event_path(:season_id => @season) %><p/>
 
 <%= link_to 'Edit', edit_season_path(@season) %> |

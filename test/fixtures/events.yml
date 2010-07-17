@@ -1,9 +1,26 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 alien_s1_r1:
-  time: 2010-07-03 14:56:36
+  time: 2010-07-03 14:00:00
   season: alien_s1
 
 alien_s1_r2:
-  time: 2010-07-03 14:56:36
+  time: 2010-07-10 14:00:00
   season: alien_s1
+
+alien_s1_r3:
+  time: 2010-07-17 14:00:00
+  season: alien_s1
+
+alien_s1_r4:
+  time: 2010-07-24 14:00:00
+  season: alien_s1
+
+alien_s1_r5:
+  time: 2010-07-31 14:00:00
+  season: alien_s1
+
+alien_s1_r6:
+  time: 2010-08-07 14:00:00
+  season: alien_s1
+
