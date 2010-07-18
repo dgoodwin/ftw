@@ -7,7 +7,7 @@ class RaceTest < ActiveSupport::TestCase
     race = Race.new(:event => event, :time => event.time, :instructions =>
         "Be there.", :index => 1)
     race.users << users(:admin)
-    race.users << users(:kaz)
+    race.users << users(:user001)
     race.save
   end
 
@@ -16,7 +16,7 @@ class RaceTest < ActiveSupport::TestCase
     race = Race.new(:event => event, :time => event.time, :instructions =>
         "Be there.")
     race.users << users(:admin)
-    race.users << users(:kaz)
+    race.users << users(:user001)
 
     assert !race.save
     assert race.errors[:index].any?

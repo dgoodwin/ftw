@@ -100,10 +100,13 @@ class EventsController < ApplicationController
       redirect_to(@event, :notice => 'Event has already been scheduled.')
       return
     end
+
+    # TODO: Block scheduling if only one participant
+
     logger.info "Scheduling event %s for league: %s" % \
       [@event.id, @event.season.league.id] 
     # TODO: assuming race size of 16 for now, should be configurable
-    race_sizes = calc_race_sizes(@event.season.league.members.length, 7)
+    race_sizes = calc_race_sizes(@event.season.league.members.length, 16)
     logger.debug("Creating %s races" % race_sizes.length)
     logger.debug(race_sizes)
 

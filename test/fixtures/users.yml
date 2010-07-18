@@ -5,50 +5,8 @@
 admin:
   login: admin
   hashed_password: d033e22ae348aeb5660fc2140aec35850c4da997
-  name: Initial site administrator.
+  name: Administrator
   location: Canada
-
-kaz:
-  login: kaz
-  hashed_password: d033e22ae348aeb5660fc2140aec35850c4da997
-  name: kaz
-  location: Japan
-
-bill:
-  login: bill
-  hashed_password: d033e22ae348aeb5660fc2140aec35850c4da997
-  name: bill
-  location: Somewhere
-
-sally:
-  login: sally
-  hashed_password: d033e22ae348aeb5660fc2140aec35850c4da997
-  name: sally
-  location: Somewhere
-
-sam:
-  login: sam
-  hashed_password: d033e22ae348aeb5660fc2140aec35850c4da997
-  name: sam
-  location: Somewhere
-
-mary:
-  login: mary
-  hashed_password: d033e22ae348aeb5660fc2140aec35850c4da997
-  name: mary
-  location: Somewhere
-
-joe:
-  login: joe
-  hashed_password: d033e22ae348aeb5660fc2140aec35850c4da997
-  name: joe
-  location: Somewhere
-
-homer:
-  login: homer
-  hashed_password: d033e22ae348aeb5660fc2140aec35850c4da997
-  name: homer
-  location: Somewhere
 
 user001:
   login: User001

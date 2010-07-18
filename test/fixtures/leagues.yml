@@ -1,9 +1,9 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 alien:
-  name: Super Awesome Aliens League
-  description: The home of champions.
+  name: Test League
+  description: Aliens only!
 
 newb:
-  name: The Newb League
+  name: Newb League
   description: We are not so good...

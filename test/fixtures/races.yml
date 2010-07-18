@@ -6,5 +6,5 @@ alien_s1_r1_r1:
   event: alien_s1_r1 
   instructions: Just be there.
   password: password
-  users: admin, kaz, bill, sally
+  users: admin, user001, user002, user003
 
