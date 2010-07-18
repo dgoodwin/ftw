@@ -50,3 +50,123 @@ homer:
   name: homer
   location: Somewhere
 
+user001:
+  login: User001
+  hashed_password: d033e22ae348aeb5660fc2140aec35850c4da997
+  name: User 001
+  location: Somewhere
+
+user002:
+  login: User002
+  hashed_password: d033e22ae348aeb5660fc2140aec35850c4da997
+  name: User 002
+  location: Somewhere
+
+user003:
+  login: User003
+  hashed_password: d033e22ae348aeb5660fc2140aec35850c4da997
+  name: User 003
+  location: Somewhere
+
+user004:
+  login: User004
+  hashed_password: d033e22ae348aeb5660fc2140aec35850c4da997
+  name: User 004
+  location: Somewhere
+
+user005:
+  login: User005
+  hashed_password: d033e22ae348aeb5660fc2140aec35850c4da997
+  name: User 005
+  location: Somewhere
+
+user006:
+  login: User006
+  hashed_password: d033e22ae348aeb5660fc2140aec35850c4da997
+  name: User 006
+  location: Somewhere
+
+user007:
+  login: User007
+  hashed_password: d033e22ae348aeb5660fc2140aec35850c4da997
+  name: User 007
+  location: Somewhere
+
+user008:
+  login: User008
+  hashed_password: d033e22ae348aeb5660fc2140aec35850c4da997
+  name: User 008
+  location: Somewhere
+
+user009:
+  login: User009
+  hashed_password: d033e22ae348aeb5660fc2140aec35850c4da997
+  name: User 009
+  location: Somewhere
+
+user010:
+  login: User010
+  hashed_password: d033e22ae348aeb5660fc2140aec35850c4da997
+  name: User 010
+  location: Somewhere
+
+user011:
+  login: User011
+  hashed_password: d033e22ae348aeb5660fc2140aec35850c4da997
+  name: User 011
+  location: Somewhere
+
+user012:
+  login: User012
+  hashed_password: d033e22ae348aeb5660fc2140aec35850c4da997
+  name: User 012
+  location: Somewhere
+
+user013:
+  login: User013
+  hashed_password: d033e22ae348aeb5660fc2140aec35850c4da997
+  name: User 013
+  location: Somewhere
+
+user014:
+  login: User014
+  hashed_password: d033e22ae348aeb5660fc2140aec35850c4da997
+  name: User 014
+  location: Somewhere
+
+user015:
+  login: User015
+  hashed_password: d033e22ae348aeb5660fc2140aec35850c4da997
+  name: User 015
+  location: Somewhere
+
+user016:
+  login: User016
+  hashed_password: d033e22ae348aeb5660fc2140aec35850c4da997
+  name: User 016
+  location: Somewhere
+
+user017:
+  login: User017
+  hashed_password: d033e22ae348aeb5660fc2140aec35850c4da997
+  name: User 017
+  location: Somewhere
+
+user018:
+  login: User018
+  hashed_password: d033e22ae348aeb5660fc2140aec35850c4da997
+  name: User 018
+  location: Somewhere
+
+user019:
+  login: User019
+  hashed_password: d033e22ae348aeb5660fc2140aec35850c4da997
+  name: User 019
+  location: Somewhere
+
+user020:
+  login: User020
+  hashed_password: d033e22ae348aeb5660fc2140aec35850c4da997
+  name: User 020
+  location: Somewhere
+

@@ -103,7 +103,7 @@ class EventsController < ApplicationController
     logger.info "Scheduling event %s for league: %s" % \
       [@event.id, @event.season.league.id] 
     # TODO: assuming race size of 16 for now, should be configurable
-    race_sizes = calc_race_sizes(@event.season.league.members.length, 16)
+    race_sizes = calc_race_sizes(@event.season.league.members.length, 7)
     logger.debug("Creating %s races" % race_sizes.length)
     logger.debug(race_sizes)
 
