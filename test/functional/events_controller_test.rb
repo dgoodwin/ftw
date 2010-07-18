@@ -67,7 +67,7 @@ class EventsControllerTest < ActionController::TestCase
 
     # A second schedule request shouldn't do anything:
     get :schedule, {'id' => event.id}
-    assert_equal 'Event has already been scheduled.', flash[:error]
+    assert_equal 'Event has already been scheduled.', flash[:notice]
 
   end
 

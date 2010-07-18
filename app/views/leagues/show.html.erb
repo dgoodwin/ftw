@@ -8,14 +8,7 @@
   <%= @league.description %>
 </p>
 
-<p>
-<b>Members:</b>
-<ul>
-    <% @league.members.sort { |a,b| a.user.name.downcase <=> b.user.name.downcase }.each do |member| %>
-    <li><%= link_to member.user.name, user_path(member.user) %></li>
-  <% end %>
-</ul>
-</p>
+<%= link_to "Create Season", new_league_season_path(@league) %><p/>
 
 <p>
 <b>Seasons:</b>
@@ -26,7 +19,14 @@
 </ul>
 </p>
 
-<%= link_to "Create Season", new_league_season_path(@league) %><p/>
+<p>
+<b>Members:</b>
+<ul>
+    <% @league.members.sort { |a,b| a.user.name.downcase <=> b.user.name.downcase }.each do |member| %>
+    <li><%= link_to member.user.name, user_path(member.user) %></li>
+  <% end %>
+</ul>
+</p>
 
 <% if @can_join then %>
   <%= form_for([@league, @league.members.build]) do |f| %>

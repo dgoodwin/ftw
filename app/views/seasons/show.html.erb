@@ -1,9 +1,8 @@
 <p class="notice"><%= notice %></p>
 
-<p>
-  <b>Name:</b>
-  <%= @season.name %>
-</p>
+<%= breadcrumb(:league => @season.league) %>
+
+<h2><%= @season.name %></h2>
 
 <p>
 <b>Events:</b>

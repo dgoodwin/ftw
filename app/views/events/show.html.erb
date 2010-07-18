@@ -1,18 +1,12 @@
 <p class="notice"><%= notice %></p>
 
-<p>
-  <b>Name:</b>
-  <%= @event.name %>
-</p>
+<%= breadcrumb(:league => @event.season.league, :season => @event.season) %>
+
+<h2><%= @event.name %></h2>
 
 <p>
   <b>Time:</b>
   <%= @event.time %>
-</p>
-
-<p>
-  <b>Season:</b>
-  <%= link_to @event.season.name, season_path(@event.season) %>
 </p>
 
 <p>
