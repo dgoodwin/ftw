@@ -29,6 +29,18 @@
 </ul>
 </p>
 
+<p>
+<b>Results:</b>
+<ul>
+  <% @race.race_results.each do |result| %>
+    <li><%= link_to result.user.name, race_result_path(result) %></li>
+  <% end %>
+</ul>
+</p>
+
+<p>
+<%= link_to 'Submit Results', new_race_result_path(:race_id => @race) %>
+</p>
 
 <%= link_to 'Edit', edit_race_path(@race) %> |
 <%= link_to 'Back', races_path %>

@@ -1,0 +1,27 @@
+<h1>Listing race_results</h1>
+
+<table>
+  <tr>
+    <th>Race</th>
+    <th>User</th>
+    <th>Final</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @race_results.each do |race_result| %>
+  <tr>
+    <td><%= race_result.race %></td>
+    <td><%= race_result.user %></td>
+    <td><%= race_result.final %></td>
+    <td><%= link_to 'Show', race_result %></td>
+    <td><%= link_to 'Edit', edit_race_result_path(race_result) %></td>
+    <td><%= link_to 'Destroy', race_result, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Race result', new_race_result_path %>

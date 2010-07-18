@@ -55,7 +55,7 @@ class LeaguesController < ApplicationController
   def create
     @league = League.new(params[:league])
 
-    creator = User.find(session[:user_id])
+    creator = get_current_user()
     member = Member.new(:league => @league, :user => creator)
     @league.members << member
 

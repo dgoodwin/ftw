@@ -1,0 +1,23 @@
+<%= form_for(@race_result) do |f| %>
+  <% if @race_result.errors.any? %>
+  <div id="errorExplanation">
+    <h2><%= pluralize(@race_result.errors.count, "error") %> prohibited this race_result from being saved:</h2>
+    <ul>
+    <% @race_result.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+  <% end %>
+
+  <div class="field">
+    <%= hidden_field_tag 'race_id', @race.id %><br />
+  </div>
+  <div class="field">
+    <%= f.label :final %><br />
+    <%= f.check_box :final %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

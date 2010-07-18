@@ -1,4 +1,6 @@
 Ftw::Application.routes.draw do |map|
+  resources :race_results
+
   resources :races
 
   resources :events

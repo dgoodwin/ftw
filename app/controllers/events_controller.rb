@@ -29,7 +29,6 @@ class EventsController < ApplicationController
   def new
     @event = Event.new
     @season = Season.find(params[:season_id])
-    @event.season = @season
 
     respond_to do |format|
       format.html # new.html.erb
