@@ -2,9 +2,13 @@ class RaceResult < ActiveRecord::Base
   belongs_to :race
   belongs_to :user
 
+  has_many :race_result_rows
+  accepts_nested_attributes_for :race_result_rows, :allow_destroy => true
+
   validates :race, :presence => true 
   validates :user, :presence => true 
-  validate :race_has_occurred, :one_submission_per_user, :block_after_final
+  validate :race_has_occurred, :one_submission_per_user, :block_after_final,
+    :unique_users
 
   # Validate the race has actually occurred, otherwise nobody should be
   # submitting results for it. Returns true if race is null, this validation
@@ -32,6 +36,23 @@ class RaceResult < ActiveRecord::Base
     end
     if RaceResult.where(["race_id = ? AND final = ?", race.id, 't']).length > 0
       errors.add(:final, "Final race results have already been decided.")
+    end
+  end
+
+  def unique_users
+    if race_result_rows.nil?
+      return
+    end
+
+    users_seen = {}
+    race_result_rows.each do |row| 
+      if users_seen.has_key?(row.user.id)
+        errors.add(:race_result_rows, 
+                   "User '%s' appears in results more than once." % row.user.name)
+        return
+      else
+        users_seen[row.user.id] = 1 # value is irrelevant here
+      end
     end
   end
 end

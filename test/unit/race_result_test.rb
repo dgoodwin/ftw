@@ -43,8 +43,12 @@ class RaceResultTest < ActiveSupport::TestCase
 
   def create_race
     event = events(:alien_s1_r1)
+    users = []
+    event.season.league.members.each do |member|
+      users << member.user
+    end
     race = Race.new(:event => event, :time => event.time, :instructions =>
-        "Be there.", :index => 1)
+        "Be there.", :index => 1, :users => users)
     return race
   end
 
@@ -71,7 +75,28 @@ class RaceResultTest < ActiveSupport::TestCase
 #     assert !result.save
 #     assert result.errors[:final].any?
 #   end
+  
+  test "cannot duplicate user in results" do
+    race = create_race
+    result = RaceResult.new(:race => race,
+        :user => users(:user001), :final => false)
+    i = 1
+    race.users.each do |u|
+      result.race_result_rows << RaceResultRow.new(:position => i, :user => u)
+    end
+    # dupe the user in the last two spots:
+    result.race_result_rows[-2].user = result.race_result_rows[-1].user
+    assert !result.save
+    assert result.errors[:race_result_rows].any?
+  end
 
+  test "all positions accounted for" do # ??? no shows ???
+  end
+
+  # no need to support multi-submissions just yet, need to see what's in gt5
+  test "only one result per race" do
+  end
+  
   test "cannot edit after final" do
   end
 

@@ -6,15 +6,23 @@
 </p>
 
 <p>
-  <b>User:</b>
-  <%= @race_result.user %>
+  <b>Submitted by:</b>
+  <%= link_to @race_result.user.name, user_path(@race_result.user) %>
 </p>
 
-<p>
-  <b>Final:</b>
-  <%= @race_result.final %>
-</p>
-
+<table>
+  <tr>
+    <th>Position</th>
+    <th>User</th>
+  </tr>
+<% @race_result.race_result_rows.each do |row| %>
+  <tr>
+    <td><%= row.position %></td>
+    <td><%= link_to row.user.name, user_path(row.user) %></td>
+  </td>
+<% end %>
+</table>
+  
 
 <%= link_to 'Edit', edit_race_result_path(@race_result) %> |
 <%= link_to 'Back', race_results_path %>

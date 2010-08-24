@@ -17,6 +17,17 @@
     <%= f.label :final %><br />
     <%= f.check_box :final %>
   </div>
+
+  <h2>Results</h2>
+
+      <%= f.fields_for :race_result_rows do |row_form| %>  
+        <div class="field">  
+          <%= row_form.label :position, 'Position: ' %>
+          <%= row_form.text_field :position, :size => 2 %>
+          <%= row_form.collection_select(:user_id, @race.users, :id, :name) %>
+        </div>  
+      <% end %> 
+
   <div class="actions">
     <%= f.submit %>
   </div>

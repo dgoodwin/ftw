@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  position: 1
+  time: 1
+  user: 
+  race_result: 
+
+two:
+  position: 1
+  time: 1
+  user: 
+  race_result: 

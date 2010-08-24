@@ -44,6 +44,11 @@ class RaceResultsController < ApplicationController
   def new
     @race = Race.find(params[:race_id])
     @race_result = RaceResult.new
+
+    # Create the required race result rows to place every participant.
+    (1..@race.users.length).to_a.each do |i|
+      @race_result.race_result_rows << RaceResultRow.new(:position => i)
+    end
     
     respond_to do |format|
       format.html # new.html.erb
@@ -53,7 +58,6 @@ class RaceResultsController < ApplicationController
 
   # GET /race_results/1/edit
   def edit
-    print "got to edit\n"
     @race_result = RaceResult.find(params[:id])
     @race = @race_result.race
   end
@@ -62,6 +66,7 @@ class RaceResultsController < ApplicationController
   # POST /race_results.xml
   def create
     @race = Race.find(params[:race_id])
+    logger.warn params
     @race_result = RaceResult.new(params[:race_result])
     @race_result.race = @race
     @race_result.user = get_current_user()
@@ -81,7 +86,6 @@ class RaceResultsController < ApplicationController
   # PUT /race_results/1
   # PUT /race_results/1.xml
   def update
-    print "got to update\n"
     @race_result = RaceResult.find(params[:id])
 
     respond_to do |format|
