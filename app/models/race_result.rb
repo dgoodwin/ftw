@@ -2,8 +2,8 @@ class RaceResult < ActiveRecord::Base
   belongs_to :race
   belongs_to :user
 
-  has_many :race_result_rows
-  accepts_nested_attributes_for :race_result_rows, :allow_destroy => true
+  has_many :rows, :class_name => 'RaceResultRow'
+  accepts_nested_attributes_for :rows, :allow_destroy => true
 
   validates :race, :presence => true 
   validates :user, :presence => true 
@@ -40,14 +40,14 @@ class RaceResult < ActiveRecord::Base
   end
 
   def unique_users
-    if race_result_rows.nil?
+    if rows.nil?
       return
     end
 
     users_seen = {}
-    race_result_rows.each do |row| 
+    rows.each do |row| 
       if users_seen.has_key?(row.user.id)
-        errors.add(:race_result_rows, 
+        errors.add(:rows, 
                    "User '%s' appears in results more than once." % row.user.name)
         return
       else

@@ -47,7 +47,7 @@ class RaceResultsController < ApplicationController
 
     # Create the required race result rows to place every participant.
     (1..@race.users.length).to_a.each do |i|
-      @race_result.race_result_rows << RaceResultRow.new(:position => i)
+      @race_result.rows << RaceResultRow.new(:position => i)
     end
     
     respond_to do |format|

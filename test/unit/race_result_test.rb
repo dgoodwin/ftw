@@ -82,12 +82,12 @@ class RaceResultTest < ActiveSupport::TestCase
         :user => users(:user001), :final => false)
     i = 1
     race.users.each do |u|
-      result.race_result_rows << RaceResultRow.new(:position => i, :user => u)
+      result.rows << RaceResultRow.new(:position => i, :user => u)
     end
     # dupe the user in the last two spots:
-    result.race_result_rows[-2].user = result.race_result_rows[-1].user
+    result.rows[-2].user = result.rows[-1].user
     assert !result.save
-    assert result.errors[:race_result_rows].any?
+    assert result.errors[:rows].any?
   end
 
   test "all positions accounted for" do # ??? no shows ???
