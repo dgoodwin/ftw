@@ -7,8 +7,26 @@ class RaceResult < ActiveRecord::Base
 
   validates :race, :presence => true 
   validates :user, :presence => true 
-  validate :race_has_occurred, :one_submission_per_user, :block_after_final,
+  validate :all_users_accounted_for, :race_has_occurred, 
+    :one_submission_per_user, :block_after_final,
     :unique_users
+
+  def all_users_accounted_for
+    submitted_users = {}
+    rows.each do |row|
+      if row.user
+        submitted_users[row.user.login] = 1
+      end
+    end
+
+    if race
+      race.users.each do |user|
+        if not submitted_users.has_key?(user.login)
+          errors.add(:rows, "Results missing for user: %s" % user.login)
+        end
+      end
+    end
+  end
 
   # Validate the race has actually occurred, otherwise nobody should be
   # submitting results for it. Returns true if race is null, this validation
@@ -46,11 +64,11 @@ class RaceResult < ActiveRecord::Base
 
     users_seen = {}
     rows.each do |row| 
-      if users_seen.has_key?(row.user.id)
+      if row.user and users_seen.has_key?(row.user.id)
         errors.add(:rows, 
                    "User '%s' appears in results more than once." % row.user.name)
         return
-      else
+      elsif row.user
         users_seen[row.user.id] = 1 # value is irrelevant here
       end
     end

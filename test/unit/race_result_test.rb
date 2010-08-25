@@ -9,22 +9,23 @@ class RaceResultTest < ActiveSupport::TestCase
 
   test "simple create" do
     race = create_race
-    result = RaceResult.new(:race => race,
-        :user => users(:user001), :final => false)
+    result = create_race_result(race)
     x = result.save
     assert x
   end
 
   test "race required" do
-    result = RaceResult.new(:user => users(:user001), :final => false)
+    race = create_race
+    result = create_race_result(race)
+    result.race = nil
     assert !result.save
     assert result.errors[:race].any?
   end
 
   test "user required" do
     race = create_race
-    result = RaceResult.new(:race => race,
-        :final => false)
+    result = create_race_result(race)
+    result.user = nil
     assert !result.save
     assert result.errors[:user].any?
   end
@@ -36,8 +37,7 @@ class RaceResultTest < ActiveSupport::TestCase
     assert race.save
 
     # Now try to submit results before the race has even happened:
-    result = RaceResult.new(:race => race,
-        :user => users(:user001), :final => false)
+    result = create_race_result(race)
     assert !result.save
   end
 
@@ -52,15 +52,24 @@ class RaceResultTest < ActiveSupport::TestCase
     return race
   end
 
-  test "can submit only once" do
-    race = create_race
+  def create_race_result(race)
     result = RaceResult.new(:race => race,
         :user => users(:user001), :final => false)
+    i = 1
+    race.users.each do |u|
+      result.rows << RaceResultRow.new(:position => i, :user => u)
+      i = i + 1
+    end
+    return result
+  end
+
+  test "can submit only once" do
+    race = create_race
+    result = create_race_result(race)
     x = result.save
     assert x
     
-    result = RaceResult.new(:race => race,
-        :user => users(:user001), :final => false)
+    result = create_race_result(race)
     assert !result.save
     assert result.errors[:user].any?
   end

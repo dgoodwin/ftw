@@ -13,10 +13,6 @@
   <div class="field">
     <%= hidden_field_tag 'race_id', @race.id %><br />
   </div>
-  <div class="field">
-    <%= f.label :final %><br />
-    <%= f.check_box :final %>
-  </div>
 
   <h2>Results</h2>
 
@@ -24,7 +20,8 @@
         <div class="field">  
           <%= row_form.label :position, 'Position: ' %>
           <%= row_form.text_field :position, :size => 2 %>
-          <%= row_form.collection_select(:user_id, @race.users, :id, :name) %>
+          <%= row_form.collection_select(:user_id, @race.users, :id, :name, 
+                  :include_blank => true) %>
         </div>  
       <% end %> 
 
