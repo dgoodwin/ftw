@@ -71,7 +71,7 @@ class RaceResultTest < ActiveSupport::TestCase
     
     result = create_race_result(race)
     assert !result.save
-    assert result.errors[:user].any?
+    assert result.errors[:race].any?
   end
 
 #   test "cannot create after final" do

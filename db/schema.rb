@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100808134428) do
+ActiveRecord::Schema.define(:version => 20100826231446) do
 
   create_table "events", :force => true do |t|
     t.datetime "time"
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(:version => 20100808134428) do
     t.integer  "race_result_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "status",         :limit => 50, :default => "finished"
   end
 
   create_table "race_results", :force => true do |t|

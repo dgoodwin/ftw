@@ -8,7 +8,7 @@ class RaceResult < ActiveRecord::Base
   validates :race, :presence => true 
   validates :user, :presence => true 
   validate :all_users_accounted_for, :race_has_occurred, 
-    :one_submission_per_user, :block_after_final,
+    :one_submission, :block_after_final,
     :unique_users
 
   def all_users_accounted_for
@@ -38,13 +38,22 @@ class RaceResult < ActiveRecord::Base
     end
   end
 
-  def one_submission_per_user
+  # Until we allow user submissions:
+  def one_submission
     # Skip this validation if user or race is nil:
     if race.nil? or user.nil?
       return
     end
-    if RaceResult.where(["race_id = ? AND user_id = ?", race.id, user.id]).length > 0
-      errors.add(:user, "You have already submitted results for this race.")
+    # Edits
+    if not id.nil?
+      if RaceResult.where(["race_id = ? and id != ?", race.id, id]).length > 0
+        errors.add(:race, "Results already submitted for this race.")
+      end
+    # Creates
+    else
+      if RaceResult.where(["race_id = ?", race.id]).length > 0
+        errors.add(:race, "Results already submitted for this race.")
+      end
     end
   end
 

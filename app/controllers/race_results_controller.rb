@@ -2,6 +2,12 @@ class RaceResultsController < ApplicationController
 
   before_filter :authenticate, :except => [:index, :show]
   before_filter :check_user, :only => [:edit, :update]
+  
+  STATUSES = [
+    ['Finished', 'finished'],
+    ['No Show', 'no_show'],
+    ['Disqualified', 'disqualified']
+  ]
 
   # Check that the current user matches the race result being modified:
   # TODO: replace this when there's a proper permissions system in play
@@ -45,9 +51,11 @@ class RaceResultsController < ApplicationController
     @race = Race.find(params[:race_id])
     @race_result = RaceResult.new
 
+    @valid_status = STATUSES
+    
     # Create the required race result rows to place every participant.
     (1..@race.users.length).to_a.each do |i|
-      @race_result.rows << RaceResultRow.new(:position => i)
+      @race_result.rows << RaceResultRow.new(:position => i, :user => @race.users[i-1])
     end
     
     respond_to do |format|
@@ -60,6 +68,7 @@ class RaceResultsController < ApplicationController
   def edit
     @race_result = RaceResult.find(params[:id])
     @race = @race_result.race
+    @valid_status = STATUSES
   end
 
   # POST /race_results
@@ -71,6 +80,15 @@ class RaceResultsController < ApplicationController
     @race_result.race = @race
     @race_result.user = get_current_user()
 
+    @race_result.rows.each do |row|
+      if row.status != 'finished'
+        row.position = 0
+      end
+    end
+
+    # Needed if we redirect back:
+    @valid_status = STATUSES
+    
     respond_to do |format|
       if @race_result.save
         format.html { redirect_to(@race_result, :notice => 'Race result was successfully created.') }
@@ -87,6 +105,8 @@ class RaceResultsController < ApplicationController
   # PUT /race_results/1.xml
   def update
     @race_result = RaceResult.find(params[:id])
+    @race = @race_result.race
+    @valid_status = STATUSES
 
     respond_to do |format|
       if @race_result.update_attributes(params[:race_result])
