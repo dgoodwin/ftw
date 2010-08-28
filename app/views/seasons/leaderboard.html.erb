@@ -1,0 +1,11 @@
+<p class="notice"><%= notice %></p>
+
+<%= breadcrumb(:league => @season.league, :season => @season) %>
+
+<h2><%= @season.name %> - Leaderboard</h2>
+
+
+<% @leaderboard.user_points.keys.each do |key| %>
+  <%= key.login %> - <%= @leaderboard.user_points[key] %><br/>
+<% end %>
+

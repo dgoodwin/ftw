@@ -1,4 +1,5 @@
 require 'digest/sha1'
+require 'pp'
 
 class ApplicationController < ActionController::Base
   protect_from_forgery
