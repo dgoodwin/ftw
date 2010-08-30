@@ -4,7 +4,7 @@ class RoleTest < ActiveSupport::TestCase
   # Replace this with your real tests.
   test "simple create" do
     assert true
-    role = Role.new(:name => "Test Role")
+    role = Role.new(:key => 'test_role', :name => "Test Role")
     role.rights << rights(:create_league)
     assert role.save
 

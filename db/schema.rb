@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100830004918) do
+ActiveRecord::Schema.define(:version => 20100830015647) do
 
   create_table "events", :force => true do |t|
     t.datetime "time"
@@ -85,10 +85,10 @@ ActiveRecord::Schema.define(:version => 20100830004918) do
   end
 
   create_table "roles", :force => true do |t|
-    t.integer  "right_id"
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "key",        :limit => 30
   end
 
   create_table "seasons", :force => true do |t|
