@@ -28,3 +28,7 @@ RIGHTS = [
 RIGHTS.each do |right|
   Right.create(:key => right)
 end
+
+# Create the standard Roles:
+
+

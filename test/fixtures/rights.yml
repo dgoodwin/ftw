@@ -1,7 +1,47 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-one:
-  key: MyString
+create_league:
+  key: create_league
 
-two:
-  key: MyString
+destroy_league:
+  key: destroy_league
+
+edit_league:
+  key: edit_league
+
+create_season:
+  key: create_season
+
+edit_season:
+  key: edit_season
+
+destroy_season:
+  key: destroy_season
+
+create_event:
+  key: create_event
+
+destroy_event:
+  key: destroy_event
+
+edit_event:
+  key: edit_event
+
+schedule_event:
+  key: schedule_event
+
+create_results:
+  key: create_results
+
+destroy_results:
+  key: destroy_results
+
+edit_results:
+  key: edit_results
+
+approve_results:
+  key: approve_results
+
+destroy_user:
+  key: destroy_user
+
