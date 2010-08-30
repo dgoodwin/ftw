@@ -47,8 +47,22 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to(@user, :notice => 'User was successfully created.') }
-        format.xml  { render :xml => @user, :status => :created, :location => @user }
+
+        # Once saved, grant the user role so they can do normal things. Would
+        # do this earlier but the user won't have an ID yet, and we need it
+        # for the qualifier.
+        user_role = Role.where(:name => "Regular Joe")[0]
+        @user.permissions << Permission.new(:user => @user, :role => user_role,
+            :qualifier => @user.id)
+
+        # Check again:
+        if @user.save
+          format.html { redirect_to(@user, :notice => 'User was successfully created.') }
+          format.xml  { render :xml => @user, :status => :created, :location => @user }
+        else
+          format.html { render :action => "new" }
+          format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
+        end
       else
         format.html { render :action => "new" }
         format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }

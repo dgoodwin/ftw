@@ -42,6 +42,9 @@ edit_results:
 approve_results:
   key: approve_results
 
+edit_user:
+  key: edit_user
+
 destroy_user:
   key: destroy_user
 

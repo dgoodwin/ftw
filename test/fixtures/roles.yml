@@ -1,8 +1,10 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
+user:
+  name: Regular Joe
+  rights: create_league, edit_user
+
 league_admin:
   name: League Admin
   rights: destroy_league, edit_league, create_season, edit_season
 
-two:
-  name: MyString

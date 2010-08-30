@@ -20,6 +20,15 @@
   <%= @user.location %>
 </p>
 
+<p>
+<b>Permissions:</b>
+<ul>
+  <% @user.permissions.each do |perm| %>
+    <li><%= perm.role.name %> = <%= perm.qualifier %></li>
+  <% end %>
+</ul>
+
+
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>

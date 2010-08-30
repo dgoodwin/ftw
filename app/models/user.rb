@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
 
   has_many :members, :dependent => :destroy
   has_many :leagues, :through => :members
+  has_many :permissions
   has_and_belongs_to_many :races
 
   def password=(pass)

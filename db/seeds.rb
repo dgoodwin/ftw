@@ -22,6 +22,7 @@ RIGHTS = [
   'destroy_results',
   'edit_results',
   'approve_results',
+  'edit_user',
   'destroy_user',
 ]
 
@@ -30,5 +31,10 @@ RIGHTS.each do |right|
 end
 
 # Create the standard Roles:
+user_role = Role.new(:name => "Regular Joe")
+user_role.rights << Right.where(:key => 'create_league')[0]
+user_role.rights << Right.where(:key => 'edit_user')[0]
+user_role.save
+
 
 

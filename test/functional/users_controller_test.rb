@@ -29,6 +29,16 @@ class UsersControllerTest < ActionController::TestCase
     assert_redirected_to user_path(assigns(:user))
   end
 
+  test "should give user role on creation" do
+    create_me = User.new(:login => "testguy", :password => "passwordakajshdkajhd")
+    attrs = create_me.attributes
+    post :create, :user => attrs
+
+    looked_up = User.find(assigns(:user))
+    assert_not_nil looked_up.permissions.detect { |p| p.role == roles(:user) \
+        and p.qualifier == assigns(:user).id }
+  end
+
   test "should show user" do
     get :show, :id => @user.to_param
     assert_response :success
