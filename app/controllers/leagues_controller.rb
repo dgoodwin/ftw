@@ -61,8 +61,20 @@ class LeaguesController < ApplicationController
 
     respond_to do |format|
       if @league.save 
-        format.html { redirect_to(@league, :notice => 'League was successfully created.') }
-        format.xml  { render :xml => @league, :status => :created, :location => @league }
+
+        # Once saved, grant the league admin role to creating user:
+        league_admin_role = Role.where(:key => "league_admin")[0]
+        creator.permissions << Permission.new(:user => creator, :role => league_admin_role,
+            :qualifier => @league.id)
+
+        # Check again:
+        if @league.save
+          format.html { redirect_to(@league, :notice => 'League was successfully created.') }
+          format.xml  { render :xml => @league, :status => :created, :location => @league }
+        else
+          format.html { render :action => "new" }
+          format.xml  { render :xml => @league.errors, :status => :unprocessable_entity }
+        end
       else
         format.html { render :action => "new" }
         format.xml  { render :xml => @league.errors, :status => :unprocessable_entity }

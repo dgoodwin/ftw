@@ -16,4 +16,15 @@ class ActiveSupport::TestCase
         % [username, password])
   end
 
+
+  # Examines a users permissions looking for one which provides
+  # the given role with the given qualifier.
+  #
+  # If no qualifier is given, look for a perm with qualifier 0. (site-wide)
+  def has_role(user, role_key, qualifier=0)
+    result = user.permissions.detect { |p| p.role.key == role_key \
+        and p.qualifier == qualifier }
+    not result.nil?
+  end
+
 end

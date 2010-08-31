@@ -35,8 +35,7 @@ class UsersControllerTest < ActionController::TestCase
     post :create, :user => attrs
 
     looked_up = User.find(assigns(:user))
-    assert_not_nil looked_up.permissions.detect { |p| p.role == roles(:user) \
-        and p.qualifier == assigns(:user).id }
+    assert has_role(looked_up, roles(:user).key, assigns(:user).id)
   end
 
   test "should show user" do

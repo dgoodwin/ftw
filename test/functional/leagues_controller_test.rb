@@ -36,6 +36,16 @@ class LeaguesControllerTest < ActionController::TestCase
 #    assert @league.members.include?(users(:user001))
   end
 
+  test "should give creator initial league admin role" do
+    authenticate(users(:admin).login, 'admin')
+    create_me = League.new(:name => "Some League")
+    post :create, :league => create_me.attributes
+    assert_redirected_to league_path(assigns(:league))
+
+    admin = User.find(users(:admin).id)
+    assert has_role(admin, roles(:league_admin).key, assigns(:league).id)
+  end
+
   test "should show league" do
     get :show, :id => @league.to_param
     assert_response :success
