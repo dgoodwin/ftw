@@ -8,7 +8,8 @@
   <%= @league.description %>
 </p>
 
-<%= link_to "Create Season", new_league_season_path(@league) %><p/>
+<%= link_to_if have_perm('create_season', @league.id), 
+    "Create Season", new_league_season_path(@league) %><p/>
 
 <p>
 <b>Seasons:</b>
@@ -27,6 +28,8 @@
   <% end %>
 </ul>
 </p>
+
+<%= link_to_if(false, "Hi", "/") %>
 
 <% if @can_join then %>
   <%= form_for([@league, @league.members.build]) do |f| %>

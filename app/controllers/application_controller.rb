@@ -5,6 +5,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   layout 'application'
 
+  before_filter :set_luser
+
   private
 
   def authenticate
@@ -33,6 +35,12 @@ class ApplicationController < ActionController::Base
       user = User.find(session[:user_id])
     end
     return user
+  end
+
+  # Set the currently logged in user, can be referenced in all views for
+  # permission checking, etc.
+  def set_luser
+    @luser = get_current_user()
   end
 
 end

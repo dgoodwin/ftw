@@ -25,6 +25,11 @@
 <ul>
   <% @user.permissions.each do |perm| %>
     <li><%= perm.role.name %> = <%= perm.qualifier %></li>
+    <ul>
+      <% perm.role.rights.each do |right| %>
+        <li><%= right.key %></li>
+      <% end %>
+    </ul>
   <% end %>
 </ul>
 
