@@ -44,13 +44,13 @@ class UsersControllerTest < ActionController::TestCase
   end
 
   test "should get edit" do
-    authenticate(users(:user001).login, 'admin')
+    authenticate(users(:admin).login, 'admin')
     get :edit, :id => @user.to_param
     assert_response :success
   end
 
   test "should update user" do
-    authenticate(users(:user001).login, 'admin')
+    authenticate(users(:admin).login, 'admin')
 
     # Hack in the password again:
     attributes = @user.attributes
@@ -61,7 +61,7 @@ class UsersControllerTest < ActionController::TestCase
   end
 
   test "should destroy user" do
-    authenticate(users(:user001).login, 'admin')
+    authenticate(users(:admin).login, 'admin')
     assert_difference('User.count', -1) do
       delete :destroy, :id => @user.to_param
     end

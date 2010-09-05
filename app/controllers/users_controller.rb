@@ -38,6 +38,7 @@ class UsersController < ApplicationController
   # GET /users/1/edit
   def edit
     @user = User.find(params[:id])
+    return if not require_perm('edit_user', @user.id)
   end
 
   # POST /users
@@ -73,6 +74,7 @@ class UsersController < ApplicationController
   # PUT /users/1.xml
   def update
     @user = User.find(params[:id])
+    return if not require_perm('edit_user', @user.id)
 
     respond_to do |format|
       if @user.update_attributes(params[:user])
@@ -89,6 +91,7 @@ class UsersController < ApplicationController
   # DELETE /users/1.xml
   def destroy
     @user = User.find(params[:id])
+    return if not require_perm('destroy_user', @user.id)
     @user.destroy
 
     respond_to do |format|

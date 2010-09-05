@@ -33,7 +33,7 @@ class RaceResultsControllerTest < ActionController::TestCase
   end
 
   test "should get edit" do
-    authenticate(users(:user001).login, 'admin')
+    authenticate(users(:admin).login, 'admin')
     get :edit, :id => @race_result.to_param
     assert_response :success
   end

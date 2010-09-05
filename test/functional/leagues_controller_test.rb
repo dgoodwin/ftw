@@ -12,7 +12,7 @@ class LeaguesControllerTest < ActionController::TestCase
   end
 
   test "should get new" do
-    authenticate(users(:user001).login, 'admin')
+    authenticate(users(:admin).login, 'admin')
     get :new
     assert_response :success
   end
@@ -23,7 +23,7 @@ class LeaguesControllerTest < ActionController::TestCase
   end
 
   test "should create league" do
-    authenticate(users(:user001).login, 'admin')
+    authenticate(users(:admin).login, 'admin')
     create_me = League.new(:name => "Elite league!")
     assert_difference('League.count') do
       post :create, :league => create_me.attributes
@@ -33,7 +33,7 @@ class LeaguesControllerTest < ActionController::TestCase
 
     # TODO: No idea why, but this works deployed but not in tests:
 #    assert !@league.members(true).empty?
-#    assert @league.members.include?(users(:user001))
+#    assert @league.members.include?(users(:admin))
   end
 
   test "should give creator initial league admin role" do
@@ -52,19 +52,19 @@ class LeaguesControllerTest < ActionController::TestCase
   end
 
   test "should get edit" do
-    authenticate(users(:user001).login, 'admin')
+    authenticate(users(:admin).login, 'admin')
     get :edit, :id => @league.to_param
     assert_response :success
   end
 
   test "should update league" do
-    authenticate(users(:user001).login, 'admin')
+    authenticate(users(:admin).login, 'admin')
     put :update, :id => @league.to_param, :league => @league.attributes
     assert_redirected_to league_path(assigns(:league))
   end
 
   test "should destroy league" do
-    authenticate(users(:user001).login, 'admin')
+    authenticate(users(:admin).login, 'admin')
     assert_difference('League.count', -1) do
       delete :destroy, :id => @league.to_param
     end

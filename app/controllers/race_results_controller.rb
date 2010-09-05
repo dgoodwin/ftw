@@ -49,6 +49,7 @@ class RaceResultsController < ApplicationController
   # GET /race_results/new.xml
   def new
     @race = Race.find(params[:race_id])
+    return if not require_perm('create_results', @race.event.season.league.id)
     @race_result = RaceResult.new
 
     @valid_status = STATUSES
@@ -68,6 +69,7 @@ class RaceResultsController < ApplicationController
   def edit
     @race_result = RaceResult.find(params[:id])
     @race = @race_result.race
+    return if not require_perm('edit_results', @race.event.season.league.id)
     @valid_status = STATUSES
   end
 
@@ -75,6 +77,7 @@ class RaceResultsController < ApplicationController
   # POST /race_results.xml
   def create
     @race = Race.find(params[:race_id])
+    return if not require_perm('create_results', @race.event.season.league.id)
     logger.warn params
     @race_result = RaceResult.new(params[:race_result])
     @race_result.race = @race
@@ -106,6 +109,8 @@ class RaceResultsController < ApplicationController
   def update
     @race_result = RaceResult.find(params[:id])
     @race = @race_result.race
+    return if not require_perm('edit_results', @race.event.season.league.id)
+
     @valid_status = STATUSES
 
     respond_to do |format|
@@ -123,6 +128,8 @@ class RaceResultsController < ApplicationController
   # DELETE /race_results/1.xml
   def destroy
     @race_result = RaceResult.find(params[:id])
+    race = @race_result.race
+    return if not require_perm('destroy_results', race.event.season.league.id)
     @race_result.destroy
 
     respond_to do |format|

@@ -29,8 +29,8 @@ module Auth
           'destroy_event',
           'schedule_event',
           'create_results',
-          'destroy_results',
           'edit_results',
+          'destroy_results',
           'approve_results'
         ])
     elsif role == 'site_admin'
@@ -46,8 +46,8 @@ module Auth
           'edit_event',
           'schedule_event',
           'create_results',
-          'destroy_results',
           'edit_results',
+          'destroy_results',
           'approve_results',
           'edit_user',
           'destroy_user'

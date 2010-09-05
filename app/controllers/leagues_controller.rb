@@ -38,6 +38,7 @@ class LeaguesController < ApplicationController
   # GET /leagues/new.xml
   def new
     @league = League.new
+    return if not require_perm('create_league', @league.id)
 
     respond_to do |format|
       format.html # new.html.erb
@@ -48,12 +49,14 @@ class LeaguesController < ApplicationController
   # GET /leagues/1/edit
   def edit
     @league = League.find(params[:id])
+    return if not require_perm('edit_league', @league.id)
   end
 
   # POST /leagues
   # POST /leagues.xml
   def create
     @league = League.new(params[:league])
+    return if not require_perm('create_league', @league.id)
 
     creator = get_current_user()
     member = Member.new(:league => @league, :user => creator)
@@ -85,6 +88,7 @@ class LeaguesController < ApplicationController
   # PUT /leagues/1.xml
   def update
     @league = League.find(params[:id])
+    return if not require_perm('edit_league', @league.id)
 
     respond_to do |format|
       if @league.update_attributes(params[:league])
@@ -101,6 +105,7 @@ class LeaguesController < ApplicationController
   # DELETE /leagues/1.xml
   def destroy
     @league = League.find(params[:id])
+    return if not require_perm('destroy_league', @league.id)
     @league.destroy
 
     respond_to do |format|

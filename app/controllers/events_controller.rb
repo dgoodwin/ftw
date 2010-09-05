@@ -29,6 +29,7 @@ class EventsController < ApplicationController
   def new
     @event = Event.new
     @season = Season.find(params[:season_id])
+    return if not require_perm('create_event', @season.league.id)
 
     respond_to do |format|
       format.html # new.html.erb
@@ -39,6 +40,7 @@ class EventsController < ApplicationController
   # GET /events/1/edit
   def edit
     @event = Event.find(params[:id])
+    return if not require_perm('edit_event', @event.season.league.id)
   end
 
   # POST /events
@@ -46,6 +48,7 @@ class EventsController < ApplicationController
   def create
     @season = Season.find(params[:season_id])
     @event = @season.events.create(params[:event])
+    return if not require_perm('create_event', @season.league.id)
 
     # For now, we auto-assign the event name "Round X", where X is the
     # number of existing events in this season + 1.
@@ -67,6 +70,7 @@ class EventsController < ApplicationController
   def update
     # TODO: block updates if the event is scheduled
     @event = Event.find(params[:id])
+    return if not require_perm('edit_event', @event.season.league.id)
 
     respond_to do |format|
       if @event.update_attributes(params[:event])
@@ -83,6 +87,7 @@ class EventsController < ApplicationController
   # DELETE /events/1.xml
   def destroy
     @event = Event.find(params[:id])
+    return if not require_perm('destroy_event', @event.season.league.id)
     @event.destroy
 
     respond_to do |format|
@@ -93,6 +98,8 @@ class EventsController < ApplicationController
 
   def schedule
     @event = Event.find(params[:id])
+    return if not require_perm('schedule_event', @event.season.league.id)
+
     if @event.races.length > 0
       logger.warn "Attempt to re-schedule an event: %s" % @event.id
       flash[:error] = "Event has already been scheduled."
