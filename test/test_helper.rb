@@ -22,7 +22,7 @@ class ActiveSupport::TestCase
   #
   # If no qualifier is given, look for a perm with qualifier 0. (site-wide)
   def has_role(user, role_key, qualifier=0)
-    result = user.permissions.detect { |p| p.role.key == role_key \
+    result = user.permissions.detect { |p| p.role == role_key \
         and p.qualifier == qualifier }
     not result.nil?
   end

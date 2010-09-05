@@ -63,9 +63,8 @@ class LeaguesController < ApplicationController
       if @league.save 
 
         # Once saved, grant the league admin role to creating user:
-        league_admin_role = Role.where(:key => "league_admin")[0]
-        creator.permissions << Permission.new(:user => creator, :role => league_admin_role,
-            :qualifier => @league.id)
+        creator.permissions << Permission.new(:user => creator, 
+            :role => 'league_admin', :qualifier => @league.id)
 
         # Check again:
         if @league.save

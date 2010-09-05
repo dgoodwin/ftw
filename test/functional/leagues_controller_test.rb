@@ -43,7 +43,7 @@ class LeaguesControllerTest < ActionController::TestCase
     assert_redirected_to league_path(assigns(:league))
 
     admin = User.find(users(:admin).id)
-    assert has_role(admin, roles(:league_admin).key, assigns(:league).id)
+    assert has_role(admin, 'league_admin', assigns(:league).id)
   end
 
   test "should show league" do

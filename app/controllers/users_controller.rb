@@ -51,8 +51,7 @@ class UsersController < ApplicationController
         # Once saved, grant the user role so they can do normal things. Would
         # do this earlier but the user won't have an ID yet, and we need it
         # for the qualifier.
-        user_role = Role.where(:key => "user")[0]
-        @user.permissions << Permission.new(:user => @user, :role => user_role,
+        @user.permissions << Permission.new(:user => @user, :role => 'user',
             :qualifier => @user.id)
 
         # Check again:

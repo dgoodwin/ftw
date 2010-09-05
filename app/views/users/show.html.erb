@@ -24,10 +24,10 @@
 <b>Permissions:</b>
 <ul>
   <% @user.permissions.each do |perm| %>
-    <li><%= perm.role.name %> = <%= perm.qualifier %></li>
+    <li><%= perm.role %> = <%= perm.qualifier %></li>
     <ul>
-      <% perm.role.rights.each do |right| %>
-        <li><%= right.key %></li>
+      <% get_role(perm.role).rights.each do |right| %>
+        <li><%= right %></li>
       <% end %>
     </ul>
   <% end %>

@@ -55,7 +55,7 @@ class ApplicationController < ActionController::Base
       redirect_to :back, :status => :forbidden
       return false
     else
-      logger.info("ALLOW: #{u.login} has #{right_key} via #{perm.role.key}")
+      logger.info("ALLOW: #{u.login} has #{right_key} via #{perm.role}")
       return true
     end
   end

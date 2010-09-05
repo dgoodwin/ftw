@@ -35,7 +35,7 @@ class UsersControllerTest < ActionController::TestCase
     post :create, :user => attrs
 
     looked_up = User.find(assigns(:user))
-    assert has_role(looked_up, roles(:user).key, assigns(:user).id)
+    assert has_role(looked_up, 'user', assigns(:user).id)
   end
 
   test "should show user" do
