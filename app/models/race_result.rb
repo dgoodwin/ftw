@@ -15,14 +15,14 @@ class RaceResult < ActiveRecord::Base
     submitted_users = {}
     rows.each do |row|
       if row.user
-        submitted_users[row.user.login] = 1
+        submitted_users[row.user.email] = 1
       end
     end
 
     if race
       race.users.each do |user|
-        if not submitted_users.has_key?(user.login)
-          errors.add(:rows, "Results missing for user: %s" % user.login)
+        if not submitted_users.has_key?(user.email)
+          errors.add(:rows, "Results missing for user: %s" % user.email)
         end
       end
     end

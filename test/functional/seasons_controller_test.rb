@@ -15,14 +15,14 @@ class SeasonsControllerTest < ActionController::TestCase
   end
 
   test "should get new" do
-    authenticate(users(:admin).login, 'admin')
+    authenticate(users(:admin).email, 'admin')
     get :new, :league_id => leagues(:alien).id
     assert_response :success
   end
 
   test "should create season" do
     request.env["HTTP_REFERER"] = "/"
-    authenticate(@admin_user.login, 'admin')
+    authenticate(@admin_user.email, 'admin')
     assert_difference('Season.count') do
       post :create, :season => @season.attributes, \
         :league_id => leagues(:alien).id
@@ -32,7 +32,7 @@ class SeasonsControllerTest < ActionController::TestCase
 
   test "create season perm" do
     request.env["HTTP_REFERER"] = "/"
-    authenticate(users(:user001).login, 'admin')
+    authenticate(users(:user001).email, 'admin')
 
     assert_no_difference('Season.count') do
       post :create, :season => @season.attributes, \
@@ -53,13 +53,13 @@ class SeasonsControllerTest < ActionController::TestCase
 #  end
 
   test "should update season" do
-    authenticate(users(:admin).login, 'admin')
+    authenticate(users(:admin).email, 'admin')
     put :update, :id => @season.to_param, :season => @season.attributes
     assert_redirected_to season_path(assigns(:season))
   end
 
   test "should destroy season" do
-    authenticate(users(:admin).login, 'admin')
+    authenticate(users(:admin).email, 'admin')
     assert_difference('Season.count', -1) do
       delete :destroy, :id => @season.to_param
     end

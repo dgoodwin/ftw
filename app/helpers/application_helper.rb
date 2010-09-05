@@ -1,3 +1,5 @@
+require 'auth'
+
 module ApplicationHelper
 
   include Auth

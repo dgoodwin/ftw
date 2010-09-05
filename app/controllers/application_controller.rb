@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
 
   def authenticate
     authenticate_or_request_with_http_basic do |user_name, password| 
-      user = User.where({'login' => user_name})[0]
+      user = User.where({'email' => user_name})[0]
 
       if user.nil?
         return false
@@ -48,14 +48,14 @@ class ApplicationController < ActionController::Base
     u = get_current_user()
     perm = find_perm(u, right_key, qualifier)
     if perm.nil?
-      logger.warn("Forbidden: #{u.login} missing #{right_key}")
+      logger.warn("Forbidden: #{u.email} missing #{right_key}")
       flash[:error] = "Forbidden!"
       # TODO: maybe a better way to return this status, but hitting this 
       # should be rare as ideally, we hide all links you cannot access.
       redirect_to :back, :status => :forbidden
       return false
     else
-      logger.info("ALLOW: #{u.login} has #{right_key} via #{perm.role}")
+      logger.info("ALLOW: #{u.email} has #{right_key} via #{perm.role}")
       return true
     end
   end

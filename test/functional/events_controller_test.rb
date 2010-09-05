@@ -12,13 +12,13 @@ class EventsControllerTest < ActionController::TestCase
   end
 
   test "should get new" do
-    authenticate(users(:admin).login, 'admin')
+    authenticate(users(:admin).email, 'admin')
     get :new, :season_id => seasons(:alien_s1).id
     assert_response :success
   end
 
   test "should create event" do
-    authenticate(users(:admin).login, 'admin')
+    authenticate(users(:admin).email, 'admin')
     assert_difference('Event.count') do
       post :create, :event => @event.attributes, \
         :season_id => seasons(:alien_s1).id
@@ -33,19 +33,19 @@ class EventsControllerTest < ActionController::TestCase
   end
 
 #  test "should get edit" do
-#    authenticate(users(:admin).login, 'admin')
+#    authenticate(users(:admin).email, 'admin')
 #    get :edit, :id => @event.to_param
 #    assert_response :success
 #  end
 
   test "should update event" do
-    authenticate(users(:admin).login, 'admin')
+    authenticate(users(:admin).email, 'admin')
     put :update, :id => @event.to_param, :event => @event.attributes
     assert_redirected_to event_path(assigns(:event))
   end
 
   test "should destroy event" do
-    authenticate(users(:admin).login, 'admin')
+    authenticate(users(:admin).email, 'admin')
     assert_difference('Event.count', -1) do
       delete :destroy, :id => @event.to_param
     end
@@ -54,7 +54,7 @@ class EventsControllerTest < ActionController::TestCase
   end
 
   test "should schedule races" do
-    authenticate(users(:admin).login, 'admin')
+    authenticate(users(:admin).email, 'admin')
     league = create_league(16)
     event = league.seasons[0].events[0]
     get :schedule, {'id' => event.id}
@@ -76,7 +76,7 @@ class EventsControllerTest < ActionController::TestCase
     league = League.new(:name => name)
     (1..member_count).each do |i|
       user = User.new
-      user.login = "user%s" % i
+      user.email = "user%s@example.com" % i
       user.save
       member = Member.new(:league => league, :user => user)
       league.members << member

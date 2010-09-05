@@ -12,7 +12,7 @@ class LeaguesControllerTest < ActionController::TestCase
   end
 
   test "should get new" do
-    authenticate(users(:admin).login, 'admin')
+    authenticate(users(:admin).email, 'admin')
     get :new
     assert_response :success
   end
@@ -23,7 +23,7 @@ class LeaguesControllerTest < ActionController::TestCase
   end
 
   test "should create league" do
-    authenticate(users(:admin).login, 'admin')
+    authenticate(users(:admin).email, 'admin')
     create_me = League.new(:name => "Elite league!")
     assert_difference('League.count') do
       post :create, :league => create_me.attributes
@@ -37,7 +37,7 @@ class LeaguesControllerTest < ActionController::TestCase
   end
 
   test "should give creator initial league admin role" do
-    authenticate(users(:admin).login, 'admin')
+    authenticate(users(:admin).email, 'admin')
     create_me = League.new(:name => "Some League")
     post :create, :league => create_me.attributes
     assert_redirected_to league_path(assigns(:league))
@@ -52,19 +52,19 @@ class LeaguesControllerTest < ActionController::TestCase
   end
 
   test "should get edit" do
-    authenticate(users(:admin).login, 'admin')
+    authenticate(users(:admin).email, 'admin')
     get :edit, :id => @league.to_param
     assert_response :success
   end
 
   test "should update league" do
-    authenticate(users(:admin).login, 'admin')
+    authenticate(users(:admin).email, 'admin')
     put :update, :id => @league.to_param, :league => @league.attributes
     assert_redirected_to league_path(assigns(:league))
   end
 
   test "should destroy league" do
-    authenticate(users(:admin).login, 'admin')
+    authenticate(users(:admin).email, 'admin')
     assert_difference('League.count', -1) do
       delete :destroy, :id => @league.to_param
     end

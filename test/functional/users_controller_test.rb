@@ -17,7 +17,7 @@ class UsersControllerTest < ActionController::TestCase
   end
 
   test "should create user" do
-    create_me = User.new(:login => "testguy", :password => "passwordakajshdkajhd")
+    create_me = User.new(:email => "testguy@example.com", :password => "passwordakajshdkajhd")
 
     assert_difference('User.count') do
       attrs = create_me.attributes
@@ -30,7 +30,8 @@ class UsersControllerTest < ActionController::TestCase
   end
 
   test "should give user role on creation" do
-    create_me = User.new(:login => "testguy", :password => "passwordakajshdkajhd")
+    create_me = User.new(:email => "testguy@example.com", 
+        :password => "passwordakajshdkajhd")
     attrs = create_me.attributes
     post :create, :user => attrs
 
@@ -44,13 +45,13 @@ class UsersControllerTest < ActionController::TestCase
   end
 
   test "should get edit" do
-    authenticate(users(:admin).login, 'admin')
+    authenticate(users(:admin).email, 'admin')
     get :edit, :id => @user.to_param
     assert_response :success
   end
 
   test "should update user" do
-    authenticate(users(:admin).login, 'admin')
+    authenticate(users(:admin).email, 'admin')
 
     # Hack in the password again:
     attributes = @user.attributes
@@ -61,7 +62,7 @@ class UsersControllerTest < ActionController::TestCase
   end
 
   test "should destroy user" do
-    authenticate(users(:admin).login, 'admin')
+    authenticate(users(:admin).email, 'admin')
     assert_difference('User.count', -1) do
       delete :destroy, :id => @user.to_param
     end

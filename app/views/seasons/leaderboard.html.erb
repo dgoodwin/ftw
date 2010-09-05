@@ -6,6 +6,6 @@
 
 
 <% @leaderboard.user_points.keys.each do |key| %>
-  <%= key.login %> - <%= @leaderboard.user_points[key] %><br/>
+  <%= key.email %> - <%= @leaderboard.user_points[key] %><br/>
 <% end %>
 

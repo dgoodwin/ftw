@@ -4,41 +4,41 @@ require 'digest/sha1'
 class UserTest < ActiveSupport::TestCase
 
   test "successful create with minimal info" do
-    user = User.new(:login => "newguy", :password => "password")
+    user = User.new(:email => "newguy@example.com", :password => "password")
     assert user.save
   end
 
   test "password hashing" do
     pass = "secret"
     expected = Digest::SHA1.hexdigest(pass)
-    user = User.new(:login => "newguy")
+    user = User.new(:email => "newguy@example.com")
     user.password = pass
     assert user.save
     user = User.find(user.id)
     assert_equal expected, user.hashed_password
   end
 
-  test "login and password required" do
+  test "email and password required" do
     user = User.new
     assert !user.save
-    assert user.errors[:login].any?
+    assert user.errors[:email].any?
   end
 
-  test "login less than 40 characters" do
-    user = User.new(:login => "a" * 41, :password => "password")
+  test "email format" do
+    user = User.new(:email => "a" * 41, :password => "password")
     assert !user.save
-    assert user.errors[:login].any?
+    assert user.errors[:email].any?
   end
 
-  test "logins must be unique" do
-    user = User.new(:login => users(:admin).login, :password => "password")
+  test "email must be unique" do
+    user = User.new(:email => users(:admin).email, :password => "password")
     assert !user.save
-    assert user.errors[:login].any?
+    assert user.errors[:email].any?
   end
 
 #   test "password too short" do
 #     # Minimum is 6 characters
-#     user = User.new(:login => "newguy", :password => "passw")
+#     user = User.new(:email => "newguy", :password => "passw")
 #     assert !user.save
 #     assert user.errors[:password].any?
 #   end
