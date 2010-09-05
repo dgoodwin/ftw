@@ -31,9 +31,9 @@ class AuthTest < ActiveSupport::TestCase
   end
 
   def test_can_do_something_site_wide
-    assert_not_nil = find_perm(@user, @sitewide_right.key, 0)
-    assert_not_nil = find_perm(@user, @sitewide_right.key)
-    assert_not_nil = find_perm(@user, @sitewide_right.key, 982137912)
+    assert_not_nil find_perm(@user, @sitewide_right.key, 0)
+    assert_not_nil find_perm(@user, @sitewide_right.key)
+    assert_not_nil find_perm(@user, @sitewide_right.key, 982137912)
   end
 
   def test_cannot_do_something_due_to_qualifier

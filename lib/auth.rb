@@ -11,7 +11,9 @@ module Auth
 
     user.permissions.each do |perm|
       perm.role.rights.each do |r|
-        if r.key == right and (perm.qualifier == qualifier)
+        # 0 indicates a site-wide qualifier:
+        if r.key == right and (perm.qualifier == qualifier or 
+            perm.qualifier == 0)
           return perm
         end
       end

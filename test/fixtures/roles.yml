@@ -5,6 +5,11 @@ user:
   name: Regular Joe
   rights: create_league, edit_user
 
+site_admin:
+  key: site_admin
+  name: Site Admin
+  rights: create_league, destroy_league, edit_league, create_season, edit_season, destroy_season, create_event, destroy_event, edit_event, schedule_event, create_results, destroy_results, edit_results, approve_results, edit_user, destroy_user
+
 league_admin:
   key: league_admin
   name: League Admin

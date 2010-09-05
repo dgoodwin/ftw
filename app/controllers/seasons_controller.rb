@@ -52,6 +52,8 @@ class SimplePointsStrategy
     end
   end
 end
+
+
 class SeasonsController < ApplicationController
 
   before_filter :authenticate, :except => [:index, :show]
@@ -86,6 +88,7 @@ class SeasonsController < ApplicationController
     # TODO: make sure we have a league ID here, the user has admin rights 
     # within it, etc.
     @league = League.find(params[:league_id])
+    return if not require_perm('create_season', @league.id)
 
     respond_to do |format|
       format.html # new.html.erb
@@ -97,12 +100,15 @@ class SeasonsController < ApplicationController
   def edit
     @season = Season.find(params[:id])
     @league = @season.league
+    return if not require_perm('edit_season', @league.id)
   end
 
   # POST /seasons
   # POST /seasons.xml
   def create
     @league = League.find(params[:league_id])
+    return if not require_perm('create_season', @league.id)
+
     @season = @league.seasons.create(params[:season])
 
     respond_to do |format|
@@ -120,6 +126,7 @@ class SeasonsController < ApplicationController
   # PUT /seasons/1.xml
   def update
     @season = Season.find(params[:id])
+    return if not require_perm('edit_season', @season.league.id)
 
     respond_to do |format|
       if @season.update_attributes(params[:season])
@@ -161,6 +168,7 @@ class SeasonsController < ApplicationController
   def destroy
     @season = Season.find(params[:id])
     @season.destroy
+    return if not require_perm('destroy_season', @season.league.id)
 
     respond_to do |format|
       format.html { redirect_to(seasons_url) }

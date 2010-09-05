@@ -3,6 +3,9 @@ require 'test_helper'
 class SeasonsControllerTest < ActionController::TestCase
   setup do
     @season = seasons(:alien_s1)
+    @admin_user = User.find(users(:admin).id)
+    @admin_user.permissions << permissions(:siteadmin)
+    @admin_user.save
   end
 
   test "should get index" do
@@ -18,12 +21,24 @@ class SeasonsControllerTest < ActionController::TestCase
   end
 
   test "should create season" do
-    authenticate(users(:admin).login, 'admin')
+    request.env["HTTP_REFERER"] = "/"
+    authenticate(@admin_user.login, 'admin')
     assert_difference('Season.count') do
       post :create, :season => @season.attributes, \
         :league_id => leagues(:alien).id
     end
     assert_redirected_to season_path(assigns(:season))
+  end
+
+  test "create season perm" do
+    request.env["HTTP_REFERER"] = "/"
+    authenticate(users(:user001).login, 'admin')
+
+    assert_no_difference('Season.count') do
+      post :create, :season => @season.attributes, \
+        :league_id => leagues(:alien).id
+    end
+    assert_response :forbidden
   end
 
   test "should show season" do
