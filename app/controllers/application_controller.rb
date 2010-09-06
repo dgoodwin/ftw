@@ -23,30 +23,18 @@ class ApplicationController < ActionController::Base
   def require_perm(right_key, qualifier)
     u = get_current_user()
 
-    # HACK: devise is tricky to customize and we cannot give roles on
-    # user creation. Instead, check here for requests to edit a user
-    # and allow if that user is the one requesting the edit.
-    # TODO: Maybe move this inside find_perm and return an actual perm
-    override = false
-    if right_key == 'edit_user' and user_signed_in? and \
-      get_current_user().id == qualifier
-      override = true
-    end
-
     perm = find_perm(u, right_key, qualifier)
-    if perm.nil? and not override
-      logger.warn("Forbidden: #{u.email} missing #{right_key}")
-      flash[:error] = "Forbidden!"
+    if perm.nil? 
+      logger.warn("DENY: #{u.email} missing #{right_key}")
+
       # TODO: maybe a better way to return this status, but hitting this 
       # should be rare as ideally, we hide all links you cannot access.
+      flash[:error] = "Forbidden!"
       redirect_to :back, :status => :forbidden
       return false
+
     else
-      role = ""
-      if not perm.nil? 
-        role = perm.role
-      end
-      logger.info("ALLOW: #{u.email} has #{right_key} via #{role}")
+      logger.info("ALLOW: #{u.email} has #{right_key} via #{perm.role}")
       return true
     end
   end

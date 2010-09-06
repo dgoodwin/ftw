@@ -64,7 +64,7 @@ module Auth
       get_role(perm.role).rights.each do |r|
         # 0 indicates a site-wide qualifier:
         if r == right and (perm.qualifier == qualifier or 
-            perm.qualifier == 0)
+            perm.qualifier == 0 or qualifier.nil?)
           return perm
         end
       end
