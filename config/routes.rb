@@ -1,5 +1,7 @@
 Ftw::Application.routes.draw do 
 
+  resources :accounts
+
   devise_for :users
 
   resources :race_results
@@ -14,7 +16,10 @@ Ftw::Application.routes.draw do
     resources :members
   end
 
-  resources :users
+  resources :users do
+    resources :accounts
+  end
+
 
   # A non-RESTful route for scheduling events:
   match 'events/:id/schedule', :to => 'events#schedule'

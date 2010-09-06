@@ -4,3 +4,6 @@ psn:
   key: psn
   name: Playstation Network
 
+another:
+  key: anotherplatform
+  name: Another Platform

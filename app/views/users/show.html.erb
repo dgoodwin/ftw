@@ -6,11 +6,6 @@
 </p>
 
 <p>
-  <b>Password:</b>
-  <%= @user.password %>
-</p>
-
-<p>
   <b>Name:</b>
   <%= @user.name %>
 </p>
@@ -21,19 +16,32 @@
 </p>
 
 <p>
+<b>Accounts:</b>
+<ul>
+  <% @user.accounts.each do |account| %>
+    <li><%= account.name %> (<%= account.platform.key %>)</li>
+  <% end %>
+</ul>
+
+<p>
 <b>Permissions:</b>
 <ul>
   <% @user.permissions.each do |perm| %>
-    <li><%= perm.role %> = <%= perm.qualifier %></li>
+    <li><%= get_role(perm.role).key %> = <%= perm.qualifier %></li>
+    <!--
     <ul>
       <% get_role(perm.role).rights.each do |right| %>
         <li><%= right %></li>
       <% end %>
     </ul>
+    -->
   <% end %>
 </ul>
 
 
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to_if (@viewing_myself or have_perm('edit_user', @user.id)), 
+                'Edit', edit_user_path(@user) %> | 
+<%= link_to_if (@viewing_myself or have_perm('edit_user', @user.id)), 
+                'Add Account', new_user_account_path(@user) %> | 
 <%= link_to 'Back', users_path %>

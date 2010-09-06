@@ -18,6 +18,13 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
 
+    @viewing_myself = false
+    if user_signed_in? and get_current_user.id == @user.id
+      @viewing_myself = true
+    end
+
+
+
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @user }
