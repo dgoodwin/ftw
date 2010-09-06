@@ -24,7 +24,7 @@ class LeaguesControllerTest < ActionController::TestCase
 
   test "should create league" do
     authenticate(users(:admin).email, 'admin')
-    create_me = League.new(:name => "Elite league!")
+    create_me = League.new(:name => "Elite league!", :game => games(:gt5))
     assert_difference('League.count') do
       post :create, :league => create_me.attributes
     end
@@ -38,7 +38,7 @@ class LeaguesControllerTest < ActionController::TestCase
 
   test "should give creator initial league admin role" do
     authenticate(users(:admin).email, 'admin')
-    create_me = League.new(:name => "Some League")
+    create_me = League.new(:name => "Some League", :game => games(:gt5))
     post :create, :league => create_me.attributes
     assert_redirected_to league_path(assigns(:league))
 

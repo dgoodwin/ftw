@@ -40,6 +40,7 @@ class LeaguesController < ApplicationController
     @league = League.new
     return if not require_perm('create_league', @league.id)
 
+
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @league }

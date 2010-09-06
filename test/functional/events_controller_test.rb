@@ -73,7 +73,7 @@ class EventsControllerTest < ActionController::TestCase
 
   def create_league(member_count)
     name = "Test League %s" % rand(10000000)
-    league = League.new(:name => name)
+    league = League.new(:name => name, :game => games(:gt5))
     (1..member_count).each do |i|
       user = User.new
       user.email = "dummyuser%s@example.com" % i

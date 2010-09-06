@@ -8,6 +8,11 @@
   <%= @league.description %>
 </p>
 
+<p>
+  <b>Game:</b>
+  <%= @league.game.name %>
+</p>
+
 <%= link_to_if have_perm('create_season', @league.id), 
     "Create Season", new_league_season_path(@league) %><p/>
 

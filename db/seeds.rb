@@ -19,3 +19,8 @@ if all.length == 1
   end
 end
 
+psn = Platform.new(:key => 'psn', :name => "Playstation Network")
+psn.save
+
+gt5 = Game.new(:key => 'gt5', :name => "Gran Turismo 5", :platform => psn)
+gt5.save
