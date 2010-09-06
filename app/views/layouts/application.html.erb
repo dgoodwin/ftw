@@ -19,9 +19,12 @@
       <%= link_to "Login", '/users/sign_in' %>
       <%= link_to "Logout", '/users/sign_out' %>
     </center>
+    <p/>
     <% if user_signed_in? %>
       <center>
-        <%= current_user.email %>
+        <%= current_user.email %> |
+        <%= link_to "Change E-mail/Password", edit_user_registration_path(current_user) %> |
+        <%= link_to "Change Details", edit_user_path(current_user) %>
       </center>
     <% end %>
     
