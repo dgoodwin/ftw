@@ -10,23 +10,23 @@
 
     <center>
       <h1>GT FTW</h1>
-      <%= link_to "Home", "/" %>
-      <%= link_to "Leagues", leagues_path %>
-      <%= link_to "Seasons", seasons_path %>
-      <%= link_to "Events", events_path %>
+      <%= link_to "Home", "/" %> |
+      <%= link_to "Leagues", leagues_path %> |
+      <%= link_to "Seasons", seasons_path %> |
       <%= link_to "Users", users_path %>
-      <%= link_to "Register", '/users/sign_up' %>
-      <%= link_to "Login", '/users/sign_in' %>
-      <%= link_to "Logout", '/users/sign_out' %>
     </center>
     <p/>
+    <center>
     <% if user_signed_in? %>
-      <center>
         <%= current_user.email %> |
         <%= link_to "Change E-mail/Password", edit_user_registration_path(current_user) %> |
-        <%= link_to "Change Details", edit_user_path(current_user) %>
-      </center>
+        <%= link_to "Change Details", edit_user_path(current_user) %> |
+        <%= link_to "Logout", '/users/sign_out' %> 
+      <% else %>
+        <%= link_to "Register", '/users/sign_up' %> |
+        <%= link_to "Login", '/users/sign_in' %>
     <% end %>
+    </center>
     
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
