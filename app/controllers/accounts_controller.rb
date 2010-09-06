@@ -27,7 +27,7 @@ class AccountsController < ApplicationController
     @account = Account.new
 
     @user = User.find(params[:user_id])
-    return if not can_edit_user?
+    return if not require_perm('edit_user', @user.id)
 
     respond_to do |format|
       format.html # new.html.erb
@@ -39,23 +39,12 @@ class AccountsController < ApplicationController
 #   def edit
 #     @account = Account.find(params[:id])
 #   end
-  def can_edit_user?
-    if not user_signed_in?
-      return false
-    end
-
-    if (@user.id == get_current_user().id or 
-      require_perm('edit_user', @user.id))
-      return true
-    end
-    return false
-  end
 
   # POST /accounts
   # POST /accounts.xml
   def create
     @user = User.find(params[:user_id])
-    return if not can_edit_user?
+    return if not require_perm('edit_user', @user.id)
 
     @account = @user.accounts.create(params[:account])
 
