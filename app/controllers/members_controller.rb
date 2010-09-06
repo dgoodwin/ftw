@@ -1,6 +1,6 @@
 class MembersController < ApplicationController
 
-  before_filter :authenticate
+  before_filter :authenticate_user!
 
   def create
     # Link to this controller will not be shown if the user cannot join, if the request

@@ -76,11 +76,14 @@ class EventsControllerTest < ActionController::TestCase
     league = League.new(:name => name)
     (1..member_count).each do |i|
       user = User.new
-      user.email = "user%s@example.com" % i
-      user.save
+      user.email = "dummyuser%s@example.com" % i
+      user.password = "password"
+      r = user.save
+      assert r
+
       member = Member.new(:league => league, :user => user)
-      league.members << member
-      member.save
+      r = member.save
+      assert r
     end
 
     season = Season.new(:league => league, :name => "Season 1")

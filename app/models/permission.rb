@@ -1,3 +1,5 @@
+require 'auth'
+
 class Permission < ActiveRecord::Base
 
   include Auth

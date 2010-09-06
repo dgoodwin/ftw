@@ -7,8 +7,8 @@ class AuthTest < ActiveSupport::TestCase
   include Auth
 
   def setup
-    @league_admin = User.new(:email => 'dummy')
-    @site_admin = User.new(:email => 'siteadmin')
+    @league_admin = User.new(:email => 'dummy@example.com')
+    @site_admin = User.new(:email => 'siteadmin@example.com')
 
     @league_admin.permissions << Permission.new(:user => @league_admin, 
         :role => 'league_admin', :qualifier => 1)

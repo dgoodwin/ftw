@@ -1,6 +1,14 @@
 require 'digest/sha1'
 
 class User < ActiveRecord::Base
+  # Include default devise modules. Others available are:
+  # :token_authenticatable, :confirmable, :lockable and :timeoutable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable
+
+  # Setup accessible (or protected) attributes for your model
+  attr_accessible :email, :password, :password_confirmation, :remember_me
+
   # TODO: This is still flaky, updates on the object get confused with validation
   # on a field that no longer exists
 #  validates_length_of :password, :within => 6..50, \
@@ -10,17 +18,10 @@ class User < ActiveRecord::Base
 
   validates_uniqueness_of :email, :message => "E-mail already in use."
   validates_format_of :email, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i, :message => "Invalid email format"  
-  attr_accessor :password
 
   has_many :members, :dependent => :destroy
   has_many :leagues, :through => :members
   has_many :permissions
   has_and_belongs_to_many :races
-
-  def password=(pass)
-    # Store cleartext as a variable to allow use of validation helpers:
-    @password=pass
-    self.hashed_password = Digest::SHA1.hexdigest(pass)
-  end
 
 end

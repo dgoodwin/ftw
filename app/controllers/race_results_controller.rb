@@ -1,6 +1,6 @@
 class RaceResultsController < ApplicationController
 
-  before_filter :authenticate, :except => [:index, :show]
+  before_filter :authenticate_user!, :except => [:index, :show]
   before_filter :check_user, :only => [:edit, :update]
   
   STATUSES = [

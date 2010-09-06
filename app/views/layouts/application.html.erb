@@ -15,12 +15,9 @@
       <%= link_to "Seasons", seasons_path %>
       <%= link_to "Events", events_path %>
       <%= link_to "Users", users_path %>
-      <% if session[:user_id] %>
-        <%= link_to "Logout", "/logout" %>
-      <% else %>
-        <%= link_to "Register", new_user_path %>
-        <%= link_to "Login", "/login" %>
-      <% end %>
+      <%= link_to "Register", '/users/sign_up' %>
+      <%= link_to "Login", '/users/sign_in' %>
+      <%= link_to "Logout", '/users/sign_out' %>
     </center>
     
     <p class="notice"><%= notice %></p>

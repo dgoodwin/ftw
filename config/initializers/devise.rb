@@ -46,7 +46,7 @@ Devise.setup do |config|
   config.encryptor = :bcrypt
 
   # Setup a pepper to generate the encrypted password.
-  config.pepper = "ab0d80207318c085e5b95853b9dd6558b1c1cc6f6d1209425815d588e94211f1744c745b93076277b9447e3c11a22350278d33bf1e7da1ab8fb3b381da04c3ac"
+  config.pepper = "alksjdhd9827kjashd98124mtn89sdsasid7yas87dasen89s7a0d7as098d7"
 
   # ==> Configuration for :confirmable
   # The time you want to give your user to confirm his account. During this time
@@ -69,10 +69,10 @@ Devise.setup do |config|
 
   # ==> Configuration for :validatable
   # Range for password length
-  # config.password_length = 6..20
+  config.password_length = 6..20
 
   # Regex to use to validate the email address
-  # config.email_regexp = /^([\w\.%\+\-]+)@([\w\-]+\.)+([\w]{2,})$/i
+  config.email_regexp = /^([\w\.%\+\-]+)@([\w\-]+\.)+([\w]{2,})$/i
 
   # ==> Configuration for :timeoutable
   # The time you want to timeout the user session without activity. After this
@@ -94,7 +94,7 @@ Devise.setup do |config|
 
   # Number of authentication tries before locking an account if lock_strategy
   # is failed attempts.
-  # config.maximum_attempts = 20
+  config.maximum_attempts = 10
 
   # Time interval to unlock the account if :time is enabled as unlock_strategy.
   # config.unlock_in = 1.hour

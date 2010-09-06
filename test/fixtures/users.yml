@@ -4,127 +4,106 @@
 
 admin:
   email: admin@example.com
-  hashed_password: d033e22ae348aeb5660fc2140aec35850c4da997
   name: Administrator
   location: Canada
 
 user001:
   email: User001@example.com
-  hashed_password: d033e22ae348aeb5660fc2140aec35850c4da997
   name: User 001
   location: Somewhere
 
 user002:
   email: User002@example.com
-  hashed_password: d033e22ae348aeb5660fc2140aec35850c4da997
   name: User 002
   location: Somewhere
 
 user003:
   email: User003@example.com
-  hashed_password: d033e22ae348aeb5660fc2140aec35850c4da997
   name: User 003
   location: Somewhere
 
 user004:
   email: User004@example.com
-  hashed_password: d033e22ae348aeb5660fc2140aec35850c4da997
   name: User 004
   location: Somewhere
 
 user005:
   email: User005@example.com
-  hashed_password: d033e22ae348aeb5660fc2140aec35850c4da997
   name: User 005
   location: Somewhere
 
 user006:
   email: User006@example.com
-  hashed_password: d033e22ae348aeb5660fc2140aec35850c4da997
   name: User 006
   location: Somewhere
 
 user007:
   email: User007@example.com
-  hashed_password: d033e22ae348aeb5660fc2140aec35850c4da997
   name: User 007
   location: Somewhere
 
 user008:
   email: User008@example.com
-  hashed_password: d033e22ae348aeb5660fc2140aec35850c4da997
   name: User 008
   location: Somewhere
 
 user009:
   email: User009@example.com
-  hashed_password: d033e22ae348aeb5660fc2140aec35850c4da997
   name: User 009
   location: Somewhere
 
 user010:
   email: User010@example.com
-  hashed_password: d033e22ae348aeb5660fc2140aec35850c4da997
   name: User 010
   location: Somewhere
 
 user011:
   email: User011@example.com
-  hashed_password: d033e22ae348aeb5660fc2140aec35850c4da997
   name: User 011
   location: Somewhere
 
 user012:
   email: User012@example.com
-  hashed_password: d033e22ae348aeb5660fc2140aec35850c4da997
   name: User 012
   location: Somewhere
 
 user013:
   email: User013@example.com
-  hashed_password: d033e22ae348aeb5660fc2140aec35850c4da997
   name: User 013
   location: Somewhere
 
 user014:
   email: User014@example.com
-  hashed_password: d033e22ae348aeb5660fc2140aec35850c4da997
   name: User 014
   location: Somewhere
 
 user015:
   email: User015@example.com
-  hashed_password: d033e22ae348aeb5660fc2140aec35850c4da997
   name: User 015
   location: Somewhere
 
 user016:
   email: User016@example.com
-  hashed_password: d033e22ae348aeb5660fc2140aec35850c4da997
   name: User 016
   location: Somewhere
 
 user017:
   email: User017@example.com
-  hashed_password: d033e22ae348aeb5660fc2140aec35850c4da997
   name: User 017
   location: Somewhere
 
 user018:
   email: User018@example.com
-  hashed_password: d033e22ae348aeb5660fc2140aec35850c4da997
   name: User 018
   location: Somewhere
 
 user019:
   email: User019@example.com
-  hashed_password: d033e22ae348aeb5660fc2140aec35850c4da997
   name: User 019
   location: Somewhere
 
 user020:
   email: User020@example.com
-  hashed_password: d033e22ae348aeb5660fc2140aec35850c4da997
   name: User 020
   location: Somewhere
 

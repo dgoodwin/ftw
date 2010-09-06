@@ -19,7 +19,7 @@ class LeaguesControllerTest < ActionController::TestCase
 
   test "must be authenticated to create league" do
     post :create, :league => @league.attributes
-    assert_response 401
+    assert_response 302
   end
 
   test "should create league" do

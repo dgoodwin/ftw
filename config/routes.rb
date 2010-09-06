@@ -1,4 +1,6 @@
 Ftw::Application.routes.draw do |map|
+  devise_for :users
+
   resources :race_results
 
   resources :races
@@ -19,9 +21,6 @@ Ftw::Application.routes.draw do |map|
   match 'seasons/:id/leaderboard' => 'seasons#leaderboard'
 
   root :to => "home#index"
-
-  match 'login' => "home#login"
-  match 'logout' => "home#logout"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

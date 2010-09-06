@@ -24,7 +24,7 @@
 <b>Members:</b>
 <ul>
     <% @league.members.sort { |a,b| a.user.name.downcase <=> b.user.name.downcase }.each do |member| %>
-    <li><%= link_to member.user.name, user_path(member.user) %></li>
+    <li><%= link_to member.user.email, user_path(member.user) %></li>
   <% end %>
 </ul>
 </p>

@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_filter :authenticate, :except => [:new, :create, :index, :show]
+  before_filter :authenticate_user!, :except => [:new, :create, :index, :show]
 
   # GET /users
   # GET /users.xml
@@ -45,6 +45,10 @@ class UsersController < ApplicationController
   # POST /users.xml
   def create
     @user = User.new(params[:user])
+
+    logger.warn("####################### OMG #########################")
+
+    make_admin = User.all.length == 0
 
     respond_to do |format|
       if @user.save

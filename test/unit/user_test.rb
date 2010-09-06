@@ -8,16 +8,6 @@ class UserTest < ActiveSupport::TestCase
     assert user.save
   end
 
-  test "password hashing" do
-    pass = "secret"
-    expected = Digest::SHA1.hexdigest(pass)
-    user = User.new(:email => "newguy@example.com")
-    user.password = pass
-    assert user.save
-    user = User.find(user.id)
-    assert_equal expected, user.hashed_password
-  end
-
   test "email and password required" do
     user = User.new
     assert !user.save

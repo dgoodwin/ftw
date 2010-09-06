@@ -1,6 +1,6 @@
 class LeaguesController < ApplicationController
 
-  before_filter :authenticate, :except => [:index, :show]
+  before_filter :authenticate_user!, :except => [:index, :show]
 
   # GET /leagues
   # GET /leagues.xml
@@ -19,8 +19,8 @@ class LeaguesController < ApplicationController
     @league = League.find(params[:id])
     
     # Check if we'll be displaying a "join this league" link.
-    if session[:user_id] 
-      user = User.find(session[:user_id])
+    if user_signed_in?
+      user = get_current_user()
       @member = Member.where(["user_id = ? AND league_id = ?", user.id, @league.id]).first
     else
       user = nil
