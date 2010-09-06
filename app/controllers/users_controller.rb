@@ -41,38 +41,39 @@ class UsersController < ApplicationController
     return if not require_perm('edit_user', @user.id)
   end
 
-  # POST /users
-  # POST /users.xml
-  def create
-    @user = User.new(params[:user])
+  #   This is done by Devise now
+#   # POST /users
+#   # POST /users.xml
+#   def create
+#     @user = User.new(params[:user])
 
-    logger.warn("####################### OMG #########################")
+#     logger.warn("####################### OMG #########################")
 
-    make_admin = User.all.length == 0
+#     make_admin = User.all.length == 0
 
-    respond_to do |format|
-      if @user.save
+#     respond_to do |format|
+#       if @user.save
 
-        # Once saved, grant the user role so they can do normal things. Would
-        # do this earlier but the user won't have an ID yet, and we need it
-        # for the qualifier.
-        @user.permissions << Permission.new(:user => @user, :role => 'user',
-            :qualifier => @user.id)
+#         # Once saved, grant the user role so they can do normal things. Would
+#         # do this earlier but the user won't have an ID yet, and we need it
+#         # for the qualifier.
+#         @user.permissions << Permission.new(:user => @user, :role => 'user',
+#             :qualifier => @user.id)
 
-        # Check again:
-        if @user.save
-          format.html { redirect_to(@user, :notice => 'User was successfully created.') }
-          format.xml  { render :xml => @user, :status => :created, :location => @user }
-        else
-          format.html { render :action => "new" }
-          format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
-        end
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
-      end
-    end
-  end
+#         # Check again:
+#         if @user.save
+#           format.html { redirect_to(@user, :notice => 'User was successfully created.') }
+#           format.xml  { render :xml => @user, :status => :created, :location => @user }
+#         else
+#           format.html { render :action => "new" }
+#           format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
+#         end
+#       else
+#         format.html { render :action => "new" }
+#         format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
+#       end
+#     end
+#   end
 
   # PUT /users/1
   # PUT /users/1.xml

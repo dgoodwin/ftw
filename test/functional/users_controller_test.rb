@@ -16,19 +16,6 @@ class UsersControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should create user" do
-    create_me = User.new(:email => "testguy@example.com", :password => "passwordakajshdkajhd")
-
-    assert_difference('User.count') do
-      attrs = create_me.attributes
-      # Hack in password, the model already changed it to a hashed version:
-      attrs['password'] = 'password'
-      post :create, :user => attrs
-    end
-
-    assert_redirected_to user_path(assigns(:user))
-  end
-
   test "should show user" do
     get :show, :id => @user.to_param
     assert_response :success
