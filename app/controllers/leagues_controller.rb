@@ -22,6 +22,8 @@ class LeaguesController < ApplicationController
     if user_signed_in?
       user = get_current_user()
       @member = Member.where(["user_id = ? AND league_id = ?", user.id, @league.id]).first
+      @have_account = Account.where(["user_id = ? AND platform_id = ?", user.id,
+          @league.game.platform.id]).length > 0
     else
       user = nil
     end

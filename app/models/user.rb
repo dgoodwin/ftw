@@ -26,4 +26,14 @@ class User < ActiveRecord::Base
   has_many :accounts, :dependent => :destroy
   has_and_belongs_to_many :races
 
+  # Return the users one and only account for the given platform.
+  def get_account(platform)
+    accounts.each do |a|
+      if a.platform.key == platform.key
+        return a
+      end
+    end
+    return nil?
+  end
+
 end

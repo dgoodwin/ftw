@@ -26,22 +26,25 @@
 <p>
 <b>Members:</b>
 <ul>
-    <% @league.members.sort { |a,b| a.user.name.downcase <=> b.user.name.downcase }.each do |member| %>
-    <li><%= link_to member.user.email, user_path(member.user) %></li>
+    <% @league.members.sort { |a,b| a.user.get_account(@league.game.platform).name.downcase <=> b.user.get_account(@league.game.platform).name.downcase }.each do |member| %>
+    <li><%= link_to member.user.get_account(@league.game.platform).name, user_path(member.user) %></li>
   <% end %>
 </ul>
 </p>
 
-<%= link_to_if(false, "Hi", "/") %>
-
-<% if @can_join then %>
+<% if @can_join and @have_account then %>
   <%= form_for([@league, @league.members.build]) do |f| %>
     <div class="actions">
       <%= f.submit 'Join' %>
     </div>
   <% end %>
+<% elsif not @have_account then %>
+  <p>
+  You must create a <%= @league.game.platform.name %> <%= link_to "account", new_user_account_path(@luser) %> before you can join this league.
+  </p>
 <% elsif @member %>
-  You are a member of this league.<p/>
+  <p>
+  You are a member of this league.</p>
   <%= link_to 'Leave this league', [@member.league, @member], 
     :confirm => 'Are you sure you wish to leave this league?', 
     :method => :delete %><p/>

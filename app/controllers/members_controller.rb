@@ -9,11 +9,15 @@ class MembersController < ApplicationController
     # TODO: Support closed registrations, approvals
    
     @league = League.find(params[:league_id])
-    user = User.find(session[:user_id])
+    user = get_current_user
     logger.info("Processing join request for: %s\n" % user)
-    member = Member.new(:league => @league, :user => user)
+    member = Member.new(:user => user)
     @league.members << member
-    redirect_to(@league, :notice => 'You have joined the league.')
+    if @league.save
+      redirect_to(@league, :notice => 'You have joined the league.')
+    else
+      redirect_to(@league, :notice => "Error joining league. #{member.errors}")
+    end
   end
  
   # DELETE /leagues/1/members/1
