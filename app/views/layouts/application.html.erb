@@ -19,6 +19,11 @@
       <%= link_to "Login", '/users/sign_in' %>
       <%= link_to "Logout", '/users/sign_out' %>
     </center>
+    <% if user_signed_in? %>
+      <center>
+        <%= current_user.email %>
+      </center>
+    <% end %>
     
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
