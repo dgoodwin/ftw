@@ -10,4 +10,5 @@ class League < ActiveRecord::Base
     "Please specify a unique name for your league."
 
   validates_presence_of :game
+
 end

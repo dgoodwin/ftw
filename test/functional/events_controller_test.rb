@@ -81,6 +81,10 @@ class EventsControllerTest < ActionController::TestCase
       r = user.save
       assert r
 
+      account = Account.new(:user => user, :platform => platforms(:psn),
+          :name => user.email)
+      account.save
+
       member = Member.new(:league => league, :user => user)
       r = member.save
       assert r

@@ -7,5 +7,6 @@ class MemberTest < ActiveSupport::TestCase
     member = Member.new(:league => leagues(:alien), :user => users(:admin))
     assert !member.save
   end
+
 end
 
