@@ -3,9 +3,10 @@ require 'test_helper'
 class MemberTest < ActiveSupport::TestCase
 
   test "successful creation" do
-
+    member = Member.new(:league => leagues(:newb), :user => users(:user001), 
+          :account => accounts(:user001))
+    assert member.save
   end
-
 
   test "only one membership per league" do
     # Admin is already a member of this league from the fixtures:
@@ -21,7 +22,6 @@ class MemberTest < ActiveSupport::TestCase
     assert !member.save
     assert member.errors[:account]
   end
-
 
 end
 
