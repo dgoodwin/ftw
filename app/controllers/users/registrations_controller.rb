@@ -20,6 +20,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
     # All users should get a role to edit themselves:
     resource.permissions << Permission.new(:role => 'user', :qualifier => resource.id)
 
+    # And a role to create leagues:
+    resource.permissions << Permission.new(:role => 'league_creator', :qualifier => 0)
+
     # Save the new permissions:
     resource.save
   end

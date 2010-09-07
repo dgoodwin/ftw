@@ -14,8 +14,11 @@ module Auth
 
     if role == 'user'
       return NewRole.new('user', [
-          'create_league',
           'edit_user'
+      ])
+    elsif role == 'league_creator'
+      return NewRole.new('league_creator', [
+          'create_league',
       ])
     elsif role == 'league_admin'
       return NewRole.new('league_admin', [
