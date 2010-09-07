@@ -16,8 +16,11 @@ class User < ActiveRecord::Base
 #    :message => "Password must be between 6 and 50 characters."
   validates_presence_of :email, \
     :message => "Must specify e-mail address."
+  validates_presence_of :name, \
+    :message => "Must specify a display name for your account."
 
   validates_uniqueness_of :email, :message => "E-mail already in use."
+  validates_uniqueness_of :name, :message => "Display name already in use."
   validates_format_of :email, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i, :message => "Invalid email format"  
 
   has_many :members, :dependent => :destroy
@@ -30,6 +33,9 @@ class User < ActiveRecord::Base
 
   # Return the users one and only account for the given platform.
   def get_account(platform)
+    if platform.class == String
+      platform = Platform.where(:key => platform)[0]
+    end
     accounts.each do |a|
       if a.platform.key == platform.key
         return a

@@ -22,7 +22,7 @@
 <b>Users:</b>
 <ul>
   <% @race.users.each do |user| %>
-    <li><%= link_to user.name, user_path(user) %></li>
+    <li><%= link_to user.get_account('psn').name, user_path(user) %></li>
   <% end %>
 </ul>
 </p>

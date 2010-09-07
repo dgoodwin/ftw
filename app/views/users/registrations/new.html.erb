@@ -1,6 +1,8 @@
 <h2>Sign up</h2>
 
-<% resource.accounts.build %>
+<% if resource.accounts.nil? or resource.accounts.length == 0 %>
+  <% resource.accounts.build %>
+<% end %>
 
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
@@ -15,7 +17,7 @@
   <%= f.password_field :password_confirmation %></p>
 
   <div class="field">
-    <%= f.label :name %><br />
+    Display Name<br />
     <%= f.text_field :name %>
   </div>
   <div class="field">

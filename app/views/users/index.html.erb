@@ -2,7 +2,6 @@
 
 <table>
   <tr>
-    <th>Email
     <th>Name</th>
     <th>Location</th>
     <th></th>
@@ -10,10 +9,9 @@
 
 <% @users.each do |user| %>
   <tr>
-    <td><%= user.email %></td>
-    <td><%= user.name %></td>
+    <td><%= link_to user.name, user %></td>
     <td><%= user.location %></td>
-    <td><%= link_to 'Show', user %></td>
+    <td></td>
   </tr>
 <% end %>
 </table>

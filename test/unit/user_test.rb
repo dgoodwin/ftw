@@ -4,7 +4,8 @@ require 'digest/sha1'
 class UserTest < ActiveSupport::TestCase
 
   test "successful create with minimal info" do
-    user = User.new(:email => "newguy@example.com", :password => "password")
+    user = User.new(:name => "newguy", :email => "newguy@example.com", 
+          :password => "password")
     assert user.save
   end
 

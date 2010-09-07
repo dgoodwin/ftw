@@ -76,7 +76,8 @@ class EventsControllerTest < ActionController::TestCase
     league = League.new(:name => name, :game => games(:gt5))
     (1..member_count).each do |i|
       user = User.new
-      user.email = "dummyuser%s@example.com" % i
+      user.name = "dummyuser#{i}"
+      user.email = "dummyuser#{i}@example.com"
       user.password = "password"
       r = user.save
       assert r
