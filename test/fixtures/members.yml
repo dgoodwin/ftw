@@ -3,24 +3,30 @@
 admin_alien:
   user: admin
   league: alien
+  account: admin
 
 admin_newb:
   user: admin
   league: newb
+  account: admin
 
 user001_alien:
   user: user001
   league: alien
+  account: user001
 
 user002_alien:
   user: user002
   league: alien
+  account: user002
 
 user003_alien:
   user: user003
   league: alien
+  account: user003
 
 user004_alien:
   user: user004
   league: alien
+  account: user004
 

@@ -62,7 +62,8 @@ class LeaguesController < ApplicationController
     return if not require_perm('create_league', @league.id)
 
     creator = get_current_user()
-    member = Member.new(:league => @league, :user => creator)
+    member = Member.new(:league => @league, :user => creator, 
+          :account => creator.get_account(@league.game.platform))
     @league.members << member
 
     respond_to do |format|

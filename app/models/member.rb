@@ -1,8 +1,13 @@
 class Member < ActiveRecord::Base
+
+  # Technically, user is unecessary here as it's already on account:
   belongs_to :league
   belongs_to :user
+  belongs_to :account
 
-  validate :can_join_only_once, :account_required
+  validates_presence_of :account, :league, :user
+
+  validate :can_join_only_once, :account_required, :account_belongs_to_user
   
   def can_join_only_once
     if Member.where(["league_id = ? AND user_id = ?", league.id, user.id]).length > 0
@@ -16,5 +21,12 @@ class Member < ActiveRecord::Base
       errors.add(:user, "#{league.game.platform.name} account required.")
     end
   end
+
+  def account_belongs_to_user
+    if user.id != account.user.id
+      errors.add(:account, "Account does not belong to user.")
+    end
+  end
+
 end
 

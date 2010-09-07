@@ -86,7 +86,7 @@ class EventsControllerTest < ActionController::TestCase
           :name => user.email)
       account.save
 
-      member = Member.new(:league => league, :user => user)
+      member = Member.new(:league => league, :user => user, :account => account)
       r = member.save
       assert r
     end
