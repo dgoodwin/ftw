@@ -15,19 +15,5 @@
   <p><%= f.label :password_confirmation %><br />
   <%= f.password_field :password_confirmation %></p>
 
-  <div class="field">
-    Display Name<br />
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :location %><br />
-    <%= f.text_field :location %>
-  </div>
-
-  <h2>Accounts</h2>
-
-  <%= render :partial => 'accounts/form',
-    :locals => {:form => f } %> 
-
   <p><%= f.submit "Update" %></p>
 <% end %>

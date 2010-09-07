@@ -1,3 +1,7 @@
+<% if @user.accounts.nil? or @user.accounts.length == 0 %>
+  <% @user.accounts.build %>
+<% end %>
+
 <%= form_for(@user) do |f| %>
   <% if @user.errors.any? %>
   <div id="errorExplanation">
@@ -18,6 +22,12 @@
     <%= f.label :location %><br />
     <%= f.text_field :location %>
   </div>
+
+  <h3>Accounts</h3>
+
+  <%= render :partial => 'accounts/form',
+    :locals => {:form => f } %> 
+
   <div class="actions">
     <%= f.submit %>
   </div>
