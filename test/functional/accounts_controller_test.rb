@@ -2,7 +2,7 @@ require 'test_helper'
 
 class AccountsControllerTest < ActionController::TestCase
   setup do
-    @account = accounts(:one)
+    @account = accounts(:admin)
     @user = users(:user001)
     @user.permissions << Permission.new(:qualifier => @user.id, :role => "user")
     assert @user.save
@@ -12,12 +12,6 @@ class AccountsControllerTest < ActionController::TestCase
     get :index
     assert_response :success
     assert_not_nil assigns(:accounts)
-  end
-
-  test "should get new" do
-    authenticate(users(:user001).email, 'password')
-    get :new, :user_id => users(:user001).id
-    assert_response :success
   end
 
   test "should create account" do

@@ -1,5 +1,7 @@
 <h2>Sign up</h2>
 
+<% resource.accounts.build %>
+
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
 
@@ -11,6 +13,23 @@
 
   <p><%= f.label :password_confirmation %><br />
   <%= f.password_field :password_confirmation %></p>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :location %><br />
+    <%= f.text_field :location %>
+  </div>
+
+  <h2>Account</h2>
+
+  Please provide your Playstation Network login name. This will be displayed throughout the site.
+
+
+  <%= render :partial => 'accounts/form',
+    :locals => {:form => f } %> 
 
   <p><%= f.submit "Sign up" %></p>
 <% end %>

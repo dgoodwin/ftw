@@ -1,8 +1,32 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-one:
+admin:
   name: AdminAccount
   user: admin
+  platform: psn 
+  verified: false
+
+user001:
+  name: user001
+  user: user001
+  platform: psn 
+  verified: false
+
+user002:
+  name: user002
+  user: user002
+  platform: psn 
+  verified: false
+
+user003:
+  name: user003
+  user: user003
+  platform: psn 
+  verified: false
+
+user004:
+  name: user004
+  user: user004
   platform: psn 
   verified: false
 

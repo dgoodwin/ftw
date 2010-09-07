@@ -1,29 +1,8 @@
-<%= form_for(@account) do |f| %>
-  <% if @account.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@account.errors.count, "error") %> prohibited this account from being saved:</h2>
-
-      <ul>
-      <% @account.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+<%= form.fields_for :accounts do |account_form| %>
 
   <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :platform %><br />
-    <%= f.collection_select :platform_id, Platform.all, :id, :name %>
+    <%= account_form.collection_select :platform_id, Platform.all, :id, :name %>
+    <%= account_form.text_field :name %>
   </div>
 
-  <!-- Can't get rails nested resources to do this for me... -->
-  <%= hidden_field_tag 'user_id', @user.id %>
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
 <% end %>

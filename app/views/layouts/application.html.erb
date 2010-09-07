@@ -19,8 +19,7 @@
     <center>
     <% if user_signed_in? %>
         <%= current_user.email %> |
-        <%= link_to "Change E-mail/Password", edit_user_registration_path(current_user) %> |
-        <%= link_to "Change Details", edit_user_path(current_user) %> |
+        <%= link_to "Edit Account", edit_user_registration_path(current_user) %> |
         <%= link_to "Logout", '/users/sign_out' %> 
       <% else %>
         <%= link_to "Register", '/users/sign_up' %> |

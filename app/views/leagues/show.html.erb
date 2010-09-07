@@ -40,7 +40,7 @@
   <% end %>
 <% elsif not @have_account then %>
   <p>
-  You must create a <%= @league.game.platform.name %> <%= link_to "account", new_user_account_path(@luser) %> before you can join this league.
+  You must create a <%= @league.game.platform.name %> account before you can join this league.
   </p>
 <% elsif @member %>
   <p>
