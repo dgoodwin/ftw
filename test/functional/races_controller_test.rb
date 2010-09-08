@@ -11,39 +11,47 @@ class RacesControllerTest < ActionController::TestCase
     assert_not_nil assigns(:races)
   end
 
-#  test "should get new" do
-#    get :new
-#    assert_response :success
-#  end
-
-#  test "should create race" do
-#    assert_difference('Race.count') do
-#      post :create, :race => @race.attributes
-#    end
-
-#    assert_redirected_to race_path(assigns(:race))
-#  end
-
   test "should show race" do
     get :show, :id => @race.to_param
     assert_response :success
   end
 
-#  test "should get edit" do
-#    get :edit, :id => @race.to_param
-#    assert_response :success
-#  end
+  test "should allow host specification" do
+    user = users(:user001)
+    authenticate(user.email, 'password')
+    post :host, :id => @race.to_param
+    
+    # Look it up fresh:
+    @race = Race.find(@race.id)
+    assert_not_nil @race.host
+    assert_equal @race.host.id, user.id
+    assert_redirected_to race_path(@race)
+  end
 
-#  test "should update race" do
-#    put :update, :id => @race.to_param, :race => @race.attributes
-#    assert_redirected_to race_path(assigns(:race))
-#  end
+  test "should block host specification if host already assigned" do
+    # Define a race host:
+    @race.host = users(:user001)
+    @race.save
+    
+    user2 = users(:user002)
+    authenticate(user2.email, 'password')
+    post :host, :id => @race.id
+    
+    @race = Race.find(@race.id)
+    assert_not_nil @race.host
 
-#  test "should destroy race" do
-#    assert_difference('Race.count', -1) do
-#      delete :destroy, :id => @race.to_param
-#    end
+    # Should still be the first user:
+    assert_equal @race.host.id, users(:user001).id
+  end
 
-#    assert_redirected_to races_path
-#  end
+  test "should enforce host_race right" do
+    request.env["HTTP_REFERER"] = "/"
+    # This user has no host role:
+    user = users(:user003)
+    authenticate(user.email, 'password')
+    post :host, :id => @race.id
+    @race = Race.find(@race.id)
+    assert_nil @race.host
+  end
+
 end

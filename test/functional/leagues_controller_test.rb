@@ -36,7 +36,7 @@ class LeaguesControllerTest < ActionController::TestCase
 #    assert @league.members.include?(users(:admin))
   end
 
-  test "should give creator initial league admin role" do
+  test "should give creator initial roles" do
     authenticate(users(:admin).email, 'admin')
     create_me = League.new(:name => "Some League", :game => games(:gt5))
     post :create, :league => create_me.attributes

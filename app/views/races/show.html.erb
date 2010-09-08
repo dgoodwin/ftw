@@ -9,6 +9,15 @@
 </p>
 
 <p>
+  <b>Host:</b>
+<% if @race.host %>
+  <%= link_to @race.host.get_account('psn').name, user_path(@race.host) %>
+<% elsif have_perm('host_race', @race.event.season.league.id) %>
+  <%= link_to 'Host Race', :controller => "races", :action => "host", :id => @race %>
+<% end %>
+</p>
+
+<p>
   <b>Instructions:</b>
   <%= @race.instructions %>
 </p>

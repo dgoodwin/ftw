@@ -16,6 +16,10 @@ module Auth
       return NewRole.new('user', [
           'edit_user'
       ])
+    elsif role == 'host'
+      return NewRole.new('host', [
+          'host_race'
+      ])
     elsif role == 'league_creator'
       return NewRole.new('league_creator', [
           'create_league',
@@ -48,6 +52,7 @@ module Auth
           'destroy_event',
           'edit_event',
           'schedule_event',
+          'host_race',
           'create_results',
           'edit_results',
           'destroy_results',
