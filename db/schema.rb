@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100907223915) do
+ActiveRecord::Schema.define(:version => 20100907230422) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(:version => 20100907223915) do
     t.boolean  "verified",    :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "can_host",    :default => 0
   end
 
   create_table "events", :force => true do |t|

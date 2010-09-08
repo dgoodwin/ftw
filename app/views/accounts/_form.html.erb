@@ -4,5 +4,9 @@
     <%= account_form.collection_select :platform_id, Platform.all, :id, :name %>
     <%= account_form.text_field :name %>
   </div>
+  <div class="field">
+    Can Host:
+    <%= account_form.text_field :can_host, :size => 2 %>
+  </div>
 
 <% end %>
