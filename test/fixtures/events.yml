@@ -4,29 +4,35 @@ alien_s1_r1:
   time: 2010-07-03 14:00:00
   season: alien_s1
   name: Round 1
+  track: monza
 
 alien_s1_r2:
   time: 2010-07-10 14:00:00
   season: alien_s1
   name: Round 2
+  track: monza
 
 alien_s1_r3:
   time: 2010-07-17 14:00:00
   season: alien_s1
   name: Round 3
+  track: monza
 
 alien_s1_r4:
   time: 2010-07-24 14:00:00
   season: alien_s1
   name: Round 4
+  track: monza
 
 alien_s1_r5:
   time: 2010-07-31 14:00:00
   season: alien_s1
   name: Round 5
+  track: monza
 
 alien_s1_r6:
   time: 2010-08-07 14:00:00
   season: alien_s1
   name: Round 6
+  track: monza
 

@@ -27,10 +27,32 @@ gt5.save
 
 # Development stuff:
 
-# Create 40 Test Users:
-(1..40).each do |i|
-  username = "testuser#{i}"
-  user = User.new(:email => "#{username}@example.com",
-      :name => username, :password => password)
-  user.save
+gt5_tracks = [
+    "Autodromo Nazionale Monza",
+    "Circuit de la Sarthe",
+    "Daytona International Speedway",
+    "Eiger Nordwand",
+    "Fuji Speedway",
+    "High Speed Ring",
+    "Indianapolis Motor Speedway",
+    "Nurburgring",
+    "Suzuka Circuit",
+    "Top Gear Test Track",
+    "Tsukuba Circuit",
+    "Daytona International Superspeedway",
+    "Indianapolis Superspeedway",
+    "Circuito de Madrid",
+    "London",
+    "Piazza del Campo",
+    "Rome",
+    "Route 5",
+    "Tokyo Route 246",
+    "Toscana",
+]
+
+gt5_tracks.each do |name|
+  track = Track.new(:name => name)
+  gt5.tracks << track
 end
+
+gt5.save
