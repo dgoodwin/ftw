@@ -47,8 +47,8 @@ class RaceResultTest < ActiveSupport::TestCase
     event.season.league.members.each do |member|
       users << member.user
     end
-    race = Race.new(:event => event, :time => event.time, :instructions =>
-        "Be there.", :index => 1, :users => users)
+    race = Race.new(:event => event, :time => event.time, 
+            :index => 1, :users => users)
     return race
   end
 

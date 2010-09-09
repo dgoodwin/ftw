@@ -4,7 +4,6 @@ alien_s1_r1_r1:
   index: 1
   time: 2010-07-05 21:36:31
   event: alien_s1_r1 
-  instructions: Just be there.
   password: password
   users: admin, user001, user002, user003
 

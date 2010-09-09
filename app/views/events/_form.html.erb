@@ -15,6 +15,10 @@
     <%= f.datetime_select :time %>
   </div>
   <div class="field">
+    <%= f.label :instructions %><br />
+    <%= f.text_area :instructions %>
+  </div>
+  <div class="field">
     <!-- TODO: Really not sure this is the most railsy way to do this... -->
     <%= hidden_field_tag 'season_id', @season.id %><br />
   </div>

@@ -40,6 +40,7 @@ class EventsController < ApplicationController
   # GET /events/1/edit
   def edit
     @event = Event.find(params[:id])
+    @season = @event.season
     return if not require_perm('edit_event', @event.season.league.id)
   end
 
@@ -124,7 +125,6 @@ class EventsController < ApplicationController
       race.event = @event
       race.time = @event.time
       race.index = index
-      race.instructions = ""
       race.password = ""
       races << race
       index += 1

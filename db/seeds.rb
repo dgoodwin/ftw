@@ -24,3 +24,13 @@ psn.save
 
 gt5 = Game.new(:key => 'gt5', :name => "Gran Turismo 5", :platform => psn)
 gt5.save
+
+# Development stuff:
+
+# Create 40 Test Users:
+(1..40).each do |i|
+  username = "testuser#{i}"
+  user = User.new(:email => "#{username}@example.com",
+      :name => username, :password => password)
+  user.save
+end
