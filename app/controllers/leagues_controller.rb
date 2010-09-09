@@ -62,9 +62,17 @@ class LeaguesController < ApplicationController
     return if not require_perm('create_league', @league.id)
 
     creator = get_current_user()
-    member = Member.new(:league => @league, :user => creator, 
-          :account => creator.get_account(@league.game.platform))
-    @league.members << member
+#     member = Member.new(:league => @league, :user => creator, 
+#           :account => creator.get_account(@league.game.platform))
+#     @league.members << member
+
+    # TODO: Development only code below, join all site users to every new league:
+    User.all.each do |user|
+      pp user.accounts
+      member = Member.new(:league => @league, :user => user, 
+           :account => user.get_account(@league.game.platform))
+      @league.members << member
+    end
 
     respond_to do |format|
       if @league.save 

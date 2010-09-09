@@ -24,7 +24,8 @@
 </p>
 
 <p>
-<b>Members:</b>
+<b>Members:</b><br/>
+<i>Currently, all site members are being joined to every new league that is created for testing purposes. Eventually leagues will be able to optionally require approval to join.
 <ul>
     <% @league.members.sort { |a,b| a.user.get_account(@league.game.platform).name.downcase <=> b.user.get_account(@league.game.platform).name.downcase }.each do |member| %>
     <li><%= link_to member.user.get_account(@league.game.platform).name, user_path(member.user) %></li>
@@ -45,9 +46,12 @@
 <% elsif @member %>
   <p>
   You are a member of this league.</p>
+
+  <!--
   <%= link_to 'Leave this league', [@member.league, @member], 
     :confirm => 'Are you sure you wish to leave this league?', 
     :method => :delete %><p/>
+    -->
 <% end %>
 
 
