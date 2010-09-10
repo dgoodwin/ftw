@@ -1,2 +1,93 @@
-<h1>HELLO WORLD</h1>
+<h1>About</h1>
+
+GT FTW is a community site for Gran Turismo, where users can create, organize, and run their own racing leagues. It is provided free of charge.
+
+The site is currently in very early stages and not yet complete.
+
+<h1>Design / Requirements</h1>
+
+Current goals for the site are below. Not all of these are implemented yet but this is the target. Feedback is welcome on changes or additions you would like to see made.
+
+<h3>Users</h3>
+
+<ul>
+  <li>Created via a normal registration process and available to anyone.</li>
+  <li>Provide your email address, account display name, PSN login, and choose a site password. (this password is stored encrypted)</li>
+  <li>PSN logins will eventually need to be verified by an administrator by sending them a PSN message to prove you own the account.</li>
+  <li>Users may have certain privledges associated with their account. (site adminstrator, league administrator, race host, etc) Some of these are site wide, but most are specific to a particular league.</li>
+  <li>Will have a dashboard page available showing upcoming events they are scheduled to attend or could register for, recent race results and standings, etc.</li>
+</ul>
+
+<h3>Leagues</h3>
+
+<ul>
+  <li>Can be created by any user. (will become initial league admin)</li>
+  <li>Other users can then request to join the league. (<i>approvals not yet implemented</i>)</li>
+  <li>Members may be granted priviledges within the league: league administrator, race result approver, race host, etc.</li>
+  <li>Leagues will most likely be specific to a particular type of racing.</li>
+  <li>Leagues may also be configured to be specific to a particular geographic area.</li>
+  <li>May one day support a blogging feature.</li>
+</ul>
+
+<h3>Seasons</h3>
+
+<ul>
+  <li>A competetive racing season, created within a league.</li>
+  <li>Scored separately from other seasons, fresh slate each time.</li>
+  <li>Season scoring/results may one day feed back into an overall league leaderboard.</li>
+  <li>In theory, multiple seasons could be running at any given time.</li>
+  <li>Associated with a particular scoring model, see scoring section below.</li>
+  <li>Contains a leaderboard of the current standings within that season.</li>
+</ul>
+
+<h3>Events</h3>
+
+<ul>
+  <li>A season consists of a series of events created by league admins.</li>
+  <li>Defines a time and track where the event is to take place.</li>
+  <li>Many users can register for the event, once admins schedule the event the field will be split into individual races.</li>
+  <li>Qualification process is TBD, really depends on what GT5 offers for functionality.</li>
+  <li>For now, all participants are split into races randomly. It would be nice to do this based on skill to keep the racing closer, and give more points to those who succeed in higher races. I do not yet know how to accomplish this however.</li>
+  <li>Event also specifies instructions for the race. Currently this is just text, we may add specific options for the more common configuration once the game is release. (PP / tire / drivetrain limitations)</li>
+</ul>
+
+
+<h3>Race</h3>
+
+<ul>
+  <li>Once scheduled, an event field is split up into races.</li>
+  <li>Will assist with finding a host for each race. League members who have the host role can volunteer to host races. Tools will be available to view races that are still in need of a host.</li>
+  <li>Will send appropriate emails to participants to notify them of changes to the race schedule and connection information.</li>
+  <li>Will support a comment system.</li>
+</ul>
+
+<h3>Race Results</h3>
+
+<ul>
+  <li>Assuming GT5 does not offer any direct API to fetch results, must rely on community reporting of results</li>
+  <li>Users who participated in the race can submit results.</li>
+  <li>League admins (or possibly another role) will be able to approve results, or enter the final results if entries are incomplete.</li>
+  <li>Once finalized, race results will affect the season leaderboard.</li>
+</ul>
+
+
+
+<h3>Scoring</h3>
+
+<ul>
+  <li>Scoring system is a very difficult problem.</li>
+  <li>In a simple world where there is only one race, assigning points to positions would be easy.</li>
+  <li>Because we support fields larger than a single race, we can still do this, but need to handle situations where each field is not a full 16, and it seems like beating a tougher field may need to be worth more points than beating an easier field.</li>
+  <li>This kind of formula could be quite difficult.</li>
+  <li>For now, field is split randomly, points are assigned for each race equally.</li>
+  <li>The site may someday support multiple scoring strategies, and league admins can choose which they would like to use.</li>
+</ul>
+
+
+<h3>Other</h3>
+
+<ul>
+  <li>The site will audit important approvals.</li>
+  <li>Events will be available outside of competetive racing seasons to just coordinate track days and other fun events.</li>
+</ul>
 
