@@ -19,6 +19,18 @@
     <%= f.collection_select :game_id, Game.all, :id, :name %>
   </div>
   <div class="field">
+    Type<br />
+    <%= select "league", "racing_type", @racing_types %>
+  </div>
+  <div class="field">
+    Skill Level<br />
+    <%= select "league", "skill_level", @skill_levels %>
+  </div>
+  <div class="field">
+    Membership<br />
+    <%= select "league", "membership", @membership_types %>
+  </div>
+  <div class="field">
     <%= f.label :description %><br />
     <%= f.text_area :description %>
   </div>

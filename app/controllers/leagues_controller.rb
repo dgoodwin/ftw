@@ -36,12 +36,40 @@ class LeaguesController < ApplicationController
     end
   end
 
+  def setup_select_data
+    @racing_types = {
+      "Sports Cars" => 'sports',
+      "Touring Cars" => 'touring',
+      "Single Seater" => 'single_seater',
+      "Karting" => 'kart',
+      "NASCAR" => 'nascar',
+      "Crappy Cars" => 'crap',
+      "Other" => 'other',
+      "Various" => 'various',
+    }
+
+    @skill_levels = {
+      "Beginner" => 'beginner',
+      "Intermedite" => 'intermediate',
+      "Advanced" => 'advanced',
+      "Alien" => 'alien',
+    }
+
+    @membership_types = {
+      "Approval Required" => 'approval',
+      "Open (all can join)" => 'open',
+      "Invite Only" => 'invite',
+      "Closed" => 'closed',
+    }
+  end
+
   # GET /leagues/new
   # GET /leagues/new.xml
   def new
     @league = League.new
     return if not require_perm('create_league', @league.id)
-
+    
+    setup_select_data
 
     respond_to do |format|
       format.html # new.html.erb
@@ -53,6 +81,7 @@ class LeaguesController < ApplicationController
   def edit
     @league = League.find(params[:id])
     return if not require_perm('edit_league', @league.id)
+    setup_select_data
   end
 
   # POST /leagues
@@ -68,7 +97,6 @@ class LeaguesController < ApplicationController
 
     # TODO: Development only code below, join all site users to every new league:
     User.all.each do |user|
-      pp user.accounts
       member = Member.new(:league => @league, :user => user, 
            :account => user.get_account(@league.game.platform))
       @league.members << member

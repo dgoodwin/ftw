@@ -12,6 +12,21 @@
   <%= @league.game.name %>
 </p>
 
+<p>
+  <b>Type:</b>
+  <%= @league.racing_type %>
+</p>
+
+<p>
+  <b>Skill Level:</b>
+  <%= @league.skill_level %>
+</p>
+
+<p>
+  <b>Membership:</b>
+  <%= @league.membership %>
+</p>
+
 <%= link_to_if have_perm('create_season', @league.id), 
     "Create Season", new_league_season_path(@league) %><p/>
 

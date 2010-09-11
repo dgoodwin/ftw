@@ -9,6 +9,6 @@ class League < ActiveRecord::Base
   validates_presence_of :name, :message => \
     "Please specify a unique name for your league."
 
-  validates_presence_of :game
+  validates_presence_of :game, :skill_level, :racing_type, :membership
 
 end

@@ -4,16 +4,18 @@
   <tr valign="top">
     <th>Name</th>
     <th>Type</th>
+    <th>Skill</th>
     <th>Members</th>
-    <th>Registration</th>
+    <th>Membership</th>
   </tr>
 
 <% @leagues.each do |league| %>
   <tr valign="top">
     <td><%= link_to league.name, league%></td>
-    <td>TBD</td>
+    <td><%= league.racing_type %></td>
+    <td><%= league.skill_level %></td>
     <td><%= Member.count(:conditions => ["league_id = ?", league.id]) %>
-    <td>Open</td>
+    <td><%= league.membership %></td>
   </tr>
 <% end %>
 </table>
