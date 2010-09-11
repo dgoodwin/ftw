@@ -1,10 +1,5 @@
 <h1><%= @user.name %></h1>
 <p>
-  <b>Email:</b>
-  <%= @user.email %>
-</p>
-
-<p>
   <b>Location:</b>
   <%= @user.location %>
 </p>
@@ -35,7 +30,8 @@
 
 
 <%= link_to_if have_perm('edit_user', @user.id), 
-        'Edit', edit_user_path(@user) %> | 
+        'Edit', edit_user_path(@user) %> 
+        <!--
 <%= link_to_if have_perm('edit_user', @user.id), 
         'Add Account', new_user_account_path(@user) %> | 
-<%= link_to 'Back', users_path %>
+        -->

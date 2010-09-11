@@ -1,17 +1,17 @@
 <h1>Listing users</h1>
 
-<table>
+<table width="100%">
   <tr>
-    <th>Name</th>
+    <th>User</th>
     <th>Location</th>
-    <th></th>
+    <th>Accounts</th>
   </tr>
 
 <% @users.each do |user| %>
   <tr>
     <td><%= link_to user.name, user %></td>
     <td><%= user.location %></td>
-    <td></td>
+    <td><%= user.accounts.collect { |a| a.name }.join(", ") %></td>
   </tr>
 <% end %>
 </table>
