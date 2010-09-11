@@ -17,26 +17,25 @@
         Your data may be destroyed at any time.</br>
       </div><p/>
 
+      <% if user_signed_in? %>
+          <%= current_user.email %> |
+          <%= link_to "Edit Details", edit_user_path(current_user) %> |
+          <%= link_to "Change Password", edit_user_registration_path(current_user) %> |
+          <%= link_to "Logout", '/users/sign_out' %> 
+        <% else %>
+          <%= link_to "Register", '/users/sign_up' %> |
+          <%= link_to "Login", '/users/sign_in' %>
+      <% end %>
+      <p/>
+
       <%= link_to "About", "/" %> |
       <%= link_to "Leagues", leagues_path %> |
       <%= link_to "Users", users_path %>
     </center>
-    <p/>
-    <center>
-    <% if user_signed_in? %>
-        <%= current_user.email %> |
-        <%= link_to "Edit Details", edit_user_path(current_user) %> |
-        <%= link_to "Change Password", edit_user_registration_path(current_user) %> |
-        <%= link_to "Logout", '/users/sign_out' %> 
-      <% else %>
-        <%= link_to "Register", '/users/sign_up' %> |
-        <%= link_to "Login", '/users/sign_in' %>
-    <% end %>
-    </center>
 
     <p/>
     
-    <p class="notice"><%= notice %></p>
+    <div class="notice"><%= notice %></div>
     <p class="alert"><%= alert %></p>
 
 

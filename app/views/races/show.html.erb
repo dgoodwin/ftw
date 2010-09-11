@@ -23,11 +23,6 @@
 </p>
 
 <p>
-  <b>Password:</b>
-  <%= @race.password %>
-</p>
-
-<p>
 <b>Users:</b>
 <ul>
   <% @race.users.each do |user| %>
@@ -37,17 +32,19 @@
 </p>
 
 <p>
-<b>Results:</b>
-<ul>
+<h2>Results</h2>
+<p>Currently, only one set of results can be submitted. Eventually any user in the race will be able to submit results, and league admins will be responsible for assembling or approving the final results.</p>
+<%= link_to_if @race.race_results.length == 0, 'Submit Results', new_race_result_path(:race_id => @race) %>
+</p>
   <% @race.race_results.each do |result| %>
-    <li><%= link_to result.user.name, race_result_path(result) %></li>
+    <hr>
+    <%= render :partial => 'race_results/show_inline',
+        :locals => { :race_result => result, :league => @race.event.season.league} %>
+    <hr>
   <% end %>
-</ul>
 </p>
 
 <p>
-<%= link_to 'Submit Results', new_race_result_path(:race_id => @race) %>
-</p>
 
 <%= link_to 'Edit', edit_race_path(@race) %> |
 <%= link_to 'Back', races_path %>
