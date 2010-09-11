@@ -54,3 +54,10 @@ div.field, div.actions {
   font-size: 12px;
   list-style: square;
 }
+
+#container {
+  width: 800px;
+  text-align: left;
+  margin-left: auto;
+  margin-right: auto;
+}

@@ -7,12 +7,18 @@
   <%= csrf_meta_tag %>
 </head>
 <body>
+  <div id="container">
 
     <center>
       <h1>GT FTW</h1>
+
+      <div class="field_with_errors">
+        WARNING: This site is only a prototype and under heavy development.<br/>
+        Your data may be destroyed at any time.</br>
+      </div><p/>
+
       <%= link_to "About", "/" %> |
       <%= link_to "Leagues", leagues_path %> |
-      <%= link_to "Seasons", seasons_path %> |
       <%= link_to "Users", users_path %>
     </center>
     <p/>
@@ -28,11 +34,7 @@
     <% end %>
     </center>
 
-    <center>
-      <div class="field_with_errors">
-        WARNING: This site is only a prototype and under heavy development. Your data may be destroyed at any time. Please do not use this site for anything permanent. Otherwise, feel free to poke around, test, and provide feedback. Thanks!
-      </div>
-    </center>
+    <p/>
     
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
@@ -40,5 +42,6 @@
 
 <%= yield %>
 
+  </div>
 </body>
 </html>

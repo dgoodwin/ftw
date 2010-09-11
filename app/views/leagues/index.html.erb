@@ -1,25 +1,23 @@
-<h1>Listing leagues</h1>
+<h1>Leagues</h1>
 
-<table>
-  <tr>
+<table width="100%" cellpadding="5">
+  <tr valign="top">
     <th>Name</th>
-    <th>Description</th>
-    <th></th>
-    <th></th>
-    <th></th>
+    <th>Type</th>
+    <th>Members</th>
+    <th>Registration</th>
   </tr>
 
 <% @leagues.each do |league| %>
-  <tr>
-    <td><%= league.name %></td>
-    <td><%= league.description %></td>
-    <td><%= link_to 'Show', league %></td>
-    <td><%= link_to 'Edit', edit_league_path(league) %></td>
-    <td><%= link_to 'Destroy', league, :confirm => 'Are you sure?', :method => :delete %></td>
+  <tr valign="top">
+    <td><%= link_to league.name, league%></td>
+    <td>TBD</td>
+    <td><%= Member.count(:conditions => ["league_id = ?", league.id]) %>
+    <td>Open</td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New League', new_league_path %>
+<%= link_to 'Create a League', new_league_path %>

@@ -3,6 +3,7 @@
 </p>
 
 <p>
+  <b>Description:</b>
   <%= @league.description %>
 </p>
 
@@ -55,5 +56,4 @@
 <% end %>
 
 
-<%= link_to 'Edit', edit_league_path(@league) %> |
-<%= link_to 'Back', leagues_path %>
+<%= link_to_if have_perm('edit_league', @league.id), 'Edit', edit_league_path(@league) %> |
