@@ -21,6 +21,11 @@ module ApplicationHelper
       html << " >> Event: "
       html << link_to(event.name, event_path(event))
     end
+    if opts[:race]
+      race = opts[:race]
+      html << " >> Race: "
+      html << link_to("Heat #{race.index}", race_path(race))
+    end
     html << "</p>"
     return raw(html)
   end

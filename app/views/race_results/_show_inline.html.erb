@@ -5,15 +5,17 @@
 
 <table width="100%">
   <tr>
-    <th>Position</th>
     <th>User</th>
     <th>Status</th>
+    <th>Position</th>
+    <th>Points</th>
   </tr>
 <% race_result.rows.each do |row| %>
   <tr>
-    <td><%= row.position %></td>
     <td><%= link_to row.user.name, user_path(row.user) %></td>
     <td><%= row.status %></td>
+    <td><%= row.position %></td>
+    <td>-</td>
   </td>
 <% end %>
 </table>

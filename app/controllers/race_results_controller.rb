@@ -94,7 +94,7 @@ class RaceResultsController < ApplicationController
     
     respond_to do |format|
       if @race_result.save
-        format.html { redirect_to(@race_result, :notice => 'Race result was successfully created.') }
+        format.html { redirect_to(@race, :notice => 'Race result was successfully created.') }
         format.xml  { render :xml => @race_result, :status => :created, :location => @race_result }
       else
         print @race_result.errors
@@ -111,11 +111,17 @@ class RaceResultsController < ApplicationController
     @race = @race_result.race
     return if not require_perm('edit_results', @race.event.season.league.id)
 
+    @race_result.rows.each do |row|
+      if row.status != 'finished'
+        row.position = 0
+      end
+    end
+
     @valid_status = STATUSES
 
     respond_to do |format|
       if @race_result.update_attributes(params[:race_result])
-        format.html { redirect_to(@race_result, :notice => 'Race result was successfully updated.') }
+        format.html { redirect_to(@race, :notice => 'Race result was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

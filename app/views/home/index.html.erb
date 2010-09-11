@@ -4,36 +4,37 @@ GT FTW is a community site for Gran Turismo, where users can create, organize, a
 
 The site is currently in very early stages and not yet complete.
 
-<h1>Design / Requirements</h1>
+<h2>How It Works</h2>
 
-Current goals for the site are below. Not all of these are implemented yet but this is the target. Feedback is welcome on changes or additions you would like to see made.
+As the site is still under heavy development, not all of this is implemented, this is just the planned/desired functionality at this point in time. (and will probably change frequently for awhile) Feedback is welcome on suggestions and changes you would like to see made.
 
 <h3>Users</h3>
 
 <ul>
-  <li>Created via a normal registration process and available to anyone.</li>
-  <li>Provide your email address, account display name, PSN login, and choose a site password. (this password is stored encrypted)</li>
-  <li>PSN logins will eventually need to be verified by an administrator by sending them a PSN message to prove you own the account.</li>
-  <li>Users may have certain privledges associated with their account. (site adminstrator, league administrator, race host, etc) Some of these are site wide, but most are specific to a particular league.</li>
+  <li>Users join the site via a normal registration process.</li>
+  <li>Provide email address, account display name, PSN login, and choose a site password.</li>
+  <li>PSN logins will need to be verified by an administrator by sending them a PSN message to prove you own the account.</li>
+  <li>Users may have certain privledges associated with their account. (site adminstrator, league administrator, race host, etc) Some of these are site wide, but most are specific to a particular league. League admins will be able to distribute these roles within the league to help spread the workload.</li>
   <li>Will have a dashboard page available showing upcoming events they are scheduled to attend or could register for, recent race results and standings, etc.</li>
+  <li>Users will be able to create and join "teams".</li>
 </ul>
 
 <h3>Leagues</h3>
 
 <ul>
-  <li>Can be created by any user. (will become initial league admin)</li>
-  <li>Other users can then request to join the league. (<i>approvals not yet implemented</i>)</li>
-  <li>Members may be granted priviledges within the league: league administrator, race result approver, race host, etc.</li>
-  <li>Leagues will most likely be specific to a particular type of racing.</li>
-  <li>Leagues may also be configured to be specific to a particular geographic area.</li>
-  <li>May one day support a blogging feature.</li>
+  <li>Can be created by any user. (who will become initial league admin)</li>
+  <li>Leagues are intended to be for a particular type of racing, where all members are expected to be competing against one another on even footing.</li>
+  <li>Leagues may be open (anyone can join), or require approval from an admin.</li>
+  <li>Members may be granted priviledges within the league to help with the administration process: full league administrator, results approver, race host, etc.</li>
+  <li>Leagues may also be configured to limit to a specific geographic area.</li>
+  <li>Will support a league blogging feature for news etc.</li>
 </ul>
 
 <h3>Seasons</h3>
 
 <ul>
   <li>A competetive racing season, created within a league.</li>
-  <li>Scored separately from other seasons, fresh slate each time.</li>
+  <li>Essentially a container for events, and an isolated scoreboard for just that season.</li>
   <li>Season scoring/results may one day feed back into an overall league leaderboard.</li>
   <li>In theory, multiple seasons could be running at any given time.</li>
   <li>Associated with a particular scoring model, see scoring section below.</li>
@@ -75,11 +76,11 @@ Current goals for the site are below. Not all of these are implemented yet but t
 <h3>Scoring</h3>
 
 <ul>
-  <li>Scoring system is a very difficult problem.</li>
+  <li>Scoring system is a very difficult problem, still very unpolished.</li>
+  <li>For now, field is split randomly, points are assigned for each position equally regardless if the field was full or not.</li>
   <li>In a simple world where there is only one race, assigning points to positions would be easy.</li>
   <li>Because we support fields larger than a single race, we can still do this, but need to handle situations where each field is not a full 16, and it seems like beating a tougher field may need to be worth more points than beating an easier field.</li>
   <li>This kind of formula could be quite difficult.</li>
-  <li>For now, field is split randomly, points are assigned for each race equally.</li>
   <li>The site may someday support multiple scoring strategies, and league admins can choose which they would like to use.</li>
 </ul>
 
