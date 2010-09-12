@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100911024927) do
+ActiveRecord::Schema.define(:version => 20100912161500) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -30,6 +30,9 @@ ActiveRecord::Schema.define(:version => 20100911024927) do
     t.string   "name",         :limit => 50
     t.text     "instructions"
     t.integer  "track_id"
+    t.integer  "tire_id"
+    t.integer  "weather_id"
+    t.integer  "pp"
   end
 
   create_table "games", :force => true do |t|
@@ -127,6 +130,13 @@ ActiveRecord::Schema.define(:version => 20100911024927) do
     t.datetime "updated_at"
   end
 
+  create_table "tires", :force => true do |t|
+    t.integer  "game_id"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "tracks", :force => true do |t|
     t.integer  "game_id"
     t.string   "name"
@@ -154,5 +164,12 @@ ActiveRecord::Schema.define(:version => 20100911024927) do
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+
+  create_table "weathers", :force => true do |t|
+    t.integer  "game_id"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end

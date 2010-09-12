@@ -1,0 +1,9 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+clear:
+  game: gt5 
+  name: Clear
+
+rain:
+  game: gt5
+  name: Rain

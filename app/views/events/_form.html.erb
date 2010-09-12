@@ -14,18 +14,37 @@
     <%= f.label :time %><br />
     <%= f.datetime_select :time %>
   </div>
+
   <div class="field">
     Track:<br/>
     <%= f.collection_select :track_id, Track.where(["game_id = ?", @season.league.game.id]), :id, :name %>
   </div>
+
+  <div class="field">
+    Tires:<br/>
+    <%= f.collection_select :tire_id, Tire.where(["game_id = ?", @season.league.game.id]).order(:name), :id, :name %>
+  </div>
+
+  <div class="field">
+    Weather:<br/>
+    <%= f.collection_select :weather_id, Weather.where(["game_id = ?", @season.league.game.id]).order(:name), :id, :name %>
+  </div>
+
+  <div class="field">
+    Performance Points:<br/>
+    <%= f.text_field :pp, :size => 4 %>
+  </div>
+
   <div class="field">
     <%= f.label :instructions %><br />
     <%= f.text_area :instructions %>
   </div>
+
   <div class="field">
     <!-- TODO: Really not sure this is the most railsy way to do this... -->
     <%= hidden_field_tag 'season_id', @season.id %><br />
   </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>

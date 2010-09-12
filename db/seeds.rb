@@ -47,3 +47,41 @@ gt5_tracks.each do |name|
 end
 
 gt5.save
+
+gt5_weather = [
+    "Clear",
+    "Rain",
+    "Snow",
+    "Random"
+]
+gt5_weather.each do |weather|
+  w = Weather.new(:name => weather, :game_id => gt5)
+  if not w.save
+    pp "Error creating weather: #{weather} (#{w.errors})"
+  else
+    pp "Created weather: #{weather}"
+  end
+end
+
+gt5_tires = [
+    "Any",
+    "N1",
+    "N2",
+    "N3",
+    "S1",
+    "S2",
+    "S3",
+    "R1",
+    "R2",
+    "R3",
+    "Dirt",
+    "Snow",
+]
+gt5_tires.each do |tire|
+  t = Tire.new(:name => tire, :game_id => gt5)
+  if not t.save
+    pp "Error creating tire: #{tire} (#{t.errors})"
+  else
+    pp "Created tire: #{tire}"
+  end
+end

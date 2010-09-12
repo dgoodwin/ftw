@@ -13,6 +13,21 @@
 </p>
 
 <p>
+  <b>Tires:</b>
+  <%= @event.tire.name unless @event.tire.nil? %>
+</p>
+
+<p>
+  <b>Weather:</b>
+  <%= @event.weather.name unless @event.weather.nil? %>
+</p>
+
+<p>
+  <b>Performance Points:</b>
+  <%= @event.pp %>
+</p>
+
+<p>
   <b>Instructions:</b>
   <%= @event.instructions %>
 </p>

@@ -1,0 +1,9 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+n1:
+  game: gt5 
+  name: N1
+
+S2:
+  game: gt5 
+  name: S2

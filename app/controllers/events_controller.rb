@@ -71,6 +71,7 @@ class EventsController < ApplicationController
   def update
     # TODO: block updates if the event is scheduled
     @event = Event.find(params[:id])
+    @season = @event.season
     return if not require_perm('edit_event', @event.season.league.id)
 
     respond_to do |format|
