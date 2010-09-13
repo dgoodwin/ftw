@@ -5,6 +5,11 @@ siteadmin:
   user: admin
   qualifier: 0
 
+leagueadmin:
+  role: league_admin
+  user: leagueadmin
+  qualifier: leagues(:alien).id
+
 user001host:
   role: host
   user: user001

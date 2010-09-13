@@ -1,0 +1,14 @@
+<h2>Administration</h2>
+
+<p>
+<b>Seasons:</b>
+<%= link_to_if have_perm('create_season', @league.id), 
+    "(add)", new_league_season_path(@league) %><br/>
+
+<ul>
+  <% @league.seasons.each do |season| %>
+    <li><%= link_to season.name, season_path(season) %></li>
+  <% end %>
+</ul>
+</p>
+

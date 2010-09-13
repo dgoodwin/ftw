@@ -7,6 +7,11 @@ admin:
   name: Administrator
   location: Canada
 
+leagueadmin:
+  email: leagueadmin@example.com
+  name: Mr League Admin
+  location: Somewhere Important
+
 user001:
   email: User001@example.com
   name: User 001

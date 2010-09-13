@@ -21,7 +21,9 @@ Ftw::Application.routes.draw do
   end
 
 
-  # A non-RESTful route for scheduling events:
+  # Non-RESTful routes:
+  match 'leagues/:id/admin', :to => 'leagues#admin'
+
   match 'events/:id/schedule', :to => 'events#schedule'
 
   match 'races/:id/host', :to => 'races#host'

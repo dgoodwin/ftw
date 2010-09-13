@@ -75,4 +75,17 @@ class LeaguesControllerTest < ActionController::TestCase
 
     assert_redirected_to leagues_path
   end
+
+  test "league admin can view admin page" do
+    authenticate(users(:leagueadmin).email, 'password')
+    get :admin, {'id' => @league.id}
+    assert_response :success 
+  end
+
+  test "must be league admin to view admin page" do
+    request.env["HTTP_REFERER"] = "/"
+    authenticate(users(:user001).email, 'password')
+    get :admin, {'id' => @league.id}
+    assert_response :forbidden 
+  end
 end

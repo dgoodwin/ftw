@@ -6,6 +6,12 @@ admin:
   platform: psn 
   verified: false
 
+leagueadmin:
+  name: MrLeagueAdin
+  user: leagueadmin
+  platform: psn 
+  verified: false
+
 user001:
   name: user001
   user: user001

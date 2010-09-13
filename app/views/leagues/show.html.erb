@@ -11,18 +11,6 @@
 <b>Membership:</b> <%= @league.membership %><br/>
 </p>
 
-<%= link_to_if have_perm('create_season', @league.id), 
-    "Create Season", new_league_season_path(@league) %><p/>
-
-<p>
-<b>Seasons:</b>
-<ul>
-  <% @league.seasons.each do |season| %>
-    <li><%= link_to season.name, season_path(season) %></li>
-  <% end %>
-</ul>
-</p>
-
 <p>
 <b>Members:</b><br/>
 <i>Currently, all site members are being joined to every new league that is created for testing purposes. Eventually leagues will be able to optionally require approval to join.

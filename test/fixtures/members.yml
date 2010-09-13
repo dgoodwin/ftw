@@ -5,6 +5,11 @@ admin_alien:
   league: alien
   account: admin
 
+leagueadmin_alien:
+  user: leagueadmin
+  league: alien
+  account: leagueadmin
+
 admin_newb:
   user: admin
   league: newb

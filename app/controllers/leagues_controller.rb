@@ -154,4 +154,11 @@ class LeaguesController < ApplicationController
     end
   end
 
+  # Render the administration page:
+  def admin
+    @league = League.find(params[:id])
+    # Assume edit_league = league admin:
+    return if not require_perm('edit_league', @league.id)
+  end
+
 end
