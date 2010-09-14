@@ -12,15 +12,15 @@ require approval to join.
   <tr>
     <th>Member</th>
     <th>Location</th>
-    <th>Races</th>
-    <th>Points</th>
-    <th>Rating</th>
+    <th>Roles</th>
   </tr>
 
 <% @members.each do |member| %>
   <tr>
     <td><%= link_to member.account.name, member.user %></td>
     <td><%= member.user.location %></td>
+    <td><%= show_league_perms(@league, member.user) %></td>
+
   </tr>
 <% end %>
 </table>
