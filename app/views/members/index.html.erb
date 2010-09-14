@@ -1,0 +1,28 @@
+<%= render :partial => 'leagues/navbar', :locals => {:league => @league} %>
+
+<h2>Members</h2>
+
+<p>
+Currently, all site members are being joined to every new league that is
+created for testing purposes. Eventually leagues will be able to optionally
+require approval to join.
+</p>
+
+<table width="100%">
+  <tr>
+    <th>Member</th>
+    <th>Location</th>
+    <th>Races</th>
+    <th>Points</th>
+    <th>Rating</th>
+  </tr>
+
+<% @members.each do |member| %>
+  <tr>
+    <td><%= link_to member.account.name, member.user %></td>
+    <td><%= member.user.location %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />

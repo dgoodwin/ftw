@@ -1,6 +1,7 @@
 <center>
   <h1><%= league.name %></h1>
-  Leaderboards | Members | Seasons |
+  Leaderboards | 
+  <%= link_to "Members", "/leagues/#{league.id}/members" %> | 
   <%= link_to_if have_role('league_admin', league.id), "Admin", 
       "/leagues/#{league.id}/admin" %>
 </center>

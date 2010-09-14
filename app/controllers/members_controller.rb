@@ -26,6 +26,11 @@ class MembersController < ApplicationController
     end
   end
  
+  def index
+    @league = League.find(params[:league_id])
+    @members = @league.members
+  end
+
 #   # DELETE /leagues/1/members/1
 #   def destroy
 #     # TODO: Sort out issue with preserving stats

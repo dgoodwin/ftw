@@ -11,16 +11,6 @@
 <b>Membership:</b> <%= @league.membership %><br/>
 </p>
 
-<p>
-<b>Members:</b><br/>
-<i>Currently, all site members are being joined to every new league that is created for testing purposes. Eventually leagues will be able to optionally require approval to join.
-<ul>
-    <% @league.members.sort { |a,b| a.user.get_account(@league.game.platform).name.downcase <=> b.user.get_account(@league.game.platform).name.downcase }.each do |member| %>
-    <li><%= link_to member.user.get_account(@league.game.platform).name, user_path(member.user) %></li>
-  <% end %>
-</ul>
-</p>
-
 <% if @can_join and @have_account then %>
   <%= form_for([@league, @league.members.build]) do |f| %>
     <div class="actions">
