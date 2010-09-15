@@ -1,4 +1,4 @@
-<%= form_for(@event) do |f| %>
+<%= form_for([@league, @event]) do |f| %>
   <% if @event.errors.any? %>
   <div id="error_explanation">
     <h2><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</h2>
@@ -11,23 +11,27 @@
   <% end %>
 
   <div class="field">
+    Season:<br/>
+    <%= f.collection_select :season_id, @seasons, :id, :name %>
+  </div>
+  <div class="field">
     <%= f.label :time %><br />
     <%= f.datetime_select :time %>
   </div>
 
   <div class="field">
     Track:<br/>
-    <%= f.collection_select :track_id, Track.where(["game_id = ?", @season.league.game.id]), :id, :name %>
+    <%= f.collection_select :track_id, Track.where(["game_id = ?", @league.game.id]), :id, :name %>
   </div>
 
   <div class="field">
     Tires:<br/>
-    <%= f.collection_select :tire_id, Tire.where(["game_id = ?", @season.league.game.id]).order(:name), :id, :name %>
+    <%= f.collection_select :tire_id, Tire.where(["game_id = ?", @league.game.id]).order(:name), :id, :name %>
   </div>
 
   <div class="field">
     Weather:<br/>
-    <%= f.collection_select :weather_id, Weather.where(["game_id = ?", @season.league.game.id]).order(:name), :id, :name %>
+    <%= f.collection_select :weather_id, Weather.where(["game_id = ?", @league.game.id]).order(:name), :id, :name %>
   </div>
 
   <div class="field">
@@ -38,11 +42,6 @@
   <div class="field">
     <%= f.label :instructions %><br />
     <%= f.text_area :instructions %>
-  </div>
-
-  <div class="field">
-    <!-- TODO: Really not sure this is the most railsy way to do this... -->
-    <%= hidden_field_tag 'season_id', @season.id %><br />
   </div>
 
   <div class="actions">

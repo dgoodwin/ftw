@@ -1,27 +1,27 @@
-<h1>Listing events</h1>
+<%= render :partial => 'leagues/navbar', :locals => {:league => @league} %>
 
-<table>
+<h1>Events</h1>
+
+<table width="100%">
   <tr>
     <th>Name</th>
-    <th>Time</th>
     <th>Season</th>
-    <th></th>
+    <th>Time</th>
     <th></th>
     <th></th>
   </tr>
 
 <% @events.each do |event| %>
   <tr>
-    <td><%= event.name %></td>
-    <td><%= event.time %></td>
+    <td><%= link_to event.name, league_event_path(@league, event) %></td>
     <td><%= link_to event.season.name, season_path(event.season) %></td>
-    <td><%= link_to 'Show', event %></td>
-    <td><%= link_to 'Edit', edit_event_path(event) %></td>
-    <td><%= link_to 'Destroy', event, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= event.time %></td>
+    <td><%= link_to 'Edit', edit_league_event_path(@league, event) %></td>
+    <td><%= link_to 'Destroy', league_event_path(@league, event), :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Event', new_event_path %>
+<%= link_to 'New Event', new_league_event_path(@league) %>

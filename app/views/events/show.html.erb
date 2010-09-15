@@ -1,6 +1,11 @@
-<%= breadcrumb(:league => @event.season.league, :season => @event.season) %>
+<%= render :partial => 'leagues/navbar', :locals => {:league => @league} %>
 
 <h2>Event: <%= @event.name %></h2>
+
+<p>
+  <b>Season:</b>
+  <%= link_to @event.season.name, season_path(@event.season) %>
+</p>
 
 <p>
   <b>Time:</b>
@@ -46,5 +51,4 @@
   :controller => "events", :action => "schedule", :id => @event %>: This will split the field up into individual races. Eventually this will be scheduled automatically. Currently all league members are assumed to be participating, this will eventually be on an opt-in basis for each event.<p/>
 
 
-<%= link_to 'Edit', edit_event_path(@event) %> |
-<%= link_to 'Back', events_path %>
+<%= link_to 'Edit', edit_league_event_path(@league, @event) %>

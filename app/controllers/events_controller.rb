@@ -5,7 +5,8 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.xml
   def index
-    @events = Event.all
+    @league = League.find(params[:league_id])
+    @events = Event.find_by_sql(["SELECT e.* from events e, seasons s where s.league_id = ? and e.season_id = s.id", @league.id])
 
     respond_to do |format|
       format.html # index.html.erb
@@ -17,6 +18,7 @@ class EventsController < ApplicationController
   # GET /events/1.xml
   def show
     @event = Event.find(params[:id])
+    @league = @event.season.league
 
     respond_to do |format|
       format.html # show.html.erb
@@ -28,8 +30,11 @@ class EventsController < ApplicationController
   # GET /events/new.xml
   def new
     @event = Event.new
-    @season = Season.find(params[:season_id])
-    return if not require_perm('create_event', @season.league.id)
+    @league = League.find(params[:league_id])
+    
+    @seasons = Season.where(["league_id = ?", @league.id])
+
+    return if not require_perm('create_event', @league.id)
 
     respond_to do |format|
       format.html # new.html.erb
@@ -41,15 +46,20 @@ class EventsController < ApplicationController
   def edit
     @event = Event.find(params[:id])
     @season = @event.season
-    return if not require_perm('edit_event', @event.season.league.id)
+    @league = @season.league
+    return if not require_perm('edit_event', @league.id)
+
+    @seasons = Season.where(["league_id = ?", @league.id])
   end
 
   # POST /events
   # POST /events.xml
   def create
-    @season = Season.find(params[:season_id])
-    @event = @season.events.create(params[:event])
-    return if not require_perm('create_event', @season.league.id)
+    @league = League.find(params[:league_id])
+    @event = Event.new(params[:event])
+    return if not require_perm('create_event', @league.id)
+
+    @season = @event.season
 
     # For now, we auto-assign the event name "Round X", where X is the
     # number of existing events in this season + 1.
@@ -57,7 +67,7 @@ class EventsController < ApplicationController
 
     respond_to do |format|
       if @event.save
-        format.html { redirect_to(@event, :notice => 'Event was successfully created.') }
+        format.html { redirect_to(league_event_path(@league, @event), :notice => 'Event was successfully created.') }
         format.xml  { render :xml => @event, :status => :created, :location => @event }
       else
         format.html { render :action => "new" }
@@ -89,11 +99,12 @@ class EventsController < ApplicationController
   # DELETE /events/1.xml
   def destroy
     @event = Event.find(params[:id])
-    return if not require_perm('destroy_event', @event.season.league.id)
+    league = @event.season.league
+    return if not require_perm('destroy_event', league.id)
     @event.destroy
 
     respond_to do |format|
-      format.html { redirect_to(events_url) }
+      format.html { redirect_to(league_events_path(league)) }
       format.xml  { head :ok }
     end
   end

@@ -6,14 +6,14 @@ class EventsControllerTest < ActionController::TestCase
   end
 
   test "should get index" do
-    get :index
+    get :index, :league_id => leagues(:alien).id
     assert_response :success
     assert_not_nil assigns(:events)
   end
 
   test "should get new" do
     authenticate(users(:admin).email, 'admin')
-    get :new, :season_id => seasons(:alien_s1).id
+    get :new, :season_id => seasons(:alien_s1).id, :league_id => leagues(:alien).id
     assert_response :success
   end
 
@@ -21,10 +21,10 @@ class EventsControllerTest < ActionController::TestCase
     authenticate(users(:admin).email, 'admin')
     assert_difference('Event.count') do
       post :create, :event => @event.attributes, \
-        :season_id => seasons(:alien_s1).id
+        :season_id => seasons(:alien_s1).id, :league_id => leagues(:alien).id
     end
 
-    assert_redirected_to event_path(assigns(:event))
+    assert_redirected_to league_event_path(leagues(:alien), assigns(:event))
   end
 
   test "should show event" do
@@ -46,11 +46,12 @@ class EventsControllerTest < ActionController::TestCase
 
   test "should destroy event" do
     authenticate(users(:admin).email, 'admin')
+    league = @event.season.league
     assert_difference('Event.count', -1) do
       delete :destroy, :id => @event.to_param
     end
 
-    assert_redirected_to events_path
+    assert_redirected_to league_events_path(league)
   end
 
   test "should schedule races" do
