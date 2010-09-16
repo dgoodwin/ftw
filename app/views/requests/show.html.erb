@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>User:</b>
+  <%= @request.user %>
+</p>
+
+<p>
+  <b>League:</b>
+  <%= @request.league %>
+</p>
+
+<p>
+  <b>Time:</b>
+  <%= @request.time %>
+</p>
+
+<p>
+  <b>Comments:</b>
+  <%= @request.comments %>
+</p>
+
+<p>
+  <b>Entity:</b>
+  <%= @request.entity_id %>
+</p>
+
+
+<%= link_to 'Back', requests_path %>

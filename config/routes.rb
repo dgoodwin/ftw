@@ -1,5 +1,7 @@
 Ftw::Application.routes.draw do 
 
+  resources :requests
+
   resources :accounts
 
   devise_for :users, :controllers => { :registrations => 'users/registrations' }
@@ -25,6 +27,7 @@ Ftw::Application.routes.draw do
   # Non-RESTful routes:
   match 'leagues/:id/admin', :to => 'leagues#admin'
   match 'leagues/:id/members', :to => 'leagues#members'
+  match 'leagues/:id/join', :to => 'leagues#join'
 
   match 'events/:id/schedule', :to => 'events#schedule'
 

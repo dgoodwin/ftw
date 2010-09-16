@@ -58,7 +58,8 @@ module Auth
           'destroy_results',
           'approve_results',
           'edit_user',
-          'destroy_user'
+          'destroy_user',
+          'manage_requests',
         ])
     else
       raise "Unknown role: #{role}"

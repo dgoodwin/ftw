@@ -161,4 +161,10 @@ class LeaguesController < ApplicationController
     return if not require_perm('edit_league', @league.id)
   end
 
+  # Action to handle requests to join this league.
+  def join
+    @league = League.find(params[:id])
+    redirect_to(new_request_path(:league_id => @league.id, :request_type => 'join_league'))
+  end
+
 end

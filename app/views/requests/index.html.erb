@@ -1,0 +1,29 @@
+<h1>Listing requests</h1>
+
+<table>
+  <tr>
+    <th>User</th>
+    <th>League</th>
+    <th>Time</th>
+    <th>Comments</th>
+    <th>Entity</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @requests.each do |request| %>
+  <tr>
+    <td><%= request.user %></td>
+    <td><%= request.league %></td>
+    <td><%= request.time %></td>
+    <td><%= request.comments %></td>
+    <td><%= request.entity_id %></td>
+    <td><%= link_to 'Show', request %></td>
+    <td><%= link_to 'Destroy', request, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Request', new_request_path %>

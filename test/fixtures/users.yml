@@ -31,3 +31,8 @@ user004:
   email: User004@example.com
   name: User 004
   location: Somewhere
+
+lonelyuser:
+  email: solonely@example.com
+  name: So Lonely
+  location: Nobody Cares

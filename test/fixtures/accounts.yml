@@ -36,3 +36,9 @@ user004:
   platform: psn 
   verified: false
 
+lonelyuser:
+  name: lonelyuser
+  user: lonelyuser
+  platform: psn 
+  verified: false
+

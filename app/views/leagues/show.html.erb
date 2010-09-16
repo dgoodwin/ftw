@@ -12,11 +12,7 @@
 </p>
 
 <% if @can_join and @have_account then %>
-  <%= form_for([@league, @league.members.build]) do |f| %>
-    <div class="actions">
-      <%= f.submit 'Join' %>
-    </div>
-  <% end %>
+  <%= link_to 'Join This League', :controller => "leagues", :action => "join", :id => @league %>
 <% elsif not @have_account then %>
   <p>
   You must create a <%= @league.game.platform.name %> account before you can join this league.
