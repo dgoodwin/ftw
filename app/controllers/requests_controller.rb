@@ -85,16 +85,16 @@ class RequestsController < ApplicationController
 #     end
 #   end
 
-#   # DELETE /requests/1
-#   # DELETE /requests/1.xml
-#   def destroy
-#     return if not require_perm('manage_requests', 0) 
-#     @request = Request.find(params[:id])
-#     @request.destroy
+   # DELETE /requests/1
+   # DELETE /requests/1.xml
+   def destroy
+     return if not require_perm('manage_requests', 0) 
+     @request = Request.find(params[:id])
+     @request.destroy
 
-#     respond_to do |format|
-#       format.html { redirect_to(requests_url) }
-#       format.xml  { head :ok }
-#     end
-#   end
+     respond_to do |format|
+       format.html { redirect_to(requests_url) }
+       format.xml  { head :ok }
+     end
+   end
 end
