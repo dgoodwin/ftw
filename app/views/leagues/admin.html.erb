@@ -12,5 +12,12 @@
     <li><%= link_to season.name, season_path(season) %></li>
   <% end %>
 </ul>
+
+<h3>League Join Requests</h3>
+
+<p>Outstanding requests to join this league, please approve or deny.</p>
+
+<%= render :partial => 'requests/list', :locals => {:reqs => @join_requests} %>
+
 </p>
 

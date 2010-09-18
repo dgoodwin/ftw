@@ -58,8 +58,8 @@ class LeaguesController < ApplicationController
     @membership_types = {
       "Approval Required" => 'approval',
       "Open (all can join)" => 'open',
-      "Invite Only" => 'invite',
-      "Closed" => 'closed',
+#      "Invite Only" => 'invite',
+#      "Closed" => 'closed',
     }
   end
 
@@ -91,16 +91,16 @@ class LeaguesController < ApplicationController
     return if not require_perm('create_league', @league.id)
 
     creator = get_current_user()
-#     member = Member.new(:league => @league, :user => creator, 
-#           :account => creator.get_account(@league.game.platform))
-#     @league.members << member
+     member = Member.new(:league => @league, :user => creator, 
+           :account => creator.get_account(@league.game.platform))
+     @league.members << member
 
-    # TODO: Development only code below, join all site users to every new league:
-    User.all.each do |user|
-      member = Member.new(:league => @league, :user => user, 
-           :account => user.get_account(@league.game.platform))
-      @league.members << member
-    end
+#     # TODO: Development only code below, join all site users to every new league:
+#     User.all.each do |user|
+#       member = Member.new(:league => @league, :user => user, 
+#            :account => user.get_account(@league.game.platform))
+#       @league.members << member
+#     end
 
     respond_to do |format|
       if @league.save 
@@ -159,12 +159,23 @@ class LeaguesController < ApplicationController
     @league = League.find(params[:id])
     # Assume edit_league = league admin:
     return if not require_perm('edit_league', @league.id)
+
+    @join_requests = Request.where(["league_id = ? AND request_type = 'join_league'",
+      @league.id])
   end
 
   # Action to handle requests to join this league.
   def join
     @league = League.find(params[:id])
-    redirect_to(new_request_path(:league_id => @league.id, :request_type => 'join_league'))
+    # TODO: block if already a member?
+
+    if @league.membership == "approval"
+      redirect_to(new_request_path(:league_id => @league.id, :request_type => 'join_league'))
+    elsif @league.membership == "open"
+      member = Member.new(:league => @league, :user => get_current_user, :account => get_current_user().get_account(@league.game.platform))
+      member.save
+      redirect_to league_path(@league), :notice => 'Joined league.'
+    end
   end
 
 end

@@ -38,7 +38,8 @@ module Auth
           'create_results',
           'edit_results',
           'destroy_results',
-          'approve_results'
+          'approve_results',
+          'approve_request',
         ])
     elsif role == 'site_admin'
       return NewRole.new('site_admin', [

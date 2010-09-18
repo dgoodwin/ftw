@@ -33,6 +33,9 @@ Ftw::Application.routes.draw do
 
   match 'races/:id/host', :to => 'races#host'
 
+  match 'requests/:id/approve', :to => 'requests#approve'
+  match 'requests/:id/deny', :to => 'requests#deny'
+
   match 'seasons/:id/leaderboard', :to => 'seasons#leaderboard'
 
   root :to => "home#index"

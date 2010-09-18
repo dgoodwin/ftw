@@ -97,4 +97,32 @@ class RequestsController < ApplicationController
        format.xml  { head :ok }
      end
    end
+
+   # TODO: auditing
+  def approve
+    @request = Request.find(params[:id])
+    return if not require_perm('approve_request', @request.league.id)
+
+    if @request.request_type == 'join_league'
+      member = Member.new(:league => @request.league, :user => @request.user, 
+        :account => @request.user.get_account(@request.league.game.platform))
+      member.save
+      @request.destroy
+    end
+
+    redirect_to :back, :notice => "Request approved."
+  end
+
+   # TODO: auditing
+  def deny
+      @request = Request.find(params[:id])
+      return if not require_perm('approve_request', @request.league.id)
+
+      # For now, we just delete the request:
+      @request.destroy
+
+      redirect_to :back, :notice => "Request denied!"
+  end
+
+
 end

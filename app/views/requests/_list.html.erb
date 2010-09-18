@@ -1,0 +1,24 @@
+<table width="100%">
+  <tr>
+    <th>User</th>
+    <th>Time</th>
+    <th>Comments</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% reqs.each do |request| %>
+  <tr>
+    <td><%= link_to request.user.get_account('psn').name, request.user %></td>
+    <td><%= request.time %></td>
+    <td><%= request.comments %></td>
+    <td><%= link_to 'Approve', :controller => "requests", :action => "approve", :id => request.id %></td>
+    <td><%= link_to 'Deny', :controller => "requests", :action => "deny", :confirm => 'Are you sure?', :id => request.id %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Request', new_request_path %>
+
