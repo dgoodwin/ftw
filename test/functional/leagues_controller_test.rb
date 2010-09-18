@@ -112,7 +112,8 @@ class LeaguesControllerTest < ActionController::TestCase
     member_count = Member.where(["league_id = ?", approval_league.id]).count
     authenticate(users(:lonelyuser).email, 'password')
     get :join, {'id' => approval_league.id}
-    assert_redirected_to new_request_path << "?league_id=#{approval_league.id}&request_type=join_league"
+    assert_redirected_to new_request_path << \
+      "?league_id=#{approval_league.id}&request_type=join_league"
     new_member_count = Member.where(["league_id = ?", approval_league.id]).count
     assert_equal member_count, new_member_count
   end

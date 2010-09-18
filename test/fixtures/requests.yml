@@ -1,8 +1,9 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-one:
-  user: lonelyuser
+join_league:
+  user: user004
   league: newb
   time: 2010-09-15 20:50:31
   comments: please let me in
+  request_type: join_league
 

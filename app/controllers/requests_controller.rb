@@ -106,11 +106,13 @@ class RequestsController < ApplicationController
     if @request.request_type == 'join_league'
       member = Member.new(:league => @request.league, :user => @request.user, 
         :account => @request.user.get_account(@request.league.game.platform))
-      member.save
-      @request.destroy
+      if member.save
+        @request.destroy
+        redirect_to :back, :notice => "Request approved."
+      else
+        redirect_to :back, :notice => "Error approving request."
+      end
     end
-
-    redirect_to :back, :notice => "Request approved."
   end
 
    # TODO: auditing
