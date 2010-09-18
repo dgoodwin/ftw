@@ -32,9 +32,15 @@ class EventsController < ApplicationController
     @event = Event.new
     @league = League.find(params[:league_id])
     
+    return if not require_perm('create_event', @league.id)
+    #
+    # TODO: probably should filter on active seasons only?
     @seasons = Season.where(["league_id = ?", @league.id])
 
-    return if not require_perm('create_event', @league.id)
+    if @seasons.length == 0
+      redirect_to :back, :notice => "You must create a season before creating events."
+      return
+    end
 
     respond_to do |format|
       format.html # new.html.erb

@@ -1,11 +1,11 @@
 <%= render :partial => 'leagues/navbar', :locals => {:league => @league} %>
 
-<h2>Administration</h2>
+<h1>Administration</h1>
 
 <p>
-<b>Seasons:</b>
+<h2>Seasons</h2>
 <%= link_to_if have_perm('create_season', @league.id), 
-    "(add)", new_league_season_path(@league) %><br/>
+    "Create Season", new_league_season_path(@league) %><br/>
 
 <ul>
   <% @league.seasons.each do |season| %>
@@ -13,7 +13,7 @@
   <% end %>
 </ul>
 
-<h3>League Join Requests</h3>
+<h2>Join Requests</h2>
 
 <p>Outstanding requests to join this league, please approve or deny.</p>
 
