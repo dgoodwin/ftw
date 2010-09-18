@@ -116,4 +116,46 @@ class EventsControllerTest < ActionController::TestCase
     assert_equal([48, 48, 47, 47, 47], @controller.calc_race_sizes(237, 50))
   end
 
+  test "register" do
+    authenticate(users(:user002).email, 'password')
+    event = events(:alien_s1_r1)
+
+    orig_count = Registrant.where(["event_id = ?", event.id]).count
+
+    get :register, {'id' => event.id}
+
+    assert_redirected_to event_path(event)
+
+    new_count = Registrant.where(["event_id = ?", event.id]).count
+    assert_equal orig_count + 1, new_count
+  end
+
+  test "unregister" do
+    authenticate(users(:user001).email, 'password')
+    event = events(:alien_s1_r1)
+
+    orig_count = Registrant.where(["event_id = ?", event.id]).count
+
+    get :unregister, {'id' => event.id}
+
+    assert_redirected_to event_path(event)
+
+    new_count = Registrant.where(["event_id = ?", event.id]).count
+    assert_equal orig_count - 1, new_count
+  end
+
+  test "unregister without being registered" do
+    authenticate(users(:user002).email, 'password')
+    event = events(:alien_s1_r1)
+
+    orig_count = Registrant.where(["event_id = ?", event.id]).count
+
+    get :unregister, {'id' => event.id}
+
+    assert_redirected_to event_path(event)
+
+    new_count = Registrant.where(["event_id = ?", event.id]).count
+    assert_equal orig_count, new_count
+  end
+
 end

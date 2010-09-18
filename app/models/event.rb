@@ -5,6 +5,9 @@ class Event < ActiveRecord::Base
   belongs_to :tire
   belongs_to :weather
 
+  has_many :registrants, :dependent => :destroy
+  has_many :users, :through => :registrants
+
   validates_numericality_of :pp, :greater_than_or_equal_to => 0, :allow_nil => true,
     :message => "Performance points must be 0 or a positive integer."
 

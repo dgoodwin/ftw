@@ -4,6 +4,7 @@ class Member < ActiveRecord::Base
   belongs_to :league
   belongs_to :user
   belongs_to :account
+  has_many :registrants, :dependent => :destroy
 
   validates_presence_of :account, :league, :user
 

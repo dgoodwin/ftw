@@ -2,6 +2,9 @@
 
 <h2>Event: <%= @event.name %></h2>
 
+<p><%= link_to "Register for this Event", :controller => 'events', :action => :register %><br/>
+<%= link_to "Unregister for this Event", :controller => 'events', :action => :unregister %></p>
+
 <p>
   <b>Season:</b>
   <%= link_to @event.season.name, season_path(@event.season) %>
@@ -38,6 +41,15 @@
 </p>
 
 <p>
+<b>Registrants:</b>
+<ul>
+  <% @event.registrants.each do |reg| %>
+    <li><%= link_to reg.member.account.name, user_path(reg.member.user.id) %></li>
+  <% end %>
+</ul>
+</p>
+
+<p>
 <b>Races:</b>
 <ul>
   <% @event.races.each do |race| %>
@@ -51,4 +63,5 @@
   :controller => "events", :action => "schedule", :id => @event %>: This will split the field up into individual races. Eventually this will be scheduled automatically. Currently all league members are assumed to be participating, this will eventually be on an opt-in basis for each event.<p/>
 
 
-<%= link_to 'Edit', edit_league_event_path(@league, @event) %>
+  <%= link_to_if have_perm('edit_event', @league.id), 'Edit', 
+    edit_league_event_path(@league, @event) %>

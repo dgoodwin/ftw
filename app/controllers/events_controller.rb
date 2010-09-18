@@ -192,4 +192,48 @@ class EventsController < ApplicationController
     
     return race_sizes
   end
+
+  def register
+    @event = Event.find(params[:id])
+    user = get_current_user
+    member = Member.where(["league_id = ? AND user_id = ?", @event.season.league.id, 
+      user.id])
+    if member.length == 0
+      redirect_to event_path(@event), :notice => "You are not a member of this league."
+      return
+    end
+    member = member[0]
+
+    registrant = Registrant.new(:member => member, :event => @event)
+    if registrant.save
+      redirect_to event_path(@event), :notice => "Successfully registered for event."
+    else
+      redirect_to event_path(@event), :notice => "Error registering for event" 
+    end
+  end
+
+  def unregister
+    @event = Event.find(params[:id])
+    user = get_current_user
+    member = Member.where(["league_id = ? AND user_id = ?", @event.season.league.id, 
+      user.id])
+    if member.length == 0
+      redirect_to event_path(@event), :notice => "You are not a member of this league."
+      return
+    end
+    member = member[0]
+
+    reg = Registrant.where(["event_id = ? AND member_id = ?", @event.id, 
+      member.id])
+    if reg.length == 0
+      redirect_to event_path(@event), :notice => "You are not registered for this event."
+      return
+    end
+    reg = reg[0]
+
+    reg.destroy
+
+    redirect_to event_path(@event), :notice => "Successfully un-registered."
+  end
+
 end
