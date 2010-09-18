@@ -5,6 +5,26 @@ class RequestsControllerTest < ActionController::TestCase
     @request = requests(:one)
   end
 
+#   def join_league(league, user)
+#     @request = Request.new(:user => user, :league => league, 
+#     get :approve, { 'id' => league.id }
+#   end
+
+
+  test "join league approval" do
+#     member_count = Member.where(["league_id = ?", approval_league.id]).count
+#     l = leagues(:alien)
+#     authenticate(users(:lonelyuser).email, 'password')
+#     join_league(l)
+#     member_count = Member.where(["league_id = ?", approval_league.id]).count
+  end
+
+  test "join league deny" do
+  end
+
+  test "non-league admin cannot approve" do
+  end
+
 #   test "should get index" do
 #     authenticate(users(:admin).email, 'password')
 #     get :index
@@ -12,11 +32,11 @@ class RequestsControllerTest < ActionController::TestCase
 #     assert_not_nil assigns(:requests)
 #   end
 
-#   test "should get new" do
-#     authenticate(users(:user001), 'password')
-#     get :new, :league_id => leagues(:newb).id, :request_type => 'join_league'
-#     assert_response :success
-#   end
+#    test "should get new" do
+#      authenticate(users(:lonelyuser), 'password')
+#      get :new, :league_id => leagues(:newb).id, :request_type => 'join_league'
+#      assert_response :success
+#    end
 
 #   test "should create request" do
 #     authenticate(users(:user001), 'password')

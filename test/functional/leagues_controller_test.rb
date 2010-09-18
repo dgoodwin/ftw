@@ -32,10 +32,8 @@ class LeaguesControllerTest < ActionController::TestCase
     end
 
     assert_redirected_to league_path(assigns(:league))
-
-    # TODO: No idea why, but this works deployed but not in tests:
-#    assert !@league.members(true).empty?
-#    assert @league.members.include?(users(:admin))
+    members = Member.where(["league_id = ?", assigns(:league).id])
+    assert_equal 1, members.length
   end
 
   test "should give creator initial roles" do
@@ -88,4 +86,35 @@ class LeaguesControllerTest < ActionController::TestCase
     get :admin, {'id' => @league.id}
     assert_response :forbidden 
   end
+
+  test "join open league" do
+    open_league = leagues(:newb)
+    member_count = Member.where(["league_id = ?", open_league.id]).count
+    authenticate(users(:lonelyuser).email, 'password')
+    get :join, {'id' => open_league.id}
+    assert_redirected_to league_path(open_league.id)
+    new_member_count = Member.where(["league_id = ?", open_league.id]).count
+    assert_equal member_count + 1, new_member_count
+  end
+
+  test "join league but already member" do
+    open_league = leagues(:alien)
+    member_count = Member.where(["league_id = ?", open_league.id]).count
+    authenticate(users(:user001).email, 'password')
+    get :join, {'id' => open_league.id}
+    assert_redirected_to league_path(open_league.id)
+    new_member_count = Member.where(["league_id = ?", open_league.id]).count
+    assert_equal member_count, new_member_count
+  end
+
+  test "join approval required league" do
+    approval_league = leagues(:alien)
+    member_count = Member.where(["league_id = ?", approval_league.id]).count
+    authenticate(users(:lonelyuser).email, 'password')
+    get :join, {'id' => approval_league.id}
+    assert_redirected_to new_request_path << "?league_id=#{approval_league.id}&request_type=join_league"
+    new_member_count = Member.where(["league_id = ?", approval_league.id]).count
+    assert_equal member_count, new_member_count
+  end
+
 end

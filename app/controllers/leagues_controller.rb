@@ -167,9 +167,10 @@ class LeaguesController < ApplicationController
   # Action to handle requests to join this league.
   def join
     @league = League.find(params[:id])
-    # TODO: block if already a member?
 
-    if @league.membership == "approval"
+    if Member.where(["user_id = ? AND league_id = ?", get_current_user().id, @league.id]).first
+      redirect_to league_path(@league), :notice => 'You are already a member of this league.'
+    elsif @league.membership == "approval"
       redirect_to(new_request_path(:league_id => @league.id, :request_type => 'join_league'))
     elsif @league.membership == "open"
       member = Member.new(:league => @league, :user => get_current_user, :account => get_current_user().get_account(@league.game.platform))
