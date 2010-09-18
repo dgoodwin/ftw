@@ -204,10 +204,20 @@ class EventsController < ApplicationController
     end
     member = member[0]
 
+    reg = Registrant.where(["event_id = ? AND member_id = ?", @event.id, 
+      member.id])
+    if not reg.nil?
+      redirect_to event_path(@event), :notice => "You are already a member of this league."
+      return
+    end
+
+
     registrant = Registrant.new(:member => member, :event => @event)
     if registrant.save
       redirect_to event_path(@event), :notice => "Successfully registered for event."
     else
+      logger.error("Error registering for event")
+      logger.error(registrant.errors)
       redirect_to event_path(@event), :notice => "Error registering for event" 
     end
   end

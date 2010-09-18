@@ -1,4 +1,14 @@
-body { background-color: #fff; color: #333; }
+body { 
+  background-color: #fff; 
+  color: #333; 
+  margin: 0; 
+  padding: 0; 
+}
+
+html {
+  margin: 0; 
+  padding: 0; 
+}
 
 body, p, ol, ul, td {
   font-family: verdana, arial, helvetica, sans-serif;
@@ -57,7 +67,24 @@ div.field, div.actions {
 
 #container {
   width: 800px;
+  margin: auto;
   text-align: left;
-  margin-left: auto;
-  margin-right: auto;
+}
+
+#sidebar {
+  float: left;
+  width: 200px;
+  padding: 5px;
+}
+
+#content {
+  float: right;
+  height: auto;
+  width: 580px;
+  padding: 5px;
+}
+
+#footer {
+  clear: both;
+  width: 100%;
 }
