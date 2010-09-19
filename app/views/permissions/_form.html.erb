@@ -1,0 +1,9 @@
+<%= form_for([user, user.permissions.build]) do |f| %>
+  <%= hidden_field_tag "user_id", user.id %>
+  <%= hidden_field_tag "qualifier", qualifier %>
+  <div class="field">
+    <%= f.collection_select :role, roles, :key, :name %>
+    <%= f.submit "Grant" %>
+  </div>
+<% end %>
+

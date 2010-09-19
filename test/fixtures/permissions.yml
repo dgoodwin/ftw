@@ -8,14 +8,14 @@ siteadmin:
 leagueadmin:
   role: league_admin
   user: leagueadmin
-  qualifier: leagues(:alien).id
+  qualifier: 5000
 
 user001host:
   role: host
   user: user001
-  qualifier: leagues(:alien).id
+  qualifier: 5000
 
 user002host:
   role: host
   user: user002
-  qualifier: leagues(:alien).id
+  qualifier: 5000

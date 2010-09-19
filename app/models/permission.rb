@@ -8,6 +8,7 @@ class Permission < ActiveRecord::Base
 
   validates_presence_of :role, :user, :qualifier
   validate :role_is_known
+  validates_uniqueness_of :role, :scope => [:user_id, :qualifier]
 
   def role_is_known
     begin

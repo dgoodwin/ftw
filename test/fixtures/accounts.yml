@@ -42,3 +42,9 @@ lonelyuser:
   platform: psn 
   verified: false
 
+newbuser:
+  name: newbuser
+  user: newbuser
+  platform: psn 
+  verified: false
+

@@ -32,6 +32,11 @@ user004:
   name: User 004
   location: Somewhere
 
+newbuser:
+  email: newbuser@example.com
+  name: I Suck
+  location: Nobody Cares
+
 lonelyuser:
   email: solonely@example.com
   name: So Lonely

@@ -21,6 +21,7 @@ Ftw::Application.routes.draw do
 
   resources :users do
     resources :accounts
+    resources :permissions
   end
 
 

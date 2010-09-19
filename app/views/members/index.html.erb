@@ -21,6 +21,12 @@ require approval to join.
     <td><%= link_to member.account.name, member.user %></td>
     <td><%= member.user.location %></td>
     <td><%= show_league_perms(@league, member.user) %></td>
+    <td>
+      <% if have_perm('grant_roles', @league.id) %>
+        <%= render :partial => 'permissions/form', :locals => {
+          :user => member.user, :qualifier => @league.id, :roles => @roles_to_grant} %>
+      <% end %>
+    </td>
 
   </tr>
 <% end %>

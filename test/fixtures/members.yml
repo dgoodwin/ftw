@@ -2,12 +2,12 @@
 
 admin_alien:
   user: admin
-  league: alien
+  league_id: 5000
   account: admin
 
 leagueadmin_alien:
   user: leagueadmin
-  league: alien
+  league_id: 5000
   account: leagueadmin
 
 admin_newb:
@@ -15,23 +15,28 @@ admin_newb:
   league: newb
   account: admin
 
+newbuser_newb:
+  user: newbuser
+  league: newb
+  account: newbuser
+
 user001_alien:
   user: user001
-  league: alien
+  league_id: 5000
   account: user001
 
 user002_alien:
   user: user002
-  league: alien
+  league_id: 5000
   account: user002
 
 user003_alien:
   user: user003
-  league: alien
+  league_id: 5000
   account: user003
 
 user004_alien:
   user: user004
-  league: alien
+  league_id: 5000
   account: user004
 

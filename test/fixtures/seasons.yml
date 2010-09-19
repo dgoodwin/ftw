@@ -2,9 +2,9 @@
 
 alien_s1:
   name: 2010 Season 1
-  league: alien
+  league_id: 5000
 
 alien_s2:
   name: 2010 Season 2
-  league: alien
+  league_id: 5000
 

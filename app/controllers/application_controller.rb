@@ -21,6 +21,10 @@ class ApplicationController < ActionController::Base
   end
 
   def require_perm(right_key, qualifier)
+
+    # Make sure we're dealing with an integer here:
+    qualifier = qualifier.to_i
+
     u = get_current_user()
 
     perm = find_perm(u, right_key, qualifier)

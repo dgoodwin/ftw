@@ -31,8 +31,8 @@ class MembersController < ApplicationController
     @members = @league.members
 
     @roles_to_grant = [
-      get_role('league_admin'),
       get_role('host'),
+      get_role('league_admin'),
     ]
   end
 

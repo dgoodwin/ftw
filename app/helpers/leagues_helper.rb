@@ -11,11 +11,15 @@ module LeaguesHelper
     results = ""
     user.permissions.each do |p|
       if LEAGUE_ROLES.include?(p.role) and p.qualifier == league.id
-        results << ", " if results.length > 0
-        results << p.role 
+        role = get_role(p.role)
+        results << role.name
+        if have_perm('grant_roles', league.id)
+          results << " (" << link_to("X", user_permission_path(user, p), :confirm => "Remove role?", :method => :delete) << ")"
+        end
+        results << "<br/>"
       end
     end
-    return results
+    return raw(results)
   end
 
 end

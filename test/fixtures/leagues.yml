@@ -1,6 +1,9 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
+# WARNING: Specifying alien league ID explicitly, we reference it sometimes.
+# This means you must use league_id in other fixtures and use this same val.
 alien:
+  id: 5000
   name: Test League
   description: Aliens only!
   game: gt5
