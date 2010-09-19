@@ -29,6 +29,11 @@ class MembersController < ApplicationController
   def index
     @league = League.find(params[:league_id])
     @members = @league.members
+
+    @roles_to_grant = [
+      get_role('league_admin'),
+      get_role('host'),
+    ]
   end
 
 #   # DELETE /leagues/1/members/1

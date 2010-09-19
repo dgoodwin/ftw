@@ -1,8 +1,9 @@
 class NewRole
-  attr_accessor :key, :rights
+  attr_accessor :key, :rights, :name
 
-  def initialize(key, rights)
+  def initialize(key, rights, name)
     @key = key
+    @name = name
     @rights = rights
   end
 
@@ -15,15 +16,18 @@ module Auth
     if role == 'user'
       return NewRole.new('user', [
           'edit_user'
-      ])
+      ],
+      "User")
     elsif role == 'host'
       return NewRole.new('host', [
           'host_race'
-      ])
+      ],
+      "Race Host")
     elsif role == 'league_creator'
       return NewRole.new('league_creator', [
           'create_league',
-      ])
+      ],
+      "League Creator")
     elsif role == 'league_admin'
       return NewRole.new('league_admin', [
           'edit_league',
@@ -40,7 +44,9 @@ module Auth
           'destroy_results',
           'approve_results',
           'approve_request',
-        ])
+          'grant_roles',
+        ],
+        "League Admin")
     elsif role == 'site_admin'
       return NewRole.new('site_admin', [
           'create_league',
@@ -61,7 +67,8 @@ module Auth
           'edit_user',
           'destroy_user',
           'manage_requests',
-        ])
+        ], 
+        "Site Admin")
     else
       raise "Unknown role: #{role}"
     end
