@@ -193,9 +193,22 @@ class EventsController < ApplicationController
     return race_sizes
   end
 
+  # TODO: test code only
+  def register_entire_league
+    @event = Event.find(params[:id])
+    @event.season.league.members.each do |member|
+      registrant = Registrant.new(:member => member, :event => @event)
+      registrant.save
+      pp registrant.errors
+    end
+
+    redirect_to @event, :notice => "Entire league has been registered for this event."
+  end
+
   def register
     @event = Event.find(params[:id])
     user = get_current_user
+
     member = Member.where(["league_id = ? AND user_id = ?", @event.season.league.id, 
       user.id])
     if member.length == 0

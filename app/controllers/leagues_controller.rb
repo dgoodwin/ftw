@@ -179,4 +179,36 @@ class LeaguesController < ApplicationController
     end
   end
 
+  # TODO: test code only, kill this someday
+  def join_test_users
+    @league = League.find(params[:id])
+    return if not require_perm('edit_league', params[:id])
+
+    (1..50).each do |i|
+      username = "testuser#{i}"
+      user = User.where(['name = ?', username])
+      if user.length > 0
+        user = user[0]
+      else
+        user = create_test_user(username)
+      end
+
+      member = Member.new(:league => @league, :user => user, 
+        :account => user.get_account(@league.game.platform))
+      member.save
+    end
+
+    redirect_to :back, :notice => "50 test users have joined your league."
+  end
+
+  def create_test_user(username)
+
+    user = User.new(:email => "#{username}@example.com",
+      :name => username, :password => 'password')
+    user.accounts << Account.new(:name => username, 
+      :platform => Platform.where(["key = 'psn'"])[0]) 
+    user.save
+    pp user.errors
+  end
+
 end

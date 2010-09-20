@@ -2,11 +2,7 @@
 
 <h2>Members</h2>
 
-<p>
-Currently, all site members are being joined to every new league that is
-created for testing purposes. Eventually leagues will be able to optionally
-require approval to join.
-</p>
+<%= link_to "I'm lonley, give me 50 test members", :controller => "leagues", :action => "join_test_users", :id => @league.id %>
 
 <table width="100%">
   <tr>

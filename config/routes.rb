@@ -27,11 +27,13 @@ Ftw::Application.routes.draw do
   # Non-RESTful routes:
   match 'leagues/:id/admin', :to => 'leagues#admin'
   match 'leagues/:id/members', :to => 'leagues#members'
+  match 'leagues/:id/join_test_users', :to => 'leagues#join_test_users'
   match 'leagues/:id/join', :to => 'leagues#join'
 
   match 'events/:id/schedule', :to => 'events#schedule'
   match 'events/:id/register', :to => 'events#register'
   match 'events/:id/unregister', :to => 'events#unregister'
+  match 'events/:id/register_entire_league', :to => 'events#register_entire_league'
 
   match 'races/:id/host', :to => 'races#host'
 

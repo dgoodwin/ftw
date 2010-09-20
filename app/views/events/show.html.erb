@@ -6,6 +6,10 @@
 <%= link_to "Unregister for this Event", :controller => 'events', :action => :unregister %></p>
 
 <p>
+<%= link_to "Auto-register Entire League", :controller => "events", :action => "register_entire_league", :id => @event.id %>
+</p>
+
+<p>
   <b>Season:</b>
   <%= link_to @event.season.name, league_season_path(@event.season.league, @event.season) %>
 </p>

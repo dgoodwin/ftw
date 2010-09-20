@@ -79,6 +79,7 @@ class RaceResultsController < ApplicationController
   # POST /race_results.xml
   def create
     @race = Race.find(params[:race_id])
+    @league = @race.event.season.league
     return if not require_perm('create_results', @race.event.season.league.id)
     logger.warn params
     @race_result = RaceResult.new(params[:race_result])
