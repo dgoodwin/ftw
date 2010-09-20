@@ -1,5 +1,5 @@
   <b>Results submitted by:</b>
-  <%= link_to race_result.user.name, user_path(race_result.user) %>
+  <%= link_to race_result.user.get_account('psn').name, user_path(race_result.user) %>
   <%= link_to_if have_perm('edit_results', league.id),
       '(edit)', edit_race_result_path(race_result) %>
 
@@ -12,7 +12,7 @@
   </tr>
 <% race_result.rows.each do |row| %>
   <tr>
-    <td><%= link_to row.user.name, user_path(row.user) %></td>
+    <td><%= link_to row.user.get_account('psn').name, user_path(row.user) %></td>
     <td><%= row.status %></td>
     <td><%= row.position %></td>
     <td>-</td>

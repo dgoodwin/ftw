@@ -209,6 +209,7 @@ class LeaguesController < ApplicationController
       :platform => Platform.where(["key = 'psn'"])[0]) 
     user.save
     pp user.errors
+    return user
   end
 
 end

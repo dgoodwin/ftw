@@ -44,4 +44,9 @@ class User < ActiveRecord::Base
     return nil?
   end
 
+  # Helper to fetch this users PSN login name:
+  def psn_account_name
+    return get_account('psn').name
+  end
+
 end

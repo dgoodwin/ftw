@@ -3,6 +3,11 @@
 <h2>Heat <%= @race.index %></h2>
 
 <p>
+  <b>Event:</b>
+  <%= link_to league_event_path(@race.event.season.league, @race.event) %>
+</p>
+
+<p>
   <b>Time:</b>
   <%= @race.time %>
 </p>

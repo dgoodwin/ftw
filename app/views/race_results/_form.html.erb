@@ -23,7 +23,7 @@
           <%= row_form.label :position, 'Position: ' %>
           <%= row_form.text_field :position, :size => 2 %>
           <%= row_form.select :status, @valid_status %>
-          <%= row_form.collection_select(:user_id, @race.users, :id, :name) %>
+          <%= row_form.collection_select(:user_id, @race.users, :id, :psn_account_name) %>
         </div>  
       <% end %> 
 
