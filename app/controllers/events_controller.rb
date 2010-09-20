@@ -131,7 +131,7 @@ class EventsController < ApplicationController
     logger.info "Scheduling event %s for league: %s" % \
       [@event.id, @event.season.league.id] 
     # TODO: assuming race size of 16 for now, should be configurable
-    race_sizes = calc_race_sizes(@event.season.league.members.length, 16)
+    race_sizes = calc_race_sizes(@event.registrants.length, 16)
     logger.debug("Creating %s races" % race_sizes.length)
     logger.debug(race_sizes)
 
@@ -151,7 +151,8 @@ class EventsController < ApplicationController
     # Assign users to each race:
     # TODO: assign randomly, or perhaps based on standings?
     race_index = 0
-    @event.season.league.members.each do |member|
+    @event.registrants.each do |registrant|
+      member = registrant.member
       races[race_index].users << member.user
       if races[race_index].users.length == race_sizes[race_index]
         race_index += 1
@@ -199,7 +200,6 @@ class EventsController < ApplicationController
     @event.season.league.members.each do |member|
       registrant = Registrant.new(:member => member, :event => @event)
       registrant.save
-      pp registrant.errors
     end
 
     redirect_to @event, :notice => "Entire league has been registered for this event."

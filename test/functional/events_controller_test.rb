@@ -58,6 +58,8 @@ class EventsControllerTest < ActionController::TestCase
     authenticate(users(:admin).email, 'admin')
     league = create_league(16)
     event = league.seasons[0].events[0]
+
+    get :register_entire_league, {'id' => event.id}
     get :schedule, {'id' => event.id}
     assert_redirected_to event_path(event)
 
