@@ -9,7 +9,7 @@
 
 <ul>
   <% @league.seasons.each do |season| %>
-    <li><%= link_to season.name, season_path(season) %></li>
+    <li><%= link_to season.name, league_season_path(@league, season) %></li>
   <% end %>
 </ul>
 

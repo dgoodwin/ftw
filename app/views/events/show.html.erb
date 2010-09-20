@@ -7,32 +7,21 @@
 
 <p>
   <b>Season:</b>
-  <%= link_to @event.season.name, season_path(@event.season) %>
+  <%= link_to @event.season.name, league_season_path(@event.season.league, @event.season) %>
 </p>
 
 <p>
   <b>Time:</b>
-  <%= @event.time %>
-</p>
-
-<p>
+  <%= @event.time %><br/>
   <b>Track:</b>
-  <%= @event.track.name %>
-</p>
-
-<p>
+  <%= @event.track.name %><br/>
   <b>Tires:</b>
-  <%= @event.tire.name unless @event.tire.nil? %>
-</p>
-
-<p>
+  <%= @event.tire.name unless @event.tire.nil? %><br/>
   <b>Weather:</b>
-  <%= @event.weather.name unless @event.weather.nil? %>
-</p>
+  <%= @event.weather.name unless @event.weather.nil? %><br/>
 
-<p>
   <b>Performance Points:</b>
-  <%= @event.pp %>
+  <%= @event.pp %><br/>
 </p>
 
 <p>

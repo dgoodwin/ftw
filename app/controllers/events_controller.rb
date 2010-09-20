@@ -207,7 +207,7 @@ class EventsController < ApplicationController
     reg = Registrant.where(["event_id = ? AND member_id = ?", @event.id, 
       member.id])
     if reg.length > 0
-      redirect_to event_path(@event), :notice => "You are already a member of this league."
+      redirect_to event_path(@event), :notice => "You are already registered for this event."
       return
     end
 

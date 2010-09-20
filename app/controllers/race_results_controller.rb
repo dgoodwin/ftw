@@ -49,6 +49,7 @@ class RaceResultsController < ApplicationController
   # GET /race_results/new.xml
   def new
     @race = Race.find(params[:race_id])
+    @league = @race.event.season.league
     return if not require_perm('create_results', @race.event.season.league.id)
     @race_result = RaceResult.new
 
@@ -69,6 +70,7 @@ class RaceResultsController < ApplicationController
   def edit
     @race_result = RaceResult.find(params[:id])
     @race = @race_result.race
+    @league = @race.event.season.league
     return if not require_perm('edit_results', @race.event.season.league.id)
     @valid_status = STATUSES
   end

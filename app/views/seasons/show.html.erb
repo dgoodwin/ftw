@@ -1,5 +1,4 @@
 <%= render :partial => 'leagues/navbar', :locals => {:league => @season.league} %>
-<%= breadcrumb(:league => @season.league) %>
 
 <h2><%= @season.name %></h2>
 
@@ -16,5 +15,5 @@
 
 <%= link_to 'Add Event', new_event_path(:season_id => @season) %><p/>
 
-<%= link_to 'Edit', edit_season_path(@season) %> |
-<%= link_to 'Back', seasons_path %>
+<%= link_to 'Edit', edit_league_season_path(@season.league, @season) if have_perm('edit_season', @season.league.id) %> |
+<%= link_to 'Back', league_seasons_path %>

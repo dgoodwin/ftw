@@ -1,6 +1,8 @@
+<%= render :partial => 'leagues/navbar', :locals => {:league => @season.league} %>
+
 <h1>Editing season</h1>
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @season %> |
-<%= link_to 'Back', seasons_path %>
+<%= link_to 'Show', league_season_path(@season.league, @season) %> |
+<%= link_to 'Back', league_seasons_path %>

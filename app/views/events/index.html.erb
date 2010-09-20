@@ -15,7 +15,7 @@
 <% @events.each do |event| %>
   <tr>
     <td><%= link_to event.name, league_event_path(@league, event) %></td>
-    <td><%= link_to event.season.name, season_path(event.season) %></td>
+    <td><%= link_to event.season.name, league_season_path(event.season.league, event.season) %></td>
     <td><%= event.time %></td>
     <td><%= event.registrants.length %></td>
     <td><%= link_to_if have_perm('edit_event', @league.id), 'Edit', edit_league_event_path(@league, event) %></td>

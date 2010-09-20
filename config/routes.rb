@@ -12,7 +12,6 @@ Ftw::Application.routes.draw do
 
   resources :events
 
-  resources :seasons
   resources :leagues do
     resources :seasons
     resources :members

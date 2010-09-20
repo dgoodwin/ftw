@@ -1,4 +1,4 @@
-<%= form_for([@league, @league.seasons.build]) do |f| %>
+<%= form_for([@league, @season]) do |f| %>
   <% if @season.errors.any? %>
   <div id="error_explanation">
     <h2><%= pluralize(@season.errors.count, "error") %> prohibited this season from being saved:</h2>
@@ -9,8 +9,6 @@
     </ul>
   </div>
   <% end %>
-
-  League: <%= @league.name %>
 
   <div class="field">
     <%= f.label :name %><br />

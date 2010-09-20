@@ -61,7 +61,8 @@ class SeasonsController < ApplicationController
   # GET /seasons
   # GET /seasons.xml
   def index
-    @seasons = Season.all
+    @league = League.find(params[:league_id])
+    @seasons = @league.seasons
 
     respond_to do |format|
       format.html # index.html.erb
@@ -101,6 +102,7 @@ class SeasonsController < ApplicationController
     @season = Season.find(params[:id])
     @league = @season.league
     return if not require_perm('edit_season', @league.id)
+    pp @season
   end
 
   # POST /seasons
@@ -113,7 +115,7 @@ class SeasonsController < ApplicationController
 
     respond_to do |format|
       if @season.save
-        format.html { redirect_to(@season, :notice => 'Season was successfully created.') }
+        format.html { redirect_to(league_seasons_path(@season.league), :notice => "Season successfully created: #{@season.name}") }
         format.xml  { render :xml => @season, :status => :created, :location => @season }
       else
         format.html { render :action => "new" }
@@ -130,7 +132,7 @@ class SeasonsController < ApplicationController
 
     respond_to do |format|
       if @season.update_attributes(params[:season])
-        format.html { redirect_to(@season, :notice => 'Season was successfully updated.') }
+        format.html { redirect_to(league_seasons_path(@season.league), :notice => 'Season was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -171,7 +173,7 @@ class SeasonsController < ApplicationController
     return if not require_perm('destroy_season', @season.league.id)
 
     respond_to do |format|
-      format.html { redirect_to(seasons_url) }
+      format.html { redirect_to(league_seasons_url(@season.league)) }
       format.xml  { head :ok }
     end
   end

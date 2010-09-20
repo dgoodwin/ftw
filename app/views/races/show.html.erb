@@ -1,5 +1,4 @@
-<%= breadcrumb(:league => @race.event.season.league, :season => @race.event.season,
-               :event => @race.event) %>
+<%= render :partial => 'leagues/navbar', :locals => {:league => @race.event.season.league} %>
 
 <h2>Heat <%= @race.index %></h2>
 

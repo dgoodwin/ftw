@@ -1,4 +1,4 @@
-<%= breadcrumb(:league => @season.league, :season => @season) %>
+<%= render :partial => 'leagues/navbar', :locals => {:league => @season.league} %>
 
 <h2><%= @season.name %> - Leaderboard</h2>
 

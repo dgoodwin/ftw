@@ -9,7 +9,7 @@ class SeasonsControllerTest < ActionController::TestCase
   end
 
   test "should get index" do
-    get :index
+    get :index, :league_id => @season.league.id
     assert_response :success
     assert_not_nil assigns(:seasons)
   end
@@ -27,7 +27,7 @@ class SeasonsControllerTest < ActionController::TestCase
       post :create, :season => @season.attributes, \
         :league_id => leagues(:alien).id
     end
-    assert_redirected_to season_path(assigns(:season))
+    assert_redirected_to league_seasons_path(leagues(:alien))
   end
 
   test "create season perm" do
@@ -42,7 +42,7 @@ class SeasonsControllerTest < ActionController::TestCase
   end
 
   test "should show season" do
-    get :show, :id => @season.to_param
+    get :show, :id => @season.to_param, :league_id => @season.league.id
     assert_response :success
   end
 
@@ -54,16 +54,16 @@ class SeasonsControllerTest < ActionController::TestCase
 
   test "should update season" do
     authenticate(users(:admin).email, 'admin')
-    put :update, :id => @season.to_param, :season => @season.attributes
-    assert_redirected_to season_path(assigns(:season))
+    put :update, :league_id => @season.league.id, :id => @season.to_param, :season => @season.attributes
+    assert_redirected_to league_seasons_path(@season.league)
   end
 
   test "should destroy season" do
     authenticate(users(:admin).email, 'admin')
     assert_difference('Season.count', -1) do
-      delete :destroy, :id => @season.to_param
+      delete :destroy, :id => @season.to_param, :league_id => @season.league.id
     end
 
-    assert_redirected_to seasons_path
+    assert_redirected_to league_seasons_path(@season.league)
   end
 end
