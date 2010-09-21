@@ -17,6 +17,7 @@ class RacesControllerTest < ActionController::TestCase
   end
 
   test "should allow host specification" do
+    request.env["HTTP_REFERER"] = "/"
     user = users(:user001)
     authenticate(user.email, 'password')
     post :host, :id => @race.to_param
@@ -25,7 +26,6 @@ class RacesControllerTest < ActionController::TestCase
     @race = Race.find(@race.id)
     assert_not_nil @race.host
     assert_equal @race.host.id, user.id
-    assert_redirected_to race_path(@race)
   end
 
   test "should block host specification if host already assigned" do

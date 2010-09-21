@@ -1,0 +1,32 @@
+<h3>Heat <%= race.index %></h3>
+
+<p>
+  <b>Host:</b>
+<% if race.host %>
+  <%= link_to race.host.get_account('psn').name, user_path(race.host) %>
+<% elsif have_perm('host_race', race.event.season.league.id) %>
+  This race still needs a host: <%= link_to 'Volunteer to Host', :controller => "races", :action => "host", :id => race %>
+<% end %>
+</p>
+
+<% if race.race_results.length == 0 %>
+<p>
+<b>Registrants:</b>
+  <% race.users.each do |user| %>
+    <%= link_to user.get_account('psn').name, user_path(user) %>
+  <% end %>
+</p>
+<% end %>
+
+<p>
+<%= link_to 'Submit Results', new_race_result_path(:race_id => race) if race.race_results.length == 0 %>
+</p>
+  <% race.race_results.each do |result| %>
+    <%= render :partial => 'race_results/show_inline',
+        :locals => { :race_result => result, :league => race.event.season.league} %>
+  <% end %>
+</p>
+
+<p>
+
+

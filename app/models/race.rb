@@ -1,7 +1,7 @@
 class Race < ActiveRecord::Base
   belongs_to :event
   has_and_belongs_to_many :users
-  has_many :race_results
+  has_many :race_results, :dependent => :destroy
   has_many :host_volunteers
   belongs_to :host, :class_name => 'User'
 

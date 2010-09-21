@@ -126,6 +126,11 @@ class EventsController < ApplicationController
       return
     end
 
+    if @event.registrants.length < 2
+      redirect_to(@event, :notice => "Must have at least two registrants to schedule.")
+      return
+    end
+
     # TODO: Block scheduling if only one participant
 
     logger.info "Scheduling event %s for league: %s" % \

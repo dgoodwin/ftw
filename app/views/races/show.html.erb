@@ -4,7 +4,7 @@
 
 <p>
   <b>Event:</b>
-  <%= link_to league_event_path(@race.event.season.league, @race.event) %>
+  <%= link_to @race.event.name, league_event_path(@race.event.season.league, @race.event) %>
 </p>
 
 <p>
@@ -41,10 +41,8 @@
 <%= link_to_if @race.race_results.length == 0, 'Submit Results', new_race_result_path(:race_id => @race) %>
 </p>
   <% @race.race_results.each do |result| %>
-    <hr>
     <%= render :partial => 'race_results/show_inline',
         :locals => { :race_result => result, :league => @race.event.season.league} %>
-    <hr>
   <% end %>
 </p>
 

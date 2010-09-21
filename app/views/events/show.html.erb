@@ -9,6 +9,10 @@
 <%= link_to "Auto-register Entire League", :controller => "events", :action => "register_entire_league", :id => @event.id %>
 </p>
 
+<%= link_to 'Schedule Event', :controller => "events", :action => "schedule", 
+  :id => @event if @event.races.length == 0 and have_perm('schedule_event', @league.id) %><p/>
+
+
 <p>
   <b>Season:</b>
   <%= link_to @event.season.name, league_season_path(@event.season.league, @event.season) %>
@@ -35,25 +39,18 @@
 
 <p>
 <b>Registrants:</b>
-<ul>
   <% @event.registrants.each do |reg| %>
-    <li><%= link_to reg.member.account.name, user_path(reg.member.user.id) %></li>
+    <%= link_to reg.member.account.name, user_path(reg.member.user.id) %>
   <% end %>
-</ul>
 </p>
 
 <p>
 <b>Races:</b>
-<ul>
-  <% @event.races.each do |race| %>
-    <li><%= link_to "Heat %s" % race.index.to_s, race_path(race) %></li>
-  <% end %>
-</ul>
+<% @event.races.each do |race| %>
+  <hr/>
+  <%= render :partial => 'races/show_inline', :locals => {:race => race} %>
+<% end %>
 </p>
-
-
-<%= link_to_if @event.races.length == 0, 'Schedule Event', 
-  :controller => "events", :action => "schedule", :id => @event %>: This will split the field up into individual races. Eventually this will be scheduled automatically. Currently all league members are assumed to be participating, this will eventually be on an opt-in basis for each event.<p/>
 
 
   <%= link_to_if have_perm('edit_event', @league.id), 'Edit', 

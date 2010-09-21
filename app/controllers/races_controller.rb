@@ -38,11 +38,11 @@ class RacesController < ApplicationController
     @race.host = user
 
     if @race.save
-      redirect_to @race, :notice => "Thank you for hosting!"
+      redirect_to :back, :notice => "Thank you for hosting!"
     else
       logger.error("Error assigning user #{user.id} as race host:")
       logger.error(@race.errors)
-      redirect_to @race, :alert => "Error assigning you as the race host."
+      redirect_to :back, :alert => "Error assigning you as the race host."
     end
   end
 
