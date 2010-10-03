@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100918131032) do
+ActiveRecord::Schema.define(:version => 20101002195627) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -86,12 +86,13 @@ ActiveRecord::Schema.define(:version => 20100918131032) do
 
   create_table "race_result_rows", :force => true do |t|
     t.integer  "position"
-    t.integer  "time"
+    t.string   "time",           :limit => 15
     t.integer  "user_id"
     t.integer  "race_result_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "status",         :limit => 50, :default => "finished"
+    t.integer  "millis"
   end
 
   create_table "race_results", :force => true do |t|

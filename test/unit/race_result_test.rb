@@ -57,7 +57,7 @@ class RaceResultTest < ActiveSupport::TestCase
         :user => users(:user001), :final => false)
     i = 1
     race.users.each do |u|
-      result.rows << RaceResultRow.new(:position => i, :user => u)
+      result.rows << RaceResultRow.new(:position => i, :user => u, :time => "30:25.008")
       i = i + 1
     end
     return result
