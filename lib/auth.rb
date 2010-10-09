@@ -20,7 +20,8 @@ module Auth
       "User")
     elsif role == 'host'
       return NewRole.new('host', [
-          'host_race'
+          'host_race',
+          'create_results',
       ],
       "Race Host")
     elsif role == 'league_creator'
