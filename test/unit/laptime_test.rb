@@ -1,4 +1,3 @@
-require 'pp'
 require 'laptime'
 require 'test/unit'
 

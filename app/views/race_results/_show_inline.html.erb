@@ -7,6 +7,7 @@
   <tr>
     <th>User</th>
     <th>Status</th>
+    <th>Time</th>
     <th>Position</th>
     <th>Points</th>
   </tr>
@@ -14,6 +15,7 @@
   <tr>
     <td><%= link_to row.user.get_account('psn').name, user_path(row.user) %></td>
     <td><%= row.status %></td>
+    <td><%= row.time %></td>
     <td><%= row.position %></td>
     <td>-</td>
   </td>

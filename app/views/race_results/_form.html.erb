@@ -18,12 +18,16 @@
 
   <h2>Results</h2>
 
+  <p>
+  NOTE: Reporting race time is optional. If you choose to include it, it should be formated like these examples: 1:29:15.081, 15:29.003, 12:39, etc.</p>
+
       <%= f.fields_for :rows do |row_form| %>  
         <div class="field">  
           <%= row_form.label :position, 'Position: ' %>
           <%= row_form.text_field :position, :size => 2 %>
-          <%= row_form.select :status, @valid_status %>
           <%= row_form.collection_select(:user_id, @race.users, :id, :psn_account_name) %>
+          <%= row_form.select :status, @valid_status %>
+          Time: <%= row_form.text_field :time, :size => 15 %> 
         </div>  
       <% end %> 
 
