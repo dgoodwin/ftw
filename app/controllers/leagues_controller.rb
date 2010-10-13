@@ -212,4 +212,14 @@ class LeaguesController < ApplicationController
     return user
   end
 
+  def list_recent_events(season, limit)
+    return Event.where(["season_id = ? AND time < ?", season.id, 
+      DateTime.now]).limit(limit).order("time DESC")
+  end
+
+  def list_upcoming_events(season, limit)
+    return Event.where(["season_id = ? AND time > ?", season.id, 
+      DateTime.now]).limit(limit).order("time")
+  end
+
 end

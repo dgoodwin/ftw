@@ -118,4 +118,44 @@ class LeaguesControllerTest < ActionController::TestCase
     assert_equal member_count, new_member_count
   end
 
+  def create_events(base_time, season, number, interval_in_days)
+    interval = interval_in_days
+    counter = interval
+    ActiveRecord::Base.transaction do
+      (1..number).each do |i|
+        event = Event.new(:time => base_time + counter, :name => "Event #{i}",
+          :season => season, :track => tracks(:monza))
+        counter += interval
+        event.save
+      end
+    end
+  end
+
+  test "recent events" do
+    season = Season.new(:league => leagues(:alien), :name => "whatever")
+    season.save
+    base_time = DateTime.now
+    create_events(base_time, season, 10, -1)
+
+    recent_events = @controller.list_recent_events(season, 2)
+    assert_equal 2, recent_events.length
+    assert recent_events[0].time > recent_events[1].time
+    assert_equal (base_time - 1).to_i, recent_events[0].time.to_i
+    assert_equal (base_time - 2).to_i, recent_events[1].time.to_i
+  end
+
+  test "upcoming events" do
+    season = Season.new(:league => leagues(:alien), :name => "whatever")
+    season.save
+    base_time = DateTime.now
+    create_events(base_time, season, 10, 1)
+    assert_equal 10, Event.where(["season_id = ?", season.id]).length
+
+    upcoming_events = @controller.list_upcoming_events(season, 2)
+    assert_equal 2, upcoming_events.length
+    assert upcoming_events[0].time < upcoming_events[1].time
+    assert_equal (base_time + 1).to_i, upcoming_events[0].time.to_i
+    assert_equal (base_time + 2).to_i, upcoming_events[1].time.to_i
+  end
+
 end
