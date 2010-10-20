@@ -11,8 +11,7 @@ class Leaderboard
   def process(results)
     results.each do |result|
       result.rows.each do |row|
-        add_points(row.user, @points_strategy.calc_points( 
-            row.position, result.race.users.length))
+        add_points(row.user, @points_strategy.calc_points(row.position))
       end
     end
   end
@@ -23,6 +22,12 @@ class Leaderboard
     else
       @user_points[user] = points
     end
+  end
+
+  def get_sorted_totals
+    # How can this possibly be so easy...
+    results = @user_points.to_a
+    return results.sort { |x,y| y[1] <=> x[1] }
   end
 
 end
@@ -44,7 +49,7 @@ class SimplePointsStrategy
 
   # User and race may eventually be used for points systems based on the
   # skill/size of the field.
-  def calc_points(position, out_of)
+  def calc_points(position)
     if @points_for_position.has_key?(position)
       return @points_for_position[position]
     else
