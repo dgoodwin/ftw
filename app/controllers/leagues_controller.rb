@@ -30,6 +30,9 @@ class LeaguesController < ApplicationController
 
     @can_join = user && !@member
 
+    @upcoming = list_upcoming_events(@league, 5)
+    @recent = list_recent_events(@league, 5)
+
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @league }
@@ -212,14 +215,14 @@ class LeaguesController < ApplicationController
     return user
   end
 
-  def list_recent_events(season, limit)
-    return Event.where(["season_id = ? AND time < ?", season.id, 
-      DateTime.now]).limit(limit).order("time DESC")
+  def list_recent_events(league, limit)
+    return Event.joins(:season).where('seasons.league_id' => league.id).
+      where(['time < ?', DateTime.now]).order("time DESC").limit(limit)
   end
 
-  def list_upcoming_events(season, limit)
-    return Event.where(["season_id = ? AND time > ?", season.id, 
-      DateTime.now]).limit(limit).order("time")
+  def list_upcoming_events(league, limit)
+    return Event.joins(:season).where('seasons.league_id' => league.id).
+      where(['time > ?', DateTime.now]).order("time ASC").limit(limit)
   end
 
 end

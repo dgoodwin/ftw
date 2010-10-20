@@ -1,6 +1,6 @@
 <%= render :partial => 'leagues/navbar', :locals => {:league => @league} %>
 
-<h3>About</h3>
+<h2>About</h2>
 <p>
   <%= @league.description %>
 </p>
@@ -28,13 +28,13 @@
     -->
 <% end %>
 
-<h3>Upcoming Events</h3>
+<h2>Upcoming Events</h2>
 
-TODO
+<%= render :partial => 'events/list', :locals => {:events => @upcoming, :league => @league} %>
 
-<h3>Recent Events</h3>
+<h2>Recent Events</h2>
 
-TODO
+<%= render :partial => 'events/list', :locals => {:events => @recent, :league => @league} %>
 
 
 <%= link_to_if have_perm('edit_league', @league.id), 'Edit', edit_league_path(@league) %>

@@ -22,11 +22,15 @@ class LeaguesControllerTest < ActionController::TestCase
     assert_response 302
   end
 
-  test "should create league" do
-    authenticate(users(:admin).email, 'admin')
-    create_me = League.new(:name => "Elite league!", :game => games(:gt5), 
+  def create_league
+    return League.new(:name => "Elite league!", :game => games(:gt5), 
       :racing_type => 'sports',
       :membership => 'open', :skill_level => 'advanced')
+  end
+
+  test "should create league" do
+    authenticate(users(:admin).email, 'admin')
+    create_me = create_league()
     assert_difference('League.count') do
       post :create, :league => create_me.attributes
     end
@@ -38,9 +42,7 @@ class LeaguesControllerTest < ActionController::TestCase
 
   test "should give creator initial roles" do
     authenticate(users(:admin).email, 'admin')
-    create_me = League.new(:name => "Some League", :game => games(:gt5),
-      :racing_type => 'sports',
-      :membership => 'open', :skill_level => 'advanced')
+    create_me = create_league()
     post :create, :league => create_me.attributes
     assert_redirected_to league_path(assigns(:league))
 
@@ -132,12 +134,13 @@ class LeaguesControllerTest < ActionController::TestCase
   end
 
   test "recent events" do
-    season = Season.new(:league => leagues(:alien), :name => "whatever")
+    league = create_league()
+    season = Season.new(:league => league, :name => "whatever")
     season.save
     base_time = DateTime.now
     create_events(base_time, season, 10, -1)
 
-    recent_events = @controller.list_recent_events(season, 2)
+    recent_events = @controller.list_recent_events(league, 2)
     assert_equal 2, recent_events.length
     assert recent_events[0].time > recent_events[1].time
     assert_equal (base_time - 1).to_i, recent_events[0].time.to_i
@@ -145,13 +148,14 @@ class LeaguesControllerTest < ActionController::TestCase
   end
 
   test "upcoming events" do
-    season = Season.new(:league => leagues(:alien), :name => "whatever")
+    league = create_league()
+    season = Season.new(:league => league, :name => "whatever")
     season.save
     base_time = DateTime.now
     create_events(base_time, season, 10, 1)
     assert_equal 10, Event.where(["season_id = ?", season.id]).length
 
-    upcoming_events = @controller.list_upcoming_events(season, 2)
+    upcoming_events = @controller.list_upcoming_events(league, 2)
     assert_equal 2, upcoming_events.length
     assert upcoming_events[0].time < upcoming_events[1].time
     assert_equal (base_time + 1).to_i, upcoming_events[0].time.to_i

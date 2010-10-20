@@ -2,27 +2,7 @@
 
 <h1>Events</h1>
 
-<table width="100%">
-  <tr>
-    <th>Name</th>
-    <th>Season</th>
-    <th>Time</th>
-    <th>Registrants</th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @events.each do |event| %>
-  <tr>
-    <td><%= link_to event.name, league_event_path(@league, event) %></td>
-    <td><%= link_to event.season.name, league_season_path(event.season.league, event.season) %></td>
-    <td><%= event.time %></td>
-    <td><%= event.registrants.length %></td>
-    <td><%= link_to_if have_perm('edit_event', @league.id), 'Edit', edit_league_event_path(@league, event) %></td>
-    <td><%= link_to('Destroy', league_event_path(@league, event), :confirm => 'Are you sure?', :method => :delete) if have_perm('destroy_event', @league.id) %></td>
-  </tr>
-<% end %>
-</table>
+<%= render :partial => 'events/list', :locals => {:events => @events, :league => @league} %>
 
 <br />
 
