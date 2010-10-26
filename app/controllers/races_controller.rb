@@ -38,6 +38,7 @@ class RacesController < ApplicationController
     @race.host = user
 
     if @race.save
+      #EventMailer.event_scheduled(User.find(1), @race.event, @race).deliver
       redirect_to :back, :notice => "Thank you for hosting!"
     else
       logger.error("Error assigning user #{user.id} as race host:")

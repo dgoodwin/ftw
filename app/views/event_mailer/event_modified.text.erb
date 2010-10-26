@@ -1,0 +1,15 @@
+<%= @league.name %>
+
+Event modified:
+
+Time: <%= @event.time %>
+Location: <%= @event.track.name %>
+Duration: TODO
+Race Host: <%= @race.host.get_account(@league.game.platform).name %>
+
+Please add the race host to your friends list at least 30 minutes before the race. If their buddy list is full, send them a private message on the PS3 XMB.
+
+Instructions:
+
+<%= @event.instructions %>
+
