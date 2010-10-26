@@ -29,6 +29,7 @@ Ftw::Application.routes.draw do
   match 'leagues/:id/members', :to => 'leagues#members'
   match 'leagues/:id/join_test_users', :to => 'leagues#join_test_users'
   match 'leagues/:id/join', :to => 'leagues#join'
+  match 'leagues/:id/leaderboard', :to => 'leagues#leaderboard'
 
   match 'events/:id/schedule', :to => 'events#schedule'
   match 'events/:id/register', :to => 'events#register'

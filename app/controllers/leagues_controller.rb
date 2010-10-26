@@ -1,3 +1,5 @@
+require 'scoring'
+
 class LeaguesController < ApplicationController
 
   before_filter :authenticate_user!, :except => [:index, :show]
@@ -223,6 +225,34 @@ class LeaguesController < ApplicationController
   def list_upcoming_events(league, limit)
     return Event.joins(:season).where('seasons.league_id' => league.id).
       where(['time > ?', DateTime.now]).order("time ASC").limit(limit)
+  end
+
+  def leaderboard
+    @league = League.find(params[:id])
+    current_season = get_current_season(@league)
+
+    @leaderboard = Leaderboard.new()
+    @season = get_current_season(@league)
+    results = load_results_for_season(@season)
+    @leaderboard.process(results)
+  end
+
+  # For now, just return the most recent:
+  def get_current_season(league)
+    return Season.where(["league_id = ?", league.id]).order("created_at DESC").limit(1).first
+  end
+
+  def load_results_for_season(season)
+    # TODO: could be done with a big join query?
+    results = []
+    season.events.each do |event|
+      event.races.each do |race|
+        race.race_results.each do |result|
+          results << result
+        end
+      end
+    end
+    return results
   end
 
 end

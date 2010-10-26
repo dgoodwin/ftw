@@ -1,0 +1,7 @@
+<h2><%= season.name %> - Leaderboard</h2>
+
+<% leaderboard.get_sorted_totals().each do |row| %>
+  <%= row[0].email %> - <%= row[1] %><br/>
+<% end %>
+
+
