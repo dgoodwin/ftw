@@ -23,4 +23,8 @@ class Event < ActiveRecord::Base
   validates_presence_of :track, \
     :message => "Cannot create event without track."
 
+  def scheduled?
+    return races.length > 0
+  end
+
 end

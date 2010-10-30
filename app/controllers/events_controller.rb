@@ -115,7 +115,7 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
     return if not require_perm('schedule_event', @event.season.league.id)
 
-    if @event.races.length > 0
+    if @event.scheduled?
       logger.warn "Attempt to re-schedule an event: %s" % @event.id
       flash[:error] = "Event has already been scheduled."
       redirect_to(@event, :notice => 'Event has already been scheduled.')
@@ -206,26 +206,39 @@ class EventsController < ApplicationController
     redirect_to @event, :notice => "Entire league has been registered for this event."
   end
 
+  def find_member(user, league)
+    results = Member.where(["league_id = ? AND user_id = ?", 
+      league.id, user.id])
+    if results.length == 1
+      return results[0]
+    end
+    return nil
+  end
+
+  def find_registrant(member, event)
+    results = Registrant.where(["event_id = ? AND member_id = ?", @event.id, member.id])
+    if results.length == 1
+      return results[0]
+    end
+    return nil
+  end
+
   def register
     @event = Event.find(params[:id])
     user = get_current_user
 
-    member = Member.where(["league_id = ? AND user_id = ?", @event.season.league.id, 
-      user.id])
-    if member.length == 0
+    member = find_member(user, @event.season.league)
+    if member.nil?
       redirect_to event_path(@event), :notice => "You are not a member of this league."
       return
     end
-    member = member[0]
 
-    reg = Registrant.where(["event_id = ? AND member_id = ?", @event.id, 
-      member.id])
-    if reg.length > 0
+    if not find_registrant(member, @event).nil?
       redirect_to event_path(@event), :notice => "You are already registered for this event."
       return
     end
 
-    if @event.races.length > 0
+    if @event.scheduled?
       redirect_to event_path(@event), :notice => "Cannot register after event has been scheduled."
       return
     end
@@ -243,27 +256,22 @@ class EventsController < ApplicationController
   def unregister
     @event = Event.find(params[:id])
     user = get_current_user
-    member = Member.where(["league_id = ? AND user_id = ?", @event.season.league.id, 
-      user.id])
-    if member.length == 0
+    member = find_member(user, @event.season.league)
+    if member.nil?
       redirect_to event_path(@event), :notice => "You are not a member of this league."
       return
     end
-    member = member[0]
 
-    reg = Registrant.where(["event_id = ? AND member_id = ?", @event.id, 
-      member.id])
-    if reg.length == 0
+    reg = find_registrant(member, @event)
+    if reg.nil?
       redirect_to event_path(@event), :notice => "You are not registered for this event."
       return
     end
 
-    if @event.races.length > 0
+    if @event.scheduled?
       redirect_to event_path(@event), :notice => "Cannot unregister after event has been scheduled."
       return
     end
-
-    reg = reg[0]
 
     reg.destroy
 
