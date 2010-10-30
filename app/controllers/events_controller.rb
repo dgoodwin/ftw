@@ -229,6 +229,11 @@ class EventsController < ApplicationController
       return
     end
 
+    if @event.races.length > 0
+      redirect_to event_path(@event), :notice => "Cannot register after event has been scheduled."
+      return
+    end
+
     registrant = Registrant.new(:member => member, :event => @event)
     if registrant.save
       redirect_to event_path(@event), :notice => "Successfully registered for event."
@@ -256,6 +261,12 @@ class EventsController < ApplicationController
       redirect_to event_path(@event), :notice => "You are not registered for this event."
       return
     end
+
+    if @event.races.length > 0
+      redirect_to event_path(@event), :notice => "Cannot unregister after event has been scheduled."
+      return
+    end
+
     reg = reg[0]
 
     reg.destroy

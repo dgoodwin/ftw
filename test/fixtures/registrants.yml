@@ -4,3 +4,15 @@ one:
   event: alien_s1_r1
   member: user001_alien
 
+two:
+  event: alien_s1_r1
+  member: user002_alien
+
+another:
+  event: alien_s1_r2
+  member: user001_alien
+
+again:
+  event: alien_s1_r2
+  member: user002_alien
+

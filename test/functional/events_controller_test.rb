@@ -71,7 +71,6 @@ class EventsControllerTest < ActionController::TestCase
     # A second schedule request shouldn't do anything:
     get :schedule, {'id' => event.id}
     assert_equal 'Event has already been scheduled.', flash[:notice]
-
   end
 
   def create_league(member_count)
@@ -119,8 +118,8 @@ class EventsControllerTest < ActionController::TestCase
   end
 
   test "register" do
-    authenticate(users(:user002).email, 'password')
-    event = events(:alien_s1_r1)
+    authenticate(users(:user004).email, 'password')
+    event = events(:alien_s1_r2)
 
     orig_count = Registrant.where(["event_id = ?", event.id]).count
 
@@ -134,7 +133,7 @@ class EventsControllerTest < ActionController::TestCase
 
   test "unregister" do
     authenticate(users(:user001).email, 'password')
-    event = events(:alien_s1_r1)
+    event = events(:alien_s1_r2)
 
     orig_count = Registrant.where(["event_id = ?", event.id]).count
 
@@ -147,7 +146,7 @@ class EventsControllerTest < ActionController::TestCase
   end
 
   test "unregister without being registered" do
-    authenticate(users(:user002).email, 'password')
+    authenticate(users(:user004).email, 'password')
     event = events(:alien_s1_r1)
 
     orig_count = Registrant.where(["event_id = ?", event.id]).count
@@ -156,6 +155,24 @@ class EventsControllerTest < ActionController::TestCase
 
     assert_redirected_to event_path(event)
 
+    new_count = Registrant.where(["event_id = ?", event.id]).count
+    assert_equal orig_count, new_count
+  end
+
+  test "register to scheduled event fails" do
+    event = events(:alien_s1_r1)
+    authenticate(users(:user004).email, 'password')
+    orig_count = Registrant.where(["event_id = ?", event.id]).count
+    get :register, {'id' => event.id}
+    new_count = Registrant.where(["event_id = ?", event.id]).count
+    assert_equal orig_count, new_count
+  end
+
+  test "unregister from scheduled event fails" do
+    event = events(:alien_s1_r1)
+    authenticate(users(:user001).email, 'password')
+    orig_count = Registrant.where(["event_id = ?", event.id]).count
+    get :unregister, {'id' => event.id}
     new_count = Registrant.where(["event_id = ?", event.id]).count
     assert_equal orig_count, new_count
   end
