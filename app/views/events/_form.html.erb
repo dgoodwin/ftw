@@ -11,6 +11,11 @@
   <% end %>
 
   <div class="field">
+    Name:<br/>
+    <%= f.text_field :name, :size => 50 %>
+  </div>
+
+  <div class="field">
     Season:<br/>
     <%= f.collection_select :season_id, @seasons, :id, :name %>
   </div>

@@ -67,10 +67,6 @@ class EventsController < ApplicationController
 
     @season = @event.season
 
-    # For now, we auto-assign the event name "Round X", where X is the
-    # number of existing events in this season + 1.
-    @event.name = "Round %s" % (Event.where(["season_id = ?", @season.id]).length + 1).to_s
-
     respond_to do |format|
       if @event.save
         format.html { redirect_to(league_event_path(@league, @event), :notice => 'Event was successfully created.') }
