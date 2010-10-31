@@ -21,7 +21,7 @@
   </div>
   <div class="field">
     <%= f.label :time %><br />
-    <%= f.datetime_select :time %>
+    <%= f.datetime_select :time, :minute_step => 5, :default => 7.days.from_now %>
   </div>
 
   <div class="field">
