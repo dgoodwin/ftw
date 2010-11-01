@@ -4,4 +4,5 @@ class Season < ActiveRecord::Base
 
   # TODO: unique name
   # TODO: must have league
+  validates_presence_of :start_date, :end_date, :league
 end

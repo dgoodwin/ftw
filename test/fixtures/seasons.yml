@@ -3,8 +3,12 @@
 alien_s1:
   name: 2010 Season 1
   league_id: 5000
+  start_date: 2010-01-01
+  end_date: 2010-03-31
 
 alien_s2:
   name: 2010 Season 2
   league_id: 5000
+  start_date: 2010-04-01
+  end_date: 2010-08-31
 

@@ -3,20 +3,20 @@ require 'test_helper'
 class EventTest < ActiveSupport::TestCase
 
   test "successful create" do
-    e = Event.new(:time => Time.now, :season => seasons(:alien_s1), 
+    e = Event.new(:time => "2010-01-31", :season => seasons(:alien_s1), 
         :name => "Round 40", :track => tracks(:monza))
     assert e.save
   end
 
   test "name required" do
-    e = Event.new(:time => Time.now, :season => seasons(:alien_s1), 
+    e = Event.new(:time => "2010-01-31", :season => seasons(:alien_s1), 
         :track => tracks(:monza))
     assert !e.save
     assert e.errors[:name].any?
   end
 
   test "season required" do
-    e = Event.new(:time => Time.now, :name => "Round 40", 
+    e = Event.new(:time => "2010-01-31", :name => "Round 40", 
         :track => tracks(:monza))
     assert !e.save
     assert e.errors[:season].any?

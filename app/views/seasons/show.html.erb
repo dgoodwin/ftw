@@ -5,6 +5,10 @@
 <h3><%= link_to "Leaderboard", :controller => "seasons", :action => "leaderboard" %></h3>
 
 <p>
+  <b>Start date:</b>
+  <%= @season.start_date %><br/>
+  <b>End date:</b>
+  <%= @season.end_date %><br/>
 <b>Events:</b>
 <ul>
   <% @season.events.sort { |a,b| a.time <=> b.time }.each do |event| %>
@@ -12,8 +16,6 @@
   <% end %>
 </ul>
 </p>
-
-<%= link_to 'Add Event', new_event_path(:season_id => @season) %><p/>
 
 <%= link_to 'Edit', edit_league_season_path(@season.league, @season) if have_perm('edit_season', @season.league.id) %> |
 <%= link_to 'Back', league_seasons_path %>

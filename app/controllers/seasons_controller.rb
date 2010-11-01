@@ -37,6 +37,8 @@ class SeasonsController < ApplicationController
     @league = League.find(params[:league_id])
     return if not require_perm('create_season', @league.id)
 
+    @last_end_date = Season.where(['league_id = ?', @league.id]).maximum('end_date')
+
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @season }

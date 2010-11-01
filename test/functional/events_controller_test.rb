@@ -94,7 +94,7 @@ class EventsControllerTest < ActionController::TestCase
       assert r
     end
 
-    season = Season.new(:league => league, :name => "Season 1")
+    season = Season.new(:league => league, :name => "Season 1", :start_date => Time.now - 30.days, :end_date => Time.now + 30.days)
     season.save
 
     event = Event.new(:season => season, :time => Time.now, 

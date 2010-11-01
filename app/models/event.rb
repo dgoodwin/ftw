@@ -23,6 +23,14 @@ class Event < ActiveRecord::Base
   validates_presence_of :track, \
     :message => "Cannot create event without track."
 
+  validate :within_season_dates
+
+  def within_season_dates
+    if time and season and (time < season.start_date or time > season.end_date)
+      errors.add(:time, "outside of season's start/end dates.")
+    end
+  end
+
   def scheduled?
     return races.length > 0
   end

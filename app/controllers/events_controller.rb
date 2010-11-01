@@ -36,6 +36,7 @@ class EventsController < ApplicationController
     #
     # TODO: probably should filter on active seasons only?
     @seasons = Season.where(["league_id = ?", @league.id])
+    @season = @event.season
 
     if @seasons.length == 0
       redirect_to :back, :notice => "You must create a season before creating events."
@@ -66,6 +67,7 @@ class EventsController < ApplicationController
     return if not require_perm('create_event', @league.id)
 
     @season = @event.season
+    @seasons = Season.where(["league_id = ?", @league.id])
 
     respond_to do |format|
       if @event.save

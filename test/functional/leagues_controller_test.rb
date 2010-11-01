@@ -135,7 +135,8 @@ class LeaguesControllerTest < ActionController::TestCase
 
   test "recent events" do
     league = create_league()
-    season = Season.new(:league => league, :name => "whatever")
+    season = Season.new(:league => league, :name => "whatever", 
+      :start_date => Time.now - 30.days, :end_date => Time.now + 30.days)
     season.save
     base_time = DateTime.now
     create_events(base_time, season, 10, -1)
@@ -149,7 +150,8 @@ class LeaguesControllerTest < ActionController::TestCase
 
   test "upcoming events" do
     league = create_league()
-    season = Season.new(:league => league, :name => "whatever")
+    season = Season.new(:league => league, :name => "whatever", 
+      :start_date => Time.now - 30.days, :end_date => Time.now + 30.days)
     season.save
     base_time = DateTime.now
     create_events(base_time, season, 10, 1)

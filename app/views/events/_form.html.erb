@@ -19,6 +19,7 @@
     Season:<br/>
     <%= f.collection_select :season_id, @seasons, :id, :name %>
   </div>
+
   <div class="field">
     <%= f.label :time %><br />
     <%= f.datetime_select :time, :minute_step => 5, :default => 7.days.from_now %>

@@ -14,6 +14,21 @@
     <%= f.label :name %><br />
     <%= f.text_field :name %>
   </div>
+
+  <% if @last_end_date %>
+    <div>Last existing season ends on: <%= @last_end_date %></div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :start_date %><br />
+    <%= f.date_select :start_date %>
+  </div>
+
+  <div class="field">
+    <%= f.label :end_date %><br />
+    <%= f.date_select :end_date %>
+  </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>

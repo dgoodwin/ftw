@@ -5,6 +5,8 @@
 <table width="100%">
   <tr>
     <th>Name</th>
+    <th>Start Date</th>
+    <th>End Date</th>
     <th></th>
     <th></th>
   </tr>
@@ -12,6 +14,8 @@
 <% @seasons.each do |season| %>
   <tr>
     <td><%= link_to season.name, league_season_path(@league, season) %></td>
+    <td><%= season.start_date %></td>
+    <td><%= season.end_date %></td>
     <td><%= link_to 'Edit', edit_league_season_path(@league, season) if have_perm('edit_season', @league.id)  %></td>
     <td><%= link_to 'Destroy', league_season_path(@league, season), :confirm => 'Are you sure?', :method => :delete if have_perm('destroy_season', @league.id) %></td>
   </tr>
