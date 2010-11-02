@@ -18,6 +18,8 @@ class ApplicationController < ActionController::Base
   # permission checking, etc.
   def set_luser
     @luser = get_current_user()
+    # Setup this users timezone:
+    Time.zone = @luser.time_zone if @luser
   end
 
   def require_perm(right_key, qualifier)

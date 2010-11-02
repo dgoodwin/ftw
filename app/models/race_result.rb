@@ -22,7 +22,6 @@ class RaceResult < ActiveRecord::Base
     if race
       race.users.each do |user|
         if not submitted_users.has_key?(user.email)
-          # TODO: need to display account name here, not user email
           errors.add(:rows, "Results missing for user: %s" % user.get_account(race.event.season.league.game.platform).name)
         end
       end
