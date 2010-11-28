@@ -109,10 +109,9 @@ end
 gt5.save
 
 gt5_weather = [
-    "Clear",
+    "Sunny",
     "Rain",
     "Snow",
-    "Random"
 ]
 gt5_weather.each do |weather|
   w = Weather.new(:name => weather, :game_id => gt5)
