@@ -124,16 +124,16 @@ gt5_weather.each do |weather|
 end
 
 gt5_tires = [
-    "Any",
-    "N1",
-    "N2",
-    "N3",
-    "S1",
-    "S2",
-    "S3",
-    "R1",
-    "R2",
-    "R3",
+    "Unrestricted",
+    "Comfort: Hard",
+    "Comfort: Medium",
+    "Comfort: Soft",
+    "Sport: Hard",
+    "Sport: Medium",
+    "Sport: Soft",
+    "Racing: Hard",
+    "Racing: Medium",
+    "Racing: Soft",
     "Dirt",
     "Snow",
 ]
