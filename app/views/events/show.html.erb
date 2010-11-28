@@ -28,8 +28,10 @@
   <b>Weather:</b>
   <%= @event.weather.name unless @event.weather.nil? %><br/>
 
-  <b>Performance Points:</b>
-  <%= @event.pp %><br/>
+  <b>Max Horsepower:</b>
+  <%= @event.power %><br/>
+  <b>Min Weight:</b>
+  <%= @event.weight %><br/>
 </p>
 
 <p>
