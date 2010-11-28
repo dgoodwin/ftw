@@ -126,7 +126,7 @@ class LeaguesControllerTest < ActionController::TestCase
     ActiveRecord::Base.transaction do
       (1..number).each do |i|
         event = Event.new(:time => base_time + counter, :name => "Event #{i}",
-          :season => season, :track => tracks(:monza))
+          :season => season, :track => tracks(:monza), :laps => 5)
         counter += interval
         event.save
       end

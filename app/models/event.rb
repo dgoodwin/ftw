@@ -23,6 +23,8 @@ class Event < ActiveRecord::Base
   validates_presence_of :track, \
     :message => "Cannot create event without track."
 
+  validates_presence_of :laps
+
   validate :within_season_dates
 
   def within_season_dates
