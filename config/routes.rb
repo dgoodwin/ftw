@@ -43,6 +43,7 @@ Ftw::Application.routes.draw do
 
   match 'seasons/:id/leaderboard', :to => 'seasons#leaderboard'
 
+
   root :to => "home#index"
 
   # The priority is based upon order of creation:
