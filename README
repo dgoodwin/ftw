@@ -2,4 +2,6 @@
 
 FTW is a Ruby on Rails project for managing online racing leagues. Primary focus is to accomodate the specific needs of the Gran Turismo series, but some effort is taken to keep it generically usable for other games/simulators as well.
 
+Currently we're not really prepped for external users or contributors. If you're so inclined feel free to check out the source but there may be some challenges and a lack of documentation.
+
 More to follow... :)
