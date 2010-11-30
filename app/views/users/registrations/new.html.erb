@@ -20,9 +20,16 @@
     Display Name<br />
     <%= f.text_field :name %>
   </div>
+
   <div class="field">
     <%= f.label :location %><br />
     <%= f.text_field :location %>
+  </div>
+
+  <div class="field">
+    <%= f.label :time_zone %><br />
+    <%= f.time_zone_select :time_zone, nil, 
+      :default => "Eastern Time (US & Canada)" %>
   </div>
 
   <h3>Account</h3>
