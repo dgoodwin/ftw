@@ -10,7 +10,7 @@
 </p>
 
 <%= link_to 'Schedule Event', :controller => "events", :action => "schedule", 
-  :id => @event if @event.races.length == 0 and have_perm('schedule_event', @league.id) %>: WARNING: this closes registration and splits the field up into separate races (if required) After this is done, race hosts can be set.<p/>
+  :id => @event if @event.races.length == 0 and have_perm('schedule_event', @league.id) %><p/>
 
 
 <p>
