@@ -46,6 +46,7 @@ module Auth
           'approve_results',
           'approve_request',
           'grant_roles',
+          'send_reminder',
         ],
         "League Admin")
     elsif role == 'site_admin'

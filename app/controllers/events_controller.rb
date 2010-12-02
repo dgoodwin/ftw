@@ -129,8 +129,6 @@ class EventsController < ApplicationController
       return
     end
 
-    # TODO: Block scheduling if only one participant
-
     logger.info "Scheduling event %s for league: %s" % \
       [@event.id, @event.season.league.id] 
     # TODO: assuming race size of 16 for now, should be configurable
@@ -169,6 +167,28 @@ class EventsController < ApplicationController
     end
 
     redirect_to(@event, :notice => 'Races have been scheduled.')
+  end
+
+  # Send a reminder email to all event registrants.
+  def send_reminder
+    @event = Event.find(params[:id])
+    return if not require_perm('send_reminder', @event.season.league.id)
+
+    # Block this if any races do not have a host assigned.
+    @event.races.each do |race|
+      if race.host.nil?
+        redirect_to(@event, :notice => "Cannot send reminder email until all races have a host.")
+        return
+      end
+    end
+
+    @event.races.each do |race|
+      race.users.each do |user|
+        EventMailer.event_reminder(user, @event, race).deliver
+
+      end
+    end
+    redirect_to(@event, :notice => 'Reminder email has been sent to all registrants.')
   end
 
   # Calculate how many races to create and of what size.

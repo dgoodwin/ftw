@@ -1,0 +1,21 @@
+<%= @league.name %>
+
+Event reminder:
+
+Time: <%= @event.time %>
+Location: <%= @event.track.name %>
+Race Host: <%= @race.host.get_account(@league.game.platform).name %>
+Tires: <%= @event.tire.name unless @event.tire.nil? %>
+Weather:  <%= @event.weather.name unless @event.weather.nil? %>
+Laps: <%= @event.laps %>
+Qualification (minutes): <%= @event.quali_mins %>
+Max Horsepower: <%= @event.power %>
+Min Weight: <%= @event.weight %>
+
+Instructions:
+
+<%= @event.instructions %>
+
+Please check the event page for connection details just before the race if you do not have the host on your PSN friends list:
+
+http://gthub.net<%= event_path(@event) %>

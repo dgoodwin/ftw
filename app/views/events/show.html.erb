@@ -9,8 +9,15 @@
 <%= link_to "Auto-register Entire League", :controller => "events", :action => "register_entire_league", :id => @event.id %>
 </p>
 
-<%= link_to 'Schedule Event', :controller => "events", :action => "schedule", 
-  :id => @event if @event.races.length == 0 and have_perm('schedule_event', @league.id) %><p/>
+  <% if @event.races.length == 0 and have_perm('schedule_event', @league.id) %>
+    <%= link_to 'Schedule Event', :controller => "events", :action => "schedule", 
+        :id => @event %>: WARNING: This will close registration, split the field into races, and allow race hosts to be assigned.<p/>
+  <% end %>
+
+  <% if have_perm('send_reminder', @league.id) %>
+    <%= link_to 'Send E-Mail Reminder', :controller => "events", 
+      :action => "send_reminder", :id => @event %>: Once the event is scheduled, and all races have been assigned a host, you can send an email to all registrants for this event. Be careful not to do this more than once, people may not like it. :) Eventually this will be part of a scheduled job and happen automatically.<p/>
+  <% end %>
 
 
 <p>

@@ -35,6 +35,7 @@ Ftw::Application.routes.draw do
   match 'events/:id/register', :to => 'events#register'
   match 'events/:id/unregister', :to => 'events#unregister'
   match 'events/:id/register_entire_league', :to => 'events#register_entire_league'
+  match 'events/:id/send_reminder', :to => 'events#send_reminder'
 
   match 'races/:id/host', :to => 'races#host'
 
