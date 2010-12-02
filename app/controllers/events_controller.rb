@@ -20,6 +20,13 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
     @league = @event.season.league
 
+    user = get_current_user
+    member = find_member(user, @event.season.league)
+
+    @registration_message = registration_msg(member, @event)
+
+    @registered = (not find_registrant(member, @event).nil?)
+
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @event }
@@ -250,18 +257,10 @@ class EventsController < ApplicationController
     user = get_current_user
 
     member = find_member(user, @event.season.league)
-    if member.nil?
-      redirect_to event_path(@event), :notice => "You are not a member of this league."
-      return
-    end
 
-    if not find_registrant(member, @event).nil?
-      redirect_to event_path(@event), :notice => "You are already registered for this event."
-      return
-    end
-
-    if @event.scheduled?
-      redirect_to event_path(@event), :notice => "Cannot register after event has been scheduled."
+    @registration_message = registration_msg(member, @event)
+    if not @registration_message.nil?
+      redirect_to event_path(@event), :notice => @registration_message
       return
     end
 
@@ -272,6 +271,18 @@ class EventsController < ApplicationController
       logger.error("Error registering for event")
       logger.error(registrant.errors)
       redirect_to event_path(@event), :notice => "Error registering for event" 
+    end
+  end
+
+  def registration_msg(member, event)
+    if member.nil?
+      return "You are not a member of this league."
+    elsif not find_registrant(member, @event).nil?
+      return "You are registered for this event."
+    elsif @event.scheduled?
+      return "Cannot register after event has been scheduled."
+    else
+      return nil
     end
   end
 

@@ -2,8 +2,9 @@
 
 <h2>Event: <%= @event.name %></h2>
 
-<p><%= link_to "Register for this Event", :controller => 'events', :action => :register %><br/>
-<%= link_to "Unregister for this Event", :controller => 'events', :action => :unregister %></p>
+<p><%= link_to "Register", :controller => 'events', :action => :register if @registration_message.nil? %><br/>
+<%= @registration_message if not @registration_message.nil? %>
+<%= link_to "Unregister", :controller => 'events', :action => :unregister if @registered %></p>
 
 <p>
 <%= link_to "Auto-register Entire League", :controller => "events", :action => "register_entire_league", :id => @event.id %>
